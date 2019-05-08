@@ -14,7 +14,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="5dp"
-        android:background="@color/colorFit"
+        android:background="@drawable/custom_shape3"
         android:drawableRight="@drawable/fit"
         android:gravity="center"
         android:shadowColor="@color/colorPrimaryDark"
@@ -25,5 +25,5 @@
         android:textColor="@color/colorPrimary"
         android:textColorLink="@color/colorPrimary"
         android:textSize="30sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 </LinearLayout>

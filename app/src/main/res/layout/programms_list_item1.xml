@@ -16,7 +16,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/custom_shape2"
-        android:drawableRight="@drawable/girlsuper"
+        android:drawableRight="@drawable/superfit"
         android:gravity="center"
         android:shadowColor="@color/colorPrimaryDark"
         android:shadowDx="1"
