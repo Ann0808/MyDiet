@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="ingridients">
+        <string-array name="ingridients_super">
+
+            <item>SuperFit 1000 kcal</item>
+            <item>Fit 1300 kcal</item>
+            <item>Balance 1500 kcal</item>
+            <item>Strong 2000 kcal</item>
+
+        </string-array>
+
+        <string-array name="ingridients_fit">
+
+
+
+        </string-array>
+
+        <string-array name="ingridients_balance">
+
+
+
+        </string-array>
+
+        <string-array name="ingridients_strong">
+
+
+
+        </string-array>
+
+    </string-array>
+
+
+
+</resources>
