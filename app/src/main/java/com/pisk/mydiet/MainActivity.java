@@ -61,7 +61,7 @@ public class MainActivity extends Activity {
         display.getMetrics(outMetrics);
 
         float density  = getResources().getDisplayMetrics().density;
-        float dpHeight = outMetrics.heightPixels / density;
+        //float dpHeight = outMetrics.heightPixels / density;
         float dpWidth  = outMetrics.widthPixels / density;
 
 
