@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PageFragment extends Fragment {
@@ -39,9 +40,25 @@ public class PageFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment, null);
 
-        TextView tvPage = (TextView) view.findViewById(R.id.tvPage);
-        tvPage.setText("Page " + pageNumber);
-        tvPage.setBackgroundColor(backColor);
+        // for time
+        String ingrid = "Картофель 3шт" + "\n" + "Морковь 2 шт";
+        String kal = "1142кк б135/Ж55.У15,79";
+        String reciped = "Обращения Аммы содержат рецепт того, как человечество может преодолеть кризис, в котором оно находится: в них затрагиваются все наиболее злободневные проблемы современности и даются четкие, практические";
+        //for time
+
+        TextView ingridients = (TextView) view.findViewById(R.id.ingridients);
+        TextView recipe = (TextView) view.findViewById(R.id.recipe);
+        TextView kcal = (TextView) view.findViewById(R.id.tvPage3);
+
+        ImageView tvImage = (ImageView) view.findViewById(R.id.photoRecept);
+
+        ingridients.setText(ingrid);
+        recipe.setText(reciped);
+        kcal.setText(kcal.getText() + kal);
+
+        view.setBackgroundColor(backColor);
+
+        tvImage.setImageDrawable(getResources().getDrawable(R.drawable.balance));
 
         return view;
     }

@@ -7,4 +7,9 @@
         <item>Balance 1500 kcal</item>
         <item>Strong 2000 kcal</item>
     </string-array>
+
+    <string name="ingridients">Ингридиенты:</string>
+    <string name="recipe">Приготовление:</string>
+    <string name="kkal">КБЖУ :</string>
+
 </resources>
