@@ -2,9 +2,9 @@
     <string name="app_name">MyDiet</string>
 
     <string-array name="programms">
-        <item>SuperFit 1000 kkal</item>
-        <item>Fit 1300 kkal</item>
-        <item>Balance 1500 kkal</item>
-        <item>Strong 2000 kkal</item>
+        <item>SuperFit 1000 kcal</item>
+        <item>Fit 1300 kcal</item>
+        <item>Balance 1500 kcal</item>
+        <item>Strong 2000 kcal</item>
     </string-array>
 </resources>
