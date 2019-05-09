@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
@@ -19,6 +20,7 @@ public class PagerActivity extends FragmentActivity {
     int programNumber;
     int dayNumber;
     ViewPager pager;
+    PagerTabStrip pagerTab;
     PagerAdapter pagerAdapter;
 
     @Override
@@ -32,6 +34,19 @@ public class PagerActivity extends FragmentActivity {
         dayNumber = intentTmp.getIntExtra("arg_day_number",0);
 
         pager = (ViewPager) findViewById(R.id.pager);
+        pagerTab = (PagerTabStrip) findViewById(R.id.pagerTabStrip);
+
+        if(programNumber ==1) {
+            pagerTab.setBackgroundResource(R.color.colorSuperFit);
+        } else if(programNumber ==2) {
+            pagerTab.setBackgroundResource(R.color.colorFit);
+        } else if(programNumber ==3) {
+            pagerTab.setBackgroundResource(R.color.colorBalance);
+        } else {
+            pagerTab.setBackgroundResource(R.color.colorStrong);
+        }
+
+        pagerTab.setTabIndicatorColor(getResources().getColor(R.color.colorWhite));
         pagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(pagerAdapter);
 

@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,7 +60,6 @@ public class PageFragment extends Fragment {
         return pageFragment;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +67,21 @@ public class PageFragment extends Fragment {
         dayNumber = getArguments().getInt(ARGUMENT_DAY_NUMBER);
         programNumber = getArguments().getInt(ARGUMENT_PROGRAM_NUMBER);
 
-        Random rnd = new Random();
-        backColor = Color.argb(40, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+        //Random rnd = new Random();
+        //backColor = Color.argb(40, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+
+        //pager.setBackgroundColor(Color.BLACK);
+
+        if(programNumber ==1) {
+            backColor = getResources().getColor(R.color.colorSuperFitLight);
+        } else if(programNumber ==2) {
+            backColor = getResources().getColor(R.color.colorFitLight);
+        } else if(programNumber ==3) {
+            backColor = getResources().getColor(R.color.colorBalanceLight);
+        } else {
+            backColor = getResources().getColor(R.color.colorStrongLight);
+        }
+
 
         dbHelper = new DatabaseHelper(this.getContext());
         // создаем базу данных

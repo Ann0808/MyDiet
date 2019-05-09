@@ -53,7 +53,7 @@ public class DaysListActivity extends Activity {
 
         titleView.setText(getResources().getStringArray(R.array.programms)[programNumber - 1]);
 
-        final String[] days = new String[30];
+        final String[] days = new String[28];
 
         for (int i = 0; i < days.length; i++) {
             days[i] = "День " + (i+1);
