@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -56,28 +58,26 @@ public class MainActivity extends Activity {
 
         CustomAdapter customAdapter = new CustomAdapter(this, R.id.textview, items);
 
-        Display display = getWindowManager().getDefaultDisplay();
-        DisplayMetrics outMetrics = new DisplayMetrics ();
-        display.getMetrics(outMetrics);
+//        Display display = getWindowManager().getDefaultDisplay();
+//        DisplayMetrics outMetrics = new DisplayMetrics ();
+ //       display.getMetrics(outMetrics);
 
-        float density  = getResources().getDisplayMetrics().density;
+//        float density  = getResources().getDisplayMetrics().density;
         //float dpHeight = outMetrics.heightPixels / density;
-        float dpWidth  = outMetrics.widthPixels / density;
+//        float dpWidth  = outMetrics.widthPixels / density;
 
 
-        View convertView = customAdapter.getView(3,null, this.listView);
-        TextView textView = convertView.findViewById(R.id.textview);
-        textView.measure(0, 0);
-        Log.d(TAG, "height is: " + textView.getMeasuredHeight());
-        Log.d(TAG, "width is: " + dpWidth);
-        textView.getLayoutParams().height = (int) (dpWidth*2);
+//        View convertView = customAdapter.getView(3,null, this.listView);
+//        TextView textView = convertView.findViewById(R.id.textview);
+//        textView.measure(0, 0);
+//        Log.d(TAG, "height is: " + textView.getMeasuredHeight());
+//        Log.d(TAG, "width is: " + dpWidth);
+//        textView.getLayoutParams().height = (int) (dpWidth*2);
 
 
         listView.setDivider(getResources().getDrawable(android.R.color.transparent));
         listView.setAdapter(customAdapter);
 
-        int hei = textView.getLayoutParams().height;
-        Log.d(TAG, "hei is: " + hei);
 
         final Intent intent = new Intent(this, DaysListActivity.class);
 
@@ -86,6 +86,16 @@ public class MainActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
                                     long id) {
 
+                Log.d(TAG, "position is: " + position);
+
+//                int newPos = position;
+//                Bundle b = new Bundle();
+//                if (newPos !=0 ) {
+//                    newPos++;
+//                }
+                //b.putInt("arg_program_number", newPos);
+                //intent.putExtra("bund", b);
+                intent.putExtra("arg_program_number", (position + 1));
                 startActivity(intent);
             }
         });

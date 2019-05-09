@@ -12,10 +12,17 @@ import android.widget.ListView;
 public class DaysListActivity extends Activity {
 
     private ListView listView;
+    //Bundle b;
+    int programNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_days_list);
+
+        Intent intentTmp = getIntent();
+        //b = intentTmp.getBundleExtra("bund");
+        programNumber = intentTmp.getIntExtra("arg_program_number",0);
 
         listView = (ListView) findViewById(R.id.daylist2);
 
@@ -38,6 +45,14 @@ public class DaysListActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
                                     long id) {
 
+//                int newPos = position;
+//                if (newPos !=0 ) {
+//                    newPos++;
+//                }
+//                b.putInt("arg_day_number", newPos);
+//                intent.putExtra("bund", b);
+                intent.putExtra("arg_day_number", (position + 1));
+                intent.putExtra("arg_program_number", programNumber);
                 startActivity(intent);
             }
         });
