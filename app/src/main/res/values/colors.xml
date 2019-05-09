@@ -5,10 +5,18 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorLGreen">#8BC34A</color>
-    <color name="colorSuperFit">#BF8BC34A</color>
-    <color name="colorFit">#BA9C27B0</color>
-    <color name="colorBalance">#BA009688</color>
-    <color name="colorStrong">#BAFF5722</color>
+
+    <color name="colorSuperFit">#998BC34A</color>
+    <color name="colorFit">#BF9C27B0</color>
+    <color name="colorBalance">#BF009688</color>
+    <color name="colorStrong">#BFFF5722</color>
+    <color name="colorDays">#BF000000</color>
+
+    <color name="colorSuperFitDay">#668BC34A</color>
+    <color name="colorFitDay">#669C27B0</color>
+    <color name="colorBalanceDay">#66009688</color>
+    <color name="colorStrongDay">#66FF5722</color>
+    <color name="colorDaysDay">#66000000</color>
 
 
 

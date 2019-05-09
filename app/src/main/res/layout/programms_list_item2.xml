@@ -14,7 +14,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/custom_shape3"
+        android:background="@drawable/custom_shape2"
         android:drawableRight="@drawable/fit"
         android:gravity="center"
         android:shadowColor="@color/colorPrimaryDark"

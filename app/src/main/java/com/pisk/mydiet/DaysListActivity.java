@@ -2,16 +2,19 @@ package com.pisk.mydiet;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class DaysListActivity extends Activity {
 
     private ListView listView;
+    private TextView titleView;
     //Bundle b;
     int programNumber;
 
@@ -26,6 +29,30 @@ public class DaysListActivity extends Activity {
 
         listView = (ListView) findViewById(R.id.daylist2);
 
+        titleView = (TextView) findViewById(R.id.title);
+
+        ColorDrawable sage = null;
+
+        if (programNumber == 1) {
+            sage = new ColorDrawable(this.getResources().getColor(R.color.colorSuperFit));
+            titleView.setBackgroundResource(R.drawable.custom_shape1);
+            titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.superfit, 0);
+        } else if (programNumber == 2) {
+            sage = new ColorDrawable(this.getResources().getColor(R.color.colorFit));
+            titleView.setBackgroundResource(R.drawable.custom_shape2);
+            titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.fit, 0);
+        } else if (programNumber == 3) {
+            sage = new ColorDrawable(this.getResources().getColor(R.color.colorBalance));
+            titleView.setBackgroundResource(R.drawable.custom_shape3);
+            titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.balance, 0);
+        } else {
+            sage = new ColorDrawable(this.getResources().getColor(R.color.colorStrong));
+            titleView.setBackgroundResource(R.drawable.custom_shape4);
+            titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.strong, 0);
+        }
+
+        titleView.setText(getResources().getStringArray(R.array.programms)[programNumber - 1]);
+
         final String[] days = new String[30];
 
         for (int i = 0; i < days.length; i++) {
@@ -33,10 +60,48 @@ public class DaysListActivity extends Activity {
         }
 
         final ArrayAdapter<String> adapter;
-        adapter = new ArrayAdapter<>(this, R.layout.day, days);
 
-        listView.setDivider(getResources().getDrawable(android.R.color.transparent));
+        adapter = new ArrayAdapter<String>(this, R.layout.day, days) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+
+                TextView mytextview=(TextView)view;
+
+                if (programNumber == 1) {
+
+                    mytextview.setBackgroundResource(R.drawable.dcustom_shape1);
+
+                } else if (programNumber == 2) {
+
+                    mytextview.setBackgroundResource(R.drawable.dcustom_shape2);
+
+                } else if (programNumber == 3) {
+
+                    mytextview.setBackgroundResource(R.drawable.dcustom_shape3);
+
+                } else {
+
+                    mytextview.setBackgroundResource(R.drawable.dcustom_shape4);
+
+                }
+
+                return view;
+            }
+        };
+
+//        listView.setDivider(sage);
+        listView.setDivider(null);
+//        listView.setHeaderDividersEnabled(true);
         listView.setAdapter(adapter);
+
+//        for (int i = 0; i < days.length; i++) {
+//            TextView view = (TextView) adapter.getView(i,null,null);
+//            Log.d("design", "text is: " + view.getText());
+//            view.setText("hh");
+//        }
+
+
 
         final Intent intent = new Intent(this, PagerActivity.class);
 
