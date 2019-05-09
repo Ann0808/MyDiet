@@ -24,6 +24,8 @@ class DatabaseHelper extends SQLiteOpenHelper {
     static final String RECIPE = "recipe";
     static final String INRIDIENTS = "ingridients";
     static final String KKAL = "kkal";
+    static final String IMAGE = "image";
+
     private Context myContext;
 
     DatabaseHelper(Context context) {
@@ -45,6 +47,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
         try {
             File file = new File(DB_PATH);
             if (!file.exists()) {
+                Log.d("dblogs", "jj");
                 this.getReadableDatabase();
                 //получаем локальную бд как поток
                 myInput = myContext.getAssets().open(DB_NAME);
@@ -72,6 +75,6 @@ class DatabaseHelper extends SQLiteOpenHelper {
     }
     public SQLiteDatabase open()throws SQLException {
 
-        return SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READWRITE);
+        return SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READONLY);
     }
 }
