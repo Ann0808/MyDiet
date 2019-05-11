@@ -25,4 +25,7 @@
 
     <string name="sharedPref">IDvalue</string>
 
+    <string name="hello">Добро пожаловать в MyDiet!</string>
+    <string name="hello2"> Пожалуйста, введите Ваше имя:</string>
+
 </resources>
