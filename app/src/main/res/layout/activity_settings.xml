@@ -15,102 +15,378 @@
         app:srcCompat="@drawable/apple" />
 
     <LinearLayout
-                android:id="@+id/lay1"
+        android:id="@+id/lay1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:id="@+id/hello"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:gravity="center"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="6"
+            android:text="@string/hello"
+            android:textColor="@color/colorWhite"
+            android:textColorLink="@color/colorWhite"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/hello2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="5"
+            android:text="@string/hello2"
+            android:textColor="@color/colorWhite"
+            android:textColorLink="@color/colorWhite"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/userName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:autoText="false"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Ваше имя"
+            android:inputType="textPersonName"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="30sp"
+            android:maxLength="18"/>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/custom_shape3"
+            android:gravity="center"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="5"
+            android:text="Далее"
+            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+            android:textColor="@color/colorPrimary"
+            android:textColorLink="@color/colorPrimary"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scroll2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:id="@+id/lay2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:visibility="invisible"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:id="@+id/hello3"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="20dp"
-                >
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:shadowColor="@color/colorPrimaryDark"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="6"
+                android:textColor="@color/colorWhite"
+                android:textColorLink="@color/colorWhite"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/hello"
+                    android:id="@+id/textView2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:gravity="center"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
                     android:shadowColor="@color/colorPrimaryDark"
-                    android:shadowDx="1"
-                    android:shadowDy="1"
-                    android:shadowRadius="5"
-                    android:text="@string/hello"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="6"
+                    android:text="Ваш вес:"
                     android:textColor="@color/colorWhite"
                     android:textColorLink="@color/colorWhite"
                     android:textSize="30sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/hello2"
+                <NumberPicker
+                    android:id="@+id/weight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingRight="10dp"
+                    android:showDividers="middle"
+                    android:theme="@style/DefaultNumberPickerTheme" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
                     android:shadowColor="@color/colorPrimaryDark"
-                    android:shadowDx="1"
-                    android:shadowDy="1"
-                    android:shadowRadius="5"
-                    android:text="@string/hello2"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="6"
+                    android:text="Ваш рост:"
                     android:textColor="@color/colorWhite"
                     android:textColorLink="@color/colorWhite"
-                    android:textSize="20sp"
+                    android:textSize="30sp"
                     android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/editText"
+                <NumberPicker
+                    android:id="@+id/growth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-                    android:autoText="false"
-                    android:ems="10"
-                    android:gravity="center"
-                    android:inputType="textPersonName"
-                    android:textColorHint="@color/colorWhite"
-                    android:hint="Ваше имя"
-                    android:textColor="@color/colorWhite"
-                    />
-
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:gravity="center"
-                    android:text="Далее"
-                    android:visibility="visible" />
-
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingRight="10dp"
+                    android:showDividers="middle"
+                    android:theme="@style/DefaultNumberPickerTheme" />
             </LinearLayout>
 
 
-        <LinearLayout
-        android:id="@+id/lay2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="invisible">
-
-            <NumberPicker
-                android:id="@+id/weight"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:shadowColor="@color/colorPrimaryDark"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="6"
+                android:text="Ваша цель:"
+                android:textColor="@color/colorWhite"
+                android:textColorLink="@color/colorWhite"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:width="100dp" />
+                android:paddingLeft="10dp"
+                android:layout_marginBottom="20dp">
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button3"
-            android:visibility="visible" />
+                <RadioButton
+                    android:id="@+id/radio_slim"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="Похудеть"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="25sp"
+                    android:shadowColor="@color/colorPrimaryDark"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="3"
+                    android:theme="@style/MyRadioButton"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2"
+                    android:translationX="30dp"
+                    android:layout_marginBottom="5dp"/>
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button4"
-            android:visibility="visible" />
-    </LinearLayout>
+                <RadioButton
+                    android:id="@+id/radio_balance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Поддержать форму"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="25sp"
+                    android:shadowColor="@color/colorPrimaryDark"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="3"
+                    android:theme="@style/MyRadioButton"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2"
+                    android:translationX="30dp"
+                    android:layout_marginBottom="5dp"
+                    />
 
-        <LinearLayout
+                <RadioButton
+                    android:id="@+id/radio_strong"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Набрать вес"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="25sp"
+                    android:shadowColor="@color/colorPrimaryDark"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="3"
+                    android:theme="@style/MyRadioButton"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2"
+                    android:translationX="30dp"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:shadowColor="@color/colorPrimaryDark"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="6"
+                android:text="Физическая активность:"
+                android:textColor="@color/colorWhite"
+                android:textColorLink="@color/colorWhite"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:layout_marginBottom="20dp">
+
+                <RadioButton
+                    android:id="@+id/radio_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="Не занимаюсь"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="25sp"
+                    android:shadowColor="@color/colorPrimaryDark"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="3"
+                    android:theme="@style/MyRadioButton"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2"
+                    android:translationX="30dp"
+                    android:layout_marginBottom="5dp"/>
+
+                <RadioButton
+                    android:id="@+id/radio_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="1-2 раза в неделю"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="25sp"
+                    android:shadowColor="@color/colorPrimaryDark"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="3"
+                    android:theme="@style/MyRadioButton"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2"
+                    android:translationX="30dp"
+                    android:layout_marginBottom="5dp"
+                    />
+
+                <RadioButton
+                    android:id="@+id/radio_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Почти каждый день"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="25sp"
+                    android:shadowColor="@color/colorPrimaryDark"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="3"
+                    android:theme="@style/MyRadioButton"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2"
+                    android:translationX="30dp"/>
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/custom_shape3"
+                android:gravity="center"
+                android:shadowColor="@color/colorPrimaryDark"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="5"
+                android:text="Далее"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:textColor="@color/colorPrimary"
+                android:textColorLink="@color/colorPrimary"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+    <LinearLayout
             android:id="@+id/lay3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
