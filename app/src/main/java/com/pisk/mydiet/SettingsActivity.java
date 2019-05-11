@@ -1,38 +1,18 @@
 package com.pisk.mydiet;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.PagerTabStrip;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity {
-
-//    ViewPager pager;
-//    PagerTabStrip pagerTab;
-//    PagerAdapter pagerAdapter;
 
     Button b1, b2, b3, b4;
     NumberPicker weight;
@@ -119,111 +99,9 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-//        pager = (ViewPager) findViewById(R.id.pager);
-        //pagerTab = (PagerTabStrip) findViewById(R.id.pagerTabStrip);
-
-        //pagerTab.setBackgroundResource(R.color.colorSuperFit);
-        //pagerTab.setTabIndicatorColor(getResources().getColor(R.color.colorWhite));
-
-//        pagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
-//
-//        pager.setAdapter(pagerAdapter);
 
 
     }
 
-//    @Override public void onLayoutChange (View v,
-//                                          int left, int top, int right, int bottom,
-//                                          int oldLeft, int oldTop, int oldRight, int oldBottom) {
-//
-//        if (left == right || top == bottom || (
-//                left == oldLeft && top == oldTop &&
-//                        right == oldRight && bottom == oldBottom))
-//            return;
-//
-//        switch (v.getId()) {
-//
-//            case R.id.biglayout:
-//
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//                    v.setBackground(
-//                            scaleKeepingAspect(
-//                                    getResources(),
-//                                    R.drawable.apple,
-//                                    v.getWidth(),
-//                                    v.getHeight()));
-//                } else {
-//                    v.setBackgroundDrawable(
-//                            scaleKeepingAspect(
-//                                    getResources(),
-//                                    R.drawable.apple,
-//                                    v.getWidth(),
-//                                    v.getHeight()));
-//                }
-//                break;
-//
-//        }
-//
-//    }
-
-//    private BitmapDrawable scaleKeepingAspect(Resources res, int id, int dstWidth, int dstHeight) {
-//
-//        Bitmap b = (new BitmapFactory()).decodeResource(res, id);
-//        float scaleX = (float) dstWidth / b.getWidth();
-//        float scaleY = (float) dstHeight / b.getHeight();
-//        float scale = scaleX < scaleY ? scaleX : scaleY;
-//        int sclWidth = Math.round(scale * b.getWidth());
-//        int sclHeight = Math.round(scale * b.getHeight());
-//
-//        b = Bitmap.createScaledBitmap(b, sclWidth, sclHeight, false);
-//        int[] pixels = new int[sclWidth * sclHeight];
-//        b.getPixels(pixels, 0, sclWidth, 0, 0, sclWidth, sclHeight);
-//        b = Bitmap.createBitmap(dstWidth, dstHeight, b.getConfig());
-//        b.setPixels(pixels, 0, sclWidth, (dstWidth - sclWidth) / 2, (dstHeight - sclHeight) / 2, sclWidth, sclHeight);
-//        return new BitmapDrawable(res, Bitmap.createBitmap(b));
-//
-//    }
-
-
-//    private class MyPagerAdapter extends FragmentPagerAdapter {
-//
-//        public MyPagerAdapter(FragmentManager fm) {
-//            super(fm);
-//        }
-//
-//        @Override
-//        public Fragment getItem(int pos) {
-//
-//            switch(pos) {
-//
-//                case 0: return FirstFragment.newInstance(pos);
-//                case 1: return SecondFragment.newInstance(pos);
-//                default: return ThirdFragment.newInstance(pos);
-//            }
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return 3;
-//        }
-//
-//        @Override
-//        public CharSequence getPageTitle(int position) {
-//
-//            CharSequence charSequence = "";
-//
-//            switch (position){
-//
-//                case 0: charSequence  = "1";
-//                    break;
-//                case 1: charSequence  = "2";
-//                    break;
-//                default: charSequence  = "3";
-//                    break;
-//            }
-//
-//            return charSequence;
-//        }
-//    }
 
 }
