@@ -66,11 +66,12 @@
             android:ems="10"
             android:gravity="center"
             android:hint="Ваше имя"
-            android:inputType="textPersonName"
+            android:inputType="textCapSentences"
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorWhite"
             android:textSize="30sp"
-            android:maxLength="18"/>
+            android:maxLength="18"
+            />
 
         <Button
             android:id="@+id/button2"
@@ -121,20 +122,16 @@
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
                 android:textSize="30sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginBottom="20dp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content"
+
+                    android:gravity="center"
                     android:paddingLeft="10dp"
                     android:shadowColor="@color/colorPrimaryDark"
                     android:shadowDx="2"
@@ -148,60 +145,54 @@
 
                 <NumberPicker
                     android:id="@+id/weight"
-                    android:layout_width="match_parent"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
+                    android:layout_gravity="center"
+
+                    android:gravity="center"
                     android:orientation="vertical"
                     android:paddingRight="10dp"
                     android:showDividers="middle"
-                    android:theme="@style/DefaultNumberPickerTheme" />
-            </LinearLayout>
+                    android:theme="@style/DefaultNumberPickerTheme"
+                    android:layout_marginBottom="20dp"/>
 
-            <LinearLayout
+
+            <TextView
+                android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:shadowColor="@color/colorPrimaryDark"
-                    android:shadowDx="2"
-                    android:shadowDy="2"
-                    android:shadowRadius="6"
-                    android:text="Ваш рост:"
-                    android:textColor="@color/colorWhite"
-                    android:textColorLink="@color/colorWhite"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:shadowColor="@color/colorPrimaryDark"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="6"
+                android:text="Ваш рост:"
+                android:textColor="@color/colorWhite"
+                android:textColorLink="@color/colorWhite"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
-                <NumberPicker
-                    android:id="@+id/growth"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical"
-                    android:paddingRight="10dp"
-                    android:showDividers="middle"
-                    android:theme="@style/DefaultNumberPickerTheme" />
-            </LinearLayout>
+            <NumberPicker
+                android:id="@+id/growth"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
 
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingRight="10dp"
+                android:showDividers="middle"
+                android:theme="@style/DefaultNumberPickerTheme"
+                android:layout_marginBottom="20dp"/>
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:paddingLeft="10dp"
                 android:shadowColor="@color/colorPrimaryDark"
                 android:shadowDx="2"
@@ -215,12 +206,13 @@
                 android:layout_marginBottom="10dp"/>
 
             <RadioGroup
-                android:id="@+id/radioGroup"
+                android:id="@+id/radioGroup1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingLeft="10dp"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                >
 
                 <RadioButton
                     android:id="@+id/radio_slim"
@@ -284,7 +276,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:paddingLeft="10dp"
                 android:shadowColor="@color/colorPrimaryDark"
                 android:shadowDx="2"
@@ -322,7 +314,8 @@
                     android:scaleX="1.2"
                     android:scaleY="1.2"
                     android:translationX="30dp"
-                    android:layout_marginBottom="5dp"/>
+                    android:layout_marginBottom="5dp"
+                    />
 
                 <RadioButton
                     android:id="@+id/radio_2"
@@ -385,29 +378,176 @@
     </ScrollView>
 
 
+    <ScrollView
+        android:id="@+id/scroll3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
 
-    <LinearLayout
+        <LinearLayout
             android:id="@+id/lay3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="invisible">
+            android:visibility="invisible"
+            android:paddingTop="20dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
-            <Button
-                android:id="@+id/button5"
+
+            <TextView
+                android:id="@+id/hello4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Button5"
-                android:visibility="visible" />
+                android:gravity="center"
+                android:shadowColor="@color/colorPrimaryDark"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="6"
+                android:textColor="@color/colorWhite"
+                android:textColorLink="@color/colorWhite"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:text="Выберите программу: "
+                />
 
-            <Button
-                android:id="@+id/button6"
+            <TextView
+                android:id="@+id/rec1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Button6"
-                android:visibility="visible" />
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:shadowColor="@color/colorPrimaryDark"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="6"
+                android:textColor="@color/colorWhite"
+                android:textColorLink="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold"
+               />
+
+            <Button
+                android:id="@+id/buttonSF"
+                android:layout_width="match_parent"
+                android:visibility="visible"
+                android:layout_height="105dp"
+                android:background="@drawable/custom_shape1"
+                android:gravity="center"
+                android:shadowColor="@color/colorPrimaryDark"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="5"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:textColor="@color/colorPrimary"
+                android:textColorLink="@color/colorPrimary"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:drawableRight="@drawable/superfit"/>
+            <Button
+                android:id="@+id/buttonF"
+                android:layout_width="match_parent"
+                android:visibility="visible"
+                android:layout_height="105dp"
+                android:background="@drawable/custom_shape2"
+                android:gravity="center"
+                android:shadowColor="@color/colorPrimaryDark"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="5"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:textColor="@color/colorPrimary"
+                android:textColorLink="@color/colorPrimary"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:drawableRight="@drawable/fit"/>
+            <Button
+                android:id="@+id/buttonB"
+                android:layout_width="match_parent"
+                android:visibility="visible"
+                android:layout_height="105dp"
+                android:background="@drawable/custom_shape3"
+                android:gravity="center"
+                android:shadowColor="@color/colorPrimaryDark"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="5"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:textColor="@color/colorPrimary"
+                android:textColorLink="@color/colorPrimary"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:drawableRight="@drawable/balance"/>
+            <Button
+                android:id="@+id/buttonS"
+                android:layout_width="match_parent"
+                android:visibility="visible"
+                android:layout_height="105dp"
+                android:background="@drawable/custom_shape4"
+                android:gravity="center"
+                android:shadowColor="@color/colorPrimaryDark"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="5"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:textColor="@color/colorPrimary"
+                android:textColorLink="@color/colorPrimary"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:drawableRight="@drawable/strong"/>
         </LinearLayout>
 
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/lay4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="20dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/hello5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:gravity="center"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="6"
+            android:text="Выберите дату начала:"
+            android:textColor="@color/colorWhite"
+            android:textColorLink="@color/colorWhite"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+
+
+        <Button
+            android:id="@+id/buttonFinish"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/custom_shape3"
+            android:gravity="center"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="5"
+            android:text="Готово"
+            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+            android:textColor="@color/colorPrimary"
+            android:textColorLink="@color/colorPrimary"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>

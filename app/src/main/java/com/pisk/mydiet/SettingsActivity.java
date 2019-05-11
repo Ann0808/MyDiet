@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -20,33 +22,53 @@ import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    Button b1, b2, b3, b4;
+    Button b1, b2, b3, b4, superFit, fit, balance, strong;
     NumberPicker weight, growth;
     EditText name;
-    LinearLayout lay1, lay2, lay3;
+    LinearLayout lay1, lay2, lay3, lay4;
     RelativeLayout bLayout;
-    ScrollView scrollView2;
+    ScrollView scrollView2, scrollView3;
     Animation anim, anim2;
     SharedPreferences sPref;
-    TextView hello3;
+    TextView hello3, hello4, recommend;
+    private RadioGroup radioGroup1, radioGroup2;
+    private RadioButton radioSelected1, radioSelected2;
+
     final String SAVED_PROGRAM = "saved_program";
     final String USER_NAME = "user_name";
     final String USER_WEIGHT = "user_weight";
     final String USER_GROWTH = "user_growth";
     final String USER_GOAL = "user_goal";
+
+    String[] programms;
+
     String userName = "";
+    int points = 2;
+    int programRecommended = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        programms = getResources().getStringArray(R.array.programms);
+
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
 
         //b1 = (Button) findViewById(R.id.button1);
-        b2 = (Button) findViewById(R.id.button2);
+        b2 = findViewById(R.id.button2);
         //b3 = (Button) findViewById(R.id.button3);
-        b4 = (Button) findViewById(R.id.button4);
+        b4 = findViewById(R.id.button4);
+
+        superFit = findViewById(R.id.buttonSF);
+        fit = findViewById(R.id.buttonF);
+        balance = findViewById(R.id.buttonB);
+        strong = findViewById(R.id.buttonS);
+
+        superFit.setText(programms[0]);
+        fit.setText(programms[1]);
+        balance.setText(programms[2]);
+        strong.setText(programms[3]);
 
         weight = findViewById(R.id.weight);
         growth = findViewById(R.id.growth);
@@ -67,15 +89,22 @@ public class SettingsActivity extends AppCompatActivity {
         lay1 = findViewById(R.id.lay1);
         lay2 = findViewById(R.id.lay2);
         lay3 = findViewById(R.id.lay3);
+        lay4 = findViewById(R.id.lay4);
 
         hello3 = findViewById(R.id.hello3);
+        hello4 = findViewById(R.id.hello4);
+        recommend = findViewById(R.id.rec1);
 
         scrollView2 = findViewById(R.id.scroll2);
+        scrollView3 = findViewById(R.id.scroll3);
+
+        radioGroup1 = findViewById(R.id.radioGroup1);
+        radioGroup2 = findViewById(R.id.radioGroup2);
 
         b2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-
+                v.setBackgroundResource(R.drawable.dcustom_shape3);
                 //Toast.makeText(getApplicationContext(),"",Toast.LENGTH_SHORT).show();
                 String usernameLocal = name.getText().toString();
                 if (usernameLocal.length() == 0) usernameLocal = "Пользователь";
@@ -110,6 +139,60 @@ public class SettingsActivity extends AppCompatActivity {
         b4.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
+
+                v.setBackgroundResource(R.drawable.dcustom_shape3);
+
+                points = 0;
+
+                int selectedId1 = radioGroup1.getCheckedRadioButtonId();
+                int selectedId2 = radioGroup2.getCheckedRadioButtonId();
+
+                switch(selectedId1){
+                    case R.id.radio_slim:
+                        points+=1;
+                        break;
+                    case R.id.radio_balance:
+                        points+=2;
+                        break;
+                    default: points+=3;
+                        break;
+                }
+
+                switch(selectedId2){
+                    case R.id.radio_1:
+                        points+=1;
+                        break;
+                    case R.id.radio_2:
+                        points+=2;
+                        break;
+                    default: points+=3;
+                        break;
+                }
+
+                if (points == 2) {
+                    programRecommended = 0;
+                } else if (points == 3) {
+                    programRecommended = 1;
+                } else if (points == 4) {
+                    programRecommended = 2;
+                } else {
+                    programRecommended = 3;
+                }
+
+                String textRecomendation = "(Исходя из Ваших данных, мы рекомендуем " + programms[programRecommended] + ")";
+                recommend.setText(textRecomendation);
+//                if (programRecommended == 0) {
+//
+//                } else if (programRecommended == 1) {
+//
+//                } else if (programRecommended == 2) {
+//
+//                } else {
+//
+//                }
+
+                //hello4.setText(textRecomendation);
+
                 sPref = getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
                 SharedPreferences.Editor ed = sPref.edit();
                 ed.putInt(USER_WEIGHT,weight.getValue());
@@ -132,14 +215,79 @@ public class SettingsActivity extends AppCompatActivity {
                         bLayout.removeView(scrollView2);
                         lay3.startAnimation(anim2);
                         lay3.setVisibility(View.VISIBLE);
+                        scrollView3.setVisibility(View.VISIBLE);
                     }
                 }, 1000);
 
             }
         });
 
+        superFit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                v.setBackgroundResource(R.drawable.dcustom_shape1);
+                makeAnimationButton();
+                setSAVED_PROGRAM(1);
+
+            }
+        });
+
+        fit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                v.setBackgroundResource(R.drawable.dcustom_shape2);
+                makeAnimationButton();
+                setSAVED_PROGRAM(2);
+
+            }
+        });
+
+        balance.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                v.setBackgroundResource(R.drawable.dcustom_shape3);
+                makeAnimationButton();
+                setSAVED_PROGRAM(3);
+
+            }
+        });
+
+        strong.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                v.setBackgroundResource(R.drawable.dcustom_shape4);
+                makeAnimationButton();
+                setSAVED_PROGRAM(4);
+
+            }
+        });
 
 
+    }
+
+    public void makeAnimationButton() {
+        anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha);
+        anim2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha2);
+        lay3.startAnimation(anim);
+
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                bLayout.removeView(scrollView3);
+                lay4.startAnimation(anim2);
+                lay4.setVisibility(View.VISIBLE);
+
+            }
+        }, 1000);
+    }
+
+    public void setSAVED_PROGRAM(int prog) {
+        sPref = getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putInt(SAVED_PROGRAM,prog);
+
+        ed.commit();
     }
 
 
