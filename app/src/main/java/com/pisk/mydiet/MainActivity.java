@@ -19,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -223,9 +224,27 @@ public class MainActivity extends AppCompatActivity
 
         }
 
+        final Intent intent3 = new Intent(this, PagerActivity.class);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
+                                    long id) {
+
+//                int newPos = position;
+//                if (newPos !=0 ) {
+//                    newPos++;
+//                }
+//                b.putInt("arg_day_number", newPos);
+//                intent.putExtra("bund", b);
+                intent3.putExtra("arg_day_number", (position + 1));
+                intent3.putExtra("arg_program_number", savedProg);
+                startActivity(intent3);
+            }
+        });
 
     }
+
 
     @Override
     protected void onResume() {
