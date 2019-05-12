@@ -21,8 +21,8 @@
         android:shadowDy="1"
         android:shadowRadius="5"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:textColor="@color/colorPrimary"
-        android:textColorLink="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        android:textColorLink="@color/colorWhite"
         android:textSize="30sp"
         android:textStyle="bold" />
 </LinearLayout>

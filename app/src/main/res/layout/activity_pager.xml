@@ -18,7 +18,7 @@
             android:layout_gravity="top"
             android:padding="3dp"
             android:textSize="30sp"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorWhite"
             android:textAppearance="?android:attr/textAppearanceLarge">
 
         </android.support.v4.view.PagerTabStrip>

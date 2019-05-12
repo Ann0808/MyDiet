@@ -1,16 +1,19 @@
 package com.pisk.mydiet;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -22,16 +25,18 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    Button b1, b2, b3, b4, superFit, fit, balance, strong;
+    Button b1, b2, b3, b4, superFit, fit, balance, strong, finish;
     NumberPicker weight, growth;
     EditText name;
     LinearLayout lay1, lay2, lay3, lay4;
     RelativeLayout bLayout;
-    ScrollView scrollView2, scrollView3;
+    ScrollView scrollView2, scrollView3, scrollView4;
     Animation anim, anim2;
     SharedPreferences sPref;
     TextView hello3, hello4, recommend;
@@ -40,17 +45,20 @@ public class SettingsActivity extends AppCompatActivity {
     Calendar dateAndTime=Calendar.getInstance();
     DatePickerDialog.OnDateSetListener d;
     TextView currentDateTime;
-    DatePickerDialog picker;
+    CalendarView picker;
+
 
     final String SAVED_PROGRAM = "saved_program";
     final String USER_NAME = "user_name";
     final String USER_WEIGHT = "user_weight";
     final String USER_GROWTH = "user_growth";
     final String USER_GOAL = "user_goal";
+    final String DATE_START = "date_start";
 
     String[] programms;
 
     String userName = "";
+    String currentDate = "";
     int points = 2;
     int programRecommended = 0;
 
@@ -67,6 +75,7 @@ public class SettingsActivity extends AppCompatActivity {
         b2 = findViewById(R.id.button2);
         //b3 = (Button) findViewById(R.id.button3);
         b4 = findViewById(R.id.button4);
+        finish = findViewById(R.id.buttonFinish);
 
         superFit = findViewById(R.id.buttonSF);
         fit = findViewById(R.id.buttonF);
@@ -105,11 +114,27 @@ public class SettingsActivity extends AppCompatActivity {
 
         scrollView2 = findViewById(R.id.scroll2);
         scrollView3 = findViewById(R.id.scroll3);
+        scrollView4 = findViewById(R.id.scroll4);
 
         radioGroup1 = findViewById(R.id.radioGroup1);
         radioGroup2 = findViewById(R.id.radioGroup2);
 
-        currentDateTime=(TextView)findViewById(R.id.textDate);
+        picker = findViewById(R.id.datePicker);
+       // picker.setMinDate(System.currentTimeMillis() - 1000);
+
+        picker.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month,
+                                            int dayOfMonth) {
+                month++;
+                String strMonth = month>9 ? String.valueOf(month) : "0" + month;
+                String day = dayOfMonth>9 ? String.valueOf(dayOfMonth) : "0" + dayOfMonth;
+                currentDate = day + "/" + strMonth + "/" + year;
+                Log.d("myLogs2", "currentDate: " + currentDate);
+            }
+        });
+
 
         b2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
@@ -237,24 +262,26 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 v.setBackgroundResource(R.drawable.dcustom_shape1);
-                //makeAnimationButton();
+                makeAnimationButton();
                 setSAVED_PROGRAM(1);
 
-                final Calendar cldr = Calendar.getInstance();
-                int day = cldr.get(Calendar.DAY_OF_MONTH);
-                int month = cldr.get(Calendar.MONTH);
-                int year = cldr.get(Calendar.YEAR);
-
-                picker = new DatePickerDialog(SettingsActivity.this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                               Toast.makeText(getApplicationContext(),
-                                       dayOfMonth + "/" + (monthOfYear + 1) + "/" + year,
-                                       Toast.LENGTH_LONG).show();
-                            }
-                        }, year, month, day);
-                picker.show();
+//                final Calendar cldr = Calendar.getInstance();
+//                int day = cldr.get(Calendar.DAY_OF_MONTH);
+//                int month = cldr.get(Calendar.MONTH);
+//                int year = cldr.get(Calendar.YEAR);
+//
+//                picker = new DatePickerDialog(SettingsActivity.this,
+//                        new DatePickerDialog.OnDateSetListener() {
+//                            @Override
+//                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                               Toast.makeText(getApplicationContext(),
+//                                       dayOfMonth + "/" + (monthOfYear + 1) + "/" + year,
+//                                       Toast.LENGTH_LONG).show();
+//                            }
+//                        }, year, month, day);
+//
+//                picker.setTitle("choose date start");
+//                picker.show();
             }
         });
 
@@ -284,7 +311,22 @@ public class SettingsActivity extends AppCompatActivity {
             {
                 v.setBackgroundResource(R.drawable.dcustom_shape4);
                 makeAnimationButton();
-                setSAVED_PROGRAM(4);
+                setSAVED_PROGRAM(4); //change to 4
+
+            }
+        });
+
+        finish.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                v.setBackgroundResource(R.drawable.dcustom_shape3);
+                sPref = getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
+                SharedPreferences.Editor ed = sPref.edit();
+                ed.putString(DATE_START,currentDate);
+                ed.commit();
+
+                final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -303,6 +345,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void run() {
                 bLayout.removeView(scrollView3);
                 lay4.startAnimation(anim2);
+                scrollView4.setVisibility(View.VISIBLE);
                 lay4.setVisibility(View.VISIBLE);
 
             }

@@ -499,96 +499,74 @@
 
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/lay4"
+    <ScrollView
+        android:id="@+id/scroll4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingTop="20dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
         android:visibility="invisible">
 
-        <TextView
-            android:id="@+id/hello5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:gravity="center"
-            android:shadowColor="@color/colorPrimaryDark"
-            android:shadowDx="2"
-            android:shadowDy="2"
-            android:shadowRadius="6"
-            android:text="Выберите дату начала:"
-            android:textColor="@color/colorWhite"
-            android:textColorLink="@color/colorWhite"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="20dp"/>
-
         <LinearLayout
+            android:id="@+id/lay4"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingTop="20dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:visibility="invisible">
 
             <TextView
-                android:id="@+id/textDate"
-                android:layout_width="wrap_content"
+                android:id="@+id/hello5"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Сегодня"
+
+                android:gravity="center"
                 android:shadowColor="@color/colorPrimaryDark"
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="3"
+                android:text="Первый день диеты:"
+                android:textColor="@color/colorWhite"
+                android:textColorLink="@color/colorWhite"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                android:textColor="@color/colorWhite"
-                android:textColorLink="@color/colorWhite"
+                android:layout_marginBottom="20dp"/>
 
-                />
-
-            <Button
-                android:id="@+id/button3"
+            <CalendarView
+                android:id="@+id/datePicker"
+                android:calendarViewShown="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Изменить дату"
+                android:layout_below="@+id/button"
+                android:layout_centerHorizontal="true"
+                android:background="@color/colorWhite"
+                android:unfocusedMonthDateColor="@color/colorBalance"
+                >
+
+            </CalendarView>
+            <Button
+                android:id="@+id/buttonFinish"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_shape3"
+                android:gravity="center"
                 android:shadowColor="@color/colorPrimaryDark"
-                android:shadowDx="2"
-                android:shadowDy="2"
+                android:shadowDx="1"
+                android:shadowDy="1"
                 android:shadowRadius="3"
-                android:textSize="20sp"
-                android:textStyle="bold"
+                android:text="Готово"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
-                android:background="@drawable/custom_shape1"
-                android:textAppearance="?android:attr/textAppearanceListItemSmall"/>
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+
         </LinearLayout>
+    </ScrollView>
 
-
-
-        <Button
-            android:id="@+id/buttonFinish"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/custom_shape1"
-            android:gravity="center"
-            android:shadowColor="@color/colorPrimaryDark"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="5"
-            android:text="Готово"
-            android:textAppearance="?android:attr/textAppearanceListItemSmall"
-            android:textColor="@color/colorWhite"
-            android:textColorLink="@color/colorWhite"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:visibility="visible" />
-
-    </LinearLayout>
 
 
 </RelativeLayout>
