@@ -62,7 +62,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:autoText="false"
             android:ems="10"
             android:gravity="center"
             android:hint="Ваше имя"
@@ -85,8 +84,8 @@
             android:shadowRadius="5"
             android:text="Далее"
             android:textAppearance="?android:attr/textAppearanceListItemSmall"
-            android:textColor="@color/colorPrimary"
-            android:textColorLink="@color/colorPrimary"
+            android:textColor="@color/colorWhite"
+            android:textColorLink="@color/colorWhite"
             android:textSize="30sp"
             android:textStyle="bold"
             android:visibility="visible" />
@@ -367,8 +366,8 @@
                 android:shadowRadius="5"
                 android:text="Далее"
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                android:textColor="@color/colorPrimary"
-                android:textColorLink="@color/colorPrimary"
+                android:textColor="@color/colorWhite"
+                android:textColorLink="@color/colorWhite"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:visibility="visible" />
@@ -440,8 +439,8 @@
                 android:shadowDy="1"
                 android:shadowRadius="5"
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                android:textColor="@color/colorPrimary"
-                android:textColorLink="@color/colorPrimary"
+                android:textColor="@color/colorWhite"
+                android:textColorLink="@color/colorWhite"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:drawableRight="@drawable/superfit"/>
@@ -457,8 +456,8 @@
                 android:shadowDy="1"
                 android:shadowRadius="5"
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                android:textColor="@color/colorPrimary"
-                android:textColorLink="@color/colorPrimary"
+                android:textColor="@color/colorWhite"
+                android:textColorLink="@color/colorWhite"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:drawableRight="@drawable/fit"/>
@@ -474,8 +473,8 @@
                 android:shadowDy="1"
                 android:shadowRadius="5"
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                android:textColor="@color/colorPrimary"
-                android:textColorLink="@color/colorPrimary"
+                android:textColor="@color/colorWhite"
+                android:textColorLink="@color/colorWhite"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:drawableRight="@drawable/balance"/>
@@ -491,8 +490,8 @@
                 android:shadowDy="1"
                 android:shadowRadius="5"
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                android:textColor="@color/colorPrimary"
-                android:textColorLink="@color/colorPrimary"
+                android:textColor="@color/colorWhite"
+                android:textColorLink="@color/colorWhite"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:drawableRight="@drawable/strong"/>
@@ -525,7 +524,49 @@
             android:textColor="@color/colorWhite"
             android:textColorLink="@color/colorWhite"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:id="@+id/textDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Сегодня"
+                android:shadowColor="@color/colorPrimaryDark"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="3"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"
+                android:textColorLink="@color/colorWhite"
+
+                />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Изменить дату"
+                android:shadowColor="@color/colorPrimaryDark"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="3"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"
+                android:textColorLink="@color/colorWhite"
+                android:background="@drawable/custom_shape1"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"/>
+        </LinearLayout>
 
 
 
@@ -533,7 +574,7 @@
             android:id="@+id/buttonFinish"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:background="@drawable/custom_shape3"
+            android:background="@drawable/custom_shape1"
             android:gravity="center"
             android:shadowColor="@color/colorPrimaryDark"
             android:shadowDx="1"
@@ -541,8 +582,8 @@
             android:shadowRadius="5"
             android:text="Готово"
             android:textAppearance="?android:attr/textAppearanceListItemSmall"
-            android:textColor="@color/colorPrimary"
-            android:textColorLink="@color/colorPrimary"
+            android:textColor="@color/colorWhite"
+            android:textColorLink="@color/colorWhite"
             android:textSize="30sp"
             android:textStyle="bold"
             android:visibility="visible" />

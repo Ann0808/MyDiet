@@ -1,5 +1,6 @@
 package com.pisk.mydiet;
 
+import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
@@ -19,6 +21,8 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -33,6 +37,10 @@ public class SettingsActivity extends AppCompatActivity {
     TextView hello3, hello4, recommend;
     private RadioGroup radioGroup1, radioGroup2;
     private RadioButton radioSelected1, radioSelected2;
+    Calendar dateAndTime=Calendar.getInstance();
+    DatePickerDialog.OnDateSetListener d;
+    TextView currentDateTime;
+    DatePickerDialog picker;
 
     final String SAVED_PROGRAM = "saved_program";
     final String USER_NAME = "user_name";
@@ -100,6 +108,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         radioGroup1 = findViewById(R.id.radioGroup1);
         radioGroup2 = findViewById(R.id.radioGroup2);
+
+        currentDateTime=(TextView)findViewById(R.id.textDate);
 
         b2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
@@ -222,15 +232,32 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+
         superFit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
                 v.setBackgroundResource(R.drawable.dcustom_shape1);
-                makeAnimationButton();
+                //makeAnimationButton();
                 setSAVED_PROGRAM(1);
 
+                final Calendar cldr = Calendar.getInstance();
+                int day = cldr.get(Calendar.DAY_OF_MONTH);
+                int month = cldr.get(Calendar.MONTH);
+                int year = cldr.get(Calendar.YEAR);
+
+                picker = new DatePickerDialog(SettingsActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                               Toast.makeText(getApplicationContext(),
+                                       dayOfMonth + "/" + (monthOfYear + 1) + "/" + year,
+                                       Toast.LENGTH_LONG).show();
+                            }
+                        }, year, month, day);
+                picker.show();
             }
         });
+
 
         fit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)

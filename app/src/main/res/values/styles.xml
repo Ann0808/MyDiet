@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimaryDark</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorWhite</item>
+        <item name="colorAccent">@color/colorBalance</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -23,6 +23,7 @@
         <item name="android:shadowDy">1</item>
         <item name="android:shadowRadius">3</item>
     </style>
+
 
     <style name="MyRadioButton" parent="Theme.AppCompat.Light">
         <item name="colorControlNormal">@android:color/white</item>
