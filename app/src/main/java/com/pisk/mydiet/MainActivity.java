@@ -3,6 +3,7 @@ package com.pisk.mydiet;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -76,12 +77,7 @@ public class MainActivity extends AppCompatActivity
         Log.d("myLogs2", "jj: " + savedProg);
 
 
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
+        // on resume
 
         final Intent intent = new Intent(this, SettingsActivity.class);
         final Intent intent2 = new Intent(this, ProgramsActivity.class);
@@ -155,7 +151,7 @@ public class MainActivity extends AppCompatActivity
                 DateFormat df = new SimpleDateFormat("dd.MM.yy");
                 String firstDate = df.format(dateStart);
                 days[i] = "День " + (i+1) + " (" + firstDate + ")";
-                Log.d("myLogs2",days[i]);
+                //Log.d("myLogs2",days[i]);
                 localDate += (24 * 60 * 60 * 1000);
             }
 
@@ -166,7 +162,14 @@ public class MainActivity extends AppCompatActivity
                 public View getView(int position, View convertView, ViewGroup parent) {
                     View view = super.getView(position, convertView, parent);
 
+
                     TextView mytextview=(TextView)view;
+
+                    Log.d("myLogs2", "text: " + mytextview.getText());
+
+                    if (position < daysGone) {
+                        mytextview.setText("Пройдено ✓");
+                    }
 
                     if (savedProg == 1) {
 
@@ -187,29 +190,48 @@ public class MainActivity extends AppCompatActivity
 
                     }
 
-                    //Object obj = listView.getItemAtPosition();
-                   // if (position < daysGone) {
-                   //     mytextview.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.strong, 0);
-                   // }
 
-                    Log.d("myLogs2","position: " +position);
+
+                    //Object obj = listView.getItemAtPosition();
+                    // if (position < daysGone) {
+                    //     mytextview.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.strong, 0);
+                    // }
+
+                    //Log.d("myLogs2","fgjhj: " + v.getText());
 
                     return view;
                 }
             };
 
+
+
             listView.setDivider(null);
 //        listView.setHeaderDividersEnabled(true);
+
             listView.setAdapter(adapter);
 
-            for(int j=0; j<daysGone; j++) {
-                TextView v = (TextView) getViewByPosition(j,listView);
-                v.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.strong, 0);
+            //TextView v = (TextView) listView.getChildAt(0);
+            //Log.d("myLogs2", "posittttt: " + v.getText());
+//            for(int j=0; j<5; j++) {
+//                TextView v = (TextView) getViewByPosition(j,listView);
+//                //v.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.strong, 0);
+//                v.setText("kkk");
+//                Log.d("myLogs2","textview: " +v.getText());
+//            }
 
-            }
 
 
         }
+
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
     }
 
     public View getViewByPosition(int pos, ListView listView) {
