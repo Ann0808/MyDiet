@@ -163,7 +163,6 @@ public class MainActivity extends AppCompatActivity
                 public View getView(int position, View convertView, ViewGroup parent) {
                     View view = super.getView(position, convertView, parent);
 
-
                     TextView mytextview=(TextView)view;
 
                     Log.d("myLogs2", "text: " + mytextview.getText());
@@ -192,7 +191,6 @@ public class MainActivity extends AppCompatActivity
                     }
 
 
-
                     //Object obj = listView.getItemAtPosition();
                     // if (position < daysGone) {
                     //     mytextview.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.strong, 0);
@@ -210,6 +208,9 @@ public class MainActivity extends AppCompatActivity
 //        listView.setHeaderDividersEnabled(true);
 
             listView.setAdapter(adapter);
+
+            listView.setSelection(daysGone); //scroll to current day
+
 
             //TextView v = (TextView) listView.getChildAt(0);
             //Log.d("myLogs2", "posittttt: " + v.getText());
@@ -248,6 +249,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onResume() {
+
         super.onResume();
 
 
