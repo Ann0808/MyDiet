@@ -28,6 +28,7 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -121,6 +122,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         picker = findViewById(R.id.datePicker);
        // picker.setMinDate(System.currentTimeMillis() - 1000);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        currentDate = simpleDateFormat.format(new Date());
 
         picker.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 

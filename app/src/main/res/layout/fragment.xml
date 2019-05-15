@@ -20,6 +20,32 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_below = "@+id/scrollingrec">
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:padding="0dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/colorPrimaryDark"
+                android:gravity="center"
+                tools:ignore="Suspicious0dp"
+                android:visibility="invisible"></TextView>
+
+            <TextView
+                android:id="@+id/nameDish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="0dp"
+                android:text="Название"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/colorPrimaryDark">
+            </TextView>
+
             <ImageView
                 android:id="@+id/photoRecept"
                 android:layout_width="fill_parent"
@@ -40,12 +66,14 @@
                 android:padding="0dp"
                 android:text="@string/ingridients"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"></TextView>
 
             <TextView
                 android:id="@+id/ingridients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_margin="10dp"
                 android:text="TextView" />
 
@@ -62,12 +90,14 @@
                 android:padding="0dp"
                 android:text="@string/recipe"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/recipe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_margin="10dp"
                 android:text="TextView" />
 
@@ -84,6 +114,7 @@
                 android:padding="0dp"
                 android:text="@string/kkal"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>

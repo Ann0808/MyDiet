@@ -27,5 +27,6 @@
 
     <string name="hello">Добро пожаловать в MyDiet!</string>
     <string name="hello2"> Пожалуйста, введите Ваше имя:</string>
+    <string name="title_activity_products">ProductsActivity</string>
 
 </resources>

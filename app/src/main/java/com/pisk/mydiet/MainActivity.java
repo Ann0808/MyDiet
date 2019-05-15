@@ -80,6 +80,16 @@ public class MainActivity extends AppCompatActivity
 
         // on resume
 
+
+
+    }
+
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+
         final Intent intent = new Intent(this, SettingsActivity.class);
         final Intent intent2 = new Intent(this, ProgramsActivity.class);
 
@@ -87,23 +97,9 @@ public class MainActivity extends AppCompatActivity
         savedProg = sPref.getInt(SAVED_PROGRAM, 0);
         savedDate = sPref.getString(DATE_START,"1/1/2019");
         //Log.d("myLogs2", "days left: " + savedDate);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = null;
-        try {
-            date = sdf.parse(savedDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        long millis = date.getTime();
-        long today = System.currentTimeMillis();
-        int dayLefttoStart = (int) Math.ceil((double)(millis - today)/ (24 * 60 * 60 * 1000));
-        int progress = 0;
 
-        if (dayLefttoStart < 0) {
-            progress = -(int)(((double)dayLefttoStart*100)/(double)28) ;
-        }
 
-        Log.d("myLogs2", "days left: " + dayLefttoStart);
+        //Log.d("myLogs2", "days left: " + dayLefttoStart);
 
         if (savedProg == 0) {  //change to ==0
             //intent.putExtra("arg_program_number", 0);
@@ -134,6 +130,22 @@ public class MainActivity extends AppCompatActivity
                         android.graphics.PorterDuff.Mode.SRC_IN);
                 titleView.setBackgroundResource(R.drawable.custom_shape4);
                 titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.strong, 0);
+            }
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = null;
+            try {
+                date = sdf.parse(savedDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            long millis = date.getTime();
+            long today = System.currentTimeMillis();
+            int dayLefttoStart = (int) Math.ceil((double)(millis - today)/ (24 * 60 * 60 * 1000));
+            int progress = 0;
+
+            if (dayLefttoStart < 0) {
+                progress = -(int)(((double)dayLefttoStart*100)/(double)28) ;
             }
 
             titleView.setText(getResources().getStringArray(R.array.programms)[savedProg - 1]);
@@ -168,7 +180,7 @@ public class MainActivity extends AppCompatActivity
                     Log.d("myLogs2", "text: " + mytextview.getText());
 
                     if (position < daysGone) {
-                        mytextview.setText("Пройдено ✓");
+                        mytextview.setText(mytextview.getText() +" (Пройден ✓)");
                     }
 
                     if (savedProg == 1) {
@@ -240,17 +252,11 @@ public class MainActivity extends AppCompatActivity
 //                intent.putExtra("bund", b);
                 intent3.putExtra("arg_day_number", (position + 1));
                 intent3.putExtra("arg_program_number", savedProg);
+                intent3.putExtra("arg_date", listView.getItemAtPosition(position).toString());
+                //Log.d("myLogs2", "clicked date " + listView.getItemAtPosition(position).toString());
                 startActivity(intent3);
             }
         });
-
-    }
-
-
-    @Override
-    protected void onResume() {
-
-        super.onResume();
 
 
     }

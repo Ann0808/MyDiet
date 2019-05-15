@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
@@ -31,10 +32,12 @@ public class PageFragment extends Fragment {
     static final String ARGUMENT_PAGE_NUMBER = "arg_page_number";
     static final String ARGUMENT_DAY_NUMBER = "arg_day_number";
     static final String ARGUMENT_PROGRAM_NUMBER = "arg_program_number";
+    static final String ARGUMENT_DATE = "arg_date";
 
     int pageNumber;
     int dayNumber;
     int programNumber;
+    String date = null;
 
 
     // for time
@@ -42,6 +45,7 @@ public class PageFragment extends Fragment {
     String kcalText;
     String recipeText;
     String image;
+    String name;
     Bitmap bm;
     //for time
 
@@ -50,12 +54,15 @@ public class PageFragment extends Fragment {
     SQLiteDatabase db;
     Cursor cursor;
 
-    static PageFragment newInstance(int page, int dayNumber, int programNumber) {
+    //TextView viewDate;
+
+    static PageFragment newInstance(int page, int dayNumber, int programNumber, String date) {
         PageFragment pageFragment = new PageFragment();
         Bundle arguments = new Bundle();
         arguments.putInt(ARGUMENT_PAGE_NUMBER, page);
         arguments.putInt(ARGUMENT_DAY_NUMBER, dayNumber);
         arguments.putInt(ARGUMENT_PROGRAM_NUMBER, programNumber);
+        arguments.putString(ARGUMENT_DATE, date);
         pageFragment.setArguments(arguments);
         return pageFragment;
     }
@@ -66,6 +73,8 @@ public class PageFragment extends Fragment {
         pageNumber = getArguments().getInt(ARGUMENT_PAGE_NUMBER);
         dayNumber = getArguments().getInt(ARGUMENT_DAY_NUMBER);
         programNumber = getArguments().getInt(ARGUMENT_PROGRAM_NUMBER);
+        date = getArguments().getString(ARGUMENT_DATE);
+
 
         //Random rnd = new Random();
         //backColor = Color.argb(40, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
@@ -88,7 +97,8 @@ public class PageFragment extends Fragment {
         dbHelper.create_db();
         db = dbHelper.open();
 
-        String[] columns = new String[]{dbHelper.RECIPE,dbHelper.INRIDIENTS,dbHelper.KKAL, dbHelper.IMAGE};
+        String[] columns = new String[]{dbHelper.RECIPE,dbHelper.INRIDIENTS,dbHelper.KKAL,
+                dbHelper.IMAGE,dbHelper.NAME};
 //        String selection = dbHelper.PROGRAM_NUMBER + "= ?";
 //         String[] selectionArgs = new String[] { "1" };
 
@@ -109,6 +119,7 @@ public class PageFragment extends Fragment {
                 int ingridientsColIndex = cursor.getColumnIndex(dbHelper.INRIDIENTS);
                 int kkalColIndex = cursor.getColumnIndex(dbHelper.KKAL);
                 int imageColIndex = cursor.getColumnIndex(dbHelper.IMAGE);
+                int nameColIndex = cursor.getColumnIndex(dbHelper.NAME);
                 Log.d(TAG2, "image index: " + imageColIndex);
                 //String str;
                 do {
@@ -116,6 +127,7 @@ public class PageFragment extends Fragment {
                     recipeText = cursor.getString(recipeColIndex);
                     kcalText = cursor.getString(kkalColIndex);
                     image = cursor.getString(imageColIndex);
+                    name = cursor.getString(nameColIndex);
                     //bm = BitmapFactory.decodeByteArray(image, 0, image.length);
 
                     //String b64 = "iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAABS2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxMzggNzkuMTU5ODI0LCAyMDE2LzA5LzE0LTAxOjA5OjAxICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+IEmuOgAACLlJREFUeJzt2LFtw0AUBUHLYCnM2QZLZhvM2cu5Agc2RJ2gnckP98LFf4wxxhcAkPI9ewAA8HoCAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAoGX2gN8c5zV7AgBvaN/W2RM+ggsAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBjzHGmD2C5zvOa/YE4Cb7ts6ewAdwAQCAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAhaZg8A4G+O83rJP/u2vuQf5nABAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABC0zB7APfZt/ffb47yeuASAd+QCAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAELTMHgAAdzjOa/aEt+YCAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABA0DJ7AO9n39bZEwC4mQsAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAEPQDpX8bARdnfd8AAAAASUVORK5CYII=";
@@ -149,6 +161,24 @@ public class PageFragment extends Fragment {
         TextView ingridients = (TextView) view.findViewById(R.id.ingridients);
         TextView recipe = (TextView) view.findViewById(R.id.recipe);
         TextView kcal = (TextView) view.findViewById(R.id.tvPage3);
+        TextView nameDish = view.findViewById(R.id.nameDish);
+
+        TextView viewDate = (TextView) view.findViewById(R.id.date);
+        ViewGroup.LayoutParams params = viewDate.getLayoutParams();
+
+        if (date == null) {
+
+            container.removeView(viewDate);
+
+        } else {
+
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            viewDate.setLayoutParams(params);
+            viewDate.setText(date);
+            viewDate.setVisibility(View.VISIBLE);
+
+        }
+
 
         ImageView tvImage = (ImageView) view.findViewById(R.id.photoRecept);
 
@@ -158,6 +188,7 @@ public class PageFragment extends Fragment {
         recipe.setText(recipeText);
         kcal.setText(kcal.getText() + kcalText);
         view.setBackgroundColor(backColor);
+        nameDish.setText(name);
 
         //tvImage.setImageDrawable(getResources().getDrawable(R.drawable.balance));
         //Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.strong);

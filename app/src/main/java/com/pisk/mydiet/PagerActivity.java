@@ -11,6 +11,12 @@ import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class PagerActivity extends FragmentActivity {
 
@@ -19,9 +25,11 @@ public class PagerActivity extends FragmentActivity {
     //Bundle b;
     int programNumber;
     int dayNumber;
+    String date;
     ViewPager pager;
     PagerTabStrip pagerTab;
     PagerAdapter pagerAdapter;
+    //TextView viewDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +41,19 @@ public class PagerActivity extends FragmentActivity {
         programNumber = intentTmp.getIntExtra("arg_program_number",0);
         dayNumber = intentTmp.getIntExtra("arg_day_number",0);
 
+        date = intentTmp.getStringExtra("arg_date");
+
         pager = (ViewPager) findViewById(R.id.pager);
         pagerTab = (PagerTabStrip) findViewById(R.id.pagerTabStrip);
+        //viewDate = findViewById(R.id.date);
+        //ViewPager.LayoutParams params = new ViewPager.LayoutParams();
+        //params.height = ViewPager.LayoutParams.WRAP_CONTENT;
+        //viewDate.setText("'l");
+//        if (date != null) {
+//
+//           // viewDate.setLayoutParams(params);
+//            //viewDate.setText("ll");
+//        }
 
         if(programNumber ==1) {
             pagerTab.setBackgroundResource(R.color.colorSuperFit);
@@ -80,7 +99,7 @@ public class PagerActivity extends FragmentActivity {
             if (newPos !=0 ) {
                 newPos++;
             }
-            return PageFragment.newInstance((position +1), dayNumber, programNumber);
+            return PageFragment.newInstance((position +1), dayNumber, programNumber,date);
         }
 
         @Override
