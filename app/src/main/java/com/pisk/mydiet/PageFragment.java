@@ -102,9 +102,9 @@ public class PageFragment extends Fragment {
 //        String selection = dbHelper.PROGRAM_NUMBER + "= ?";
 //         String[] selectionArgs = new String[] { "1" };
 
-        Log.d(TAG2, "programNumber is: " + programNumber);
-        Log.d(TAG2, "pageNumber is: " + pageNumber);
-        Log.d(TAG2, "dayNumber is: " + dayNumber);
+//        Log.d(TAG2, "programNumber is: " + programNumber);
+//        Log.d(TAG2, "pageNumber is: " + pageNumber);
+//        Log.d(TAG2, "dayNumber is: " + dayNumber);
 
         String WHERE = dbHelper.PROGRAM_NUMBER + "='" + programNumber + "' AND " +
                 dbHelper.FOOD_TIME + "='" + pageNumber + "' AND " +

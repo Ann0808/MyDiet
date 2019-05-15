@@ -17,7 +17,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
     private static String DB_NAME = "myDiet.db";
     private static final int SCHEMA = 1; // версия базы данных
     static final String TABLE = "recipes"; // название таблицы в бд
-    static final String TABLE_PRODUCTS = "settings"; // название таблицы в бд
+    static final String TABLE_PRODUCTS = "products"; // название таблицы в бд
     // названия столбцов TABLE
     static final String PROGRAM_NUMBER = "program_number";
     static final String DAY = "day";
