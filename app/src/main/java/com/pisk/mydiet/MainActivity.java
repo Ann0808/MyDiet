@@ -91,7 +91,6 @@ public class MainActivity extends AppCompatActivity
         super.onResume();
 
         final Intent intent = new Intent(this, SettingsActivity.class);
-        final Intent intent2 = new Intent(this, ProgramsActivity.class);
 
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
         savedProg = sPref.getInt(SAVED_PROGRAM, 0);
@@ -311,11 +310,17 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
+            Intent intent2 = new Intent(this, ProductsActivity.class);
+            startActivity(intent2);
 
         } else if (id == R.id.nav_slideshow) {
+
+            Intent intent2 = new Intent(this, ProgramsActivity.class);
+            startActivity(intent2);
 
         } else if (id == R.id.nav_manage) {
 

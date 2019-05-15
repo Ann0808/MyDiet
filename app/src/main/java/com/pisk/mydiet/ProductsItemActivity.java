@@ -1,7 +1,5 @@
 package com.pisk.mydiet;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,26 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-public class ProductsActivity extends AppCompatActivity
+public class ProductsItemActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    private ListView listView;
-    int programNumber;
-    final String SAVED_PROGRAM = "saved_program";
-    SharedPreferences sPref;
-    TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_products);
+        setContentView(R.layout.activity_products_item);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -54,68 +40,6 @@ public class ProductsActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
-        programNumber = sPref.getInt(SAVED_PROGRAM, 0);
-
-        listView = (ListView) findViewById(R.id.listViewWeeks);
-        title = findViewById(R.id.title1);
-
-        final String[] weeks = new String[4];
-
-        for (int i = 0; i < weeks.length; i++) {
-            weeks[i] = "Неделя " + (i+1);
-        }
-
-        final ArrayAdapter<String> adapter;
-        adapter = new ArrayAdapter<String>(this, R.layout.day, weeks) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-
-                TextView mytextview=(TextView)view;
-
-                if (programNumber == 1) {
-
-                    mytextview.setBackgroundResource(R.drawable.custom_shape1);
-
-                } else if (programNumber == 2) {
-
-                    mytextview.setBackgroundResource(R.drawable.custom_shape2);
-
-                } else if (programNumber == 3) {
-
-                    mytextview.setBackgroundResource(R.drawable.custom_shape3);
-
-                } else {
-
-                    mytextview.setBackgroundResource(R.drawable.custom_shape4);
-
-                }
-
-                title.setText("Список продуктов для программы " + getResources().getStringArray(R.array.programms)[programNumber - 1]);
-
-                return view;
-            }
-        };
-
-        listView.setDivider(null);
-//        listView.setHeaderDividersEnabled(true);
-        listView.setAdapter(adapter);
-
-        final Intent intent = new Intent(this, ProductsItemActivity.class);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
-                                    long id) {
-
-                intent.putExtra("arg_week_number", (position + 1));
-                intent.putExtra("arg_program_number", programNumber);
-                startActivity(intent);
-            }
-        });
-
     }
 
     @Override
@@ -157,7 +81,6 @@ public class ProductsActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Toast.makeText(getApplicationContext(),"df",Toast.LENGTH_LONG).show();
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
