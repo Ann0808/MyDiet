@@ -1,36 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
-
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/title"
+    <include
+        layout="@layout/app_bar_days_list"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/custom_shape"
-        android:gravity="center"
-        android:minHeight="?android:attr/listPreferredItemHeightSmall"
-        android:shadowColor="@color/colorPrimaryDark"
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:shadowRadius="5"
-        android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:textColor="@color/colorWhite"
-        android:textColorLink="@color/colorWhite"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:layout_height="match_parent" />
 
-    <ListView
-        android:id="@+id/daylist2"
-        android:layout_width="match_parent"
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"/>
-</LinearLayout>
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/activity_drawer" />
+
+</android.support.v4.widget.DrawerLayout>
