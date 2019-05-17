@@ -29,5 +29,8 @@
     <string name="hello2"> Пожалуйста, введите Ваше имя:</string>
     <string name="title_activity_products">ProductsActivity</string>
     <string name="title_activity_products_item">ProductsItemActivity</string>
+    <string name="title_activity_my_page">MyPageActivity</string>
+
+    <string name="edit"><u>ред</u></string>
 
 </resources>

@@ -10,9 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".MyPageActivity"
+            android:label="@string/title_activity_my_page"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".ProductsItemActivity"
             android:label="@string/title_activity_products_item"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ProductsActivity"
             android:label="@string/title_activity_products"
@@ -32,9 +36,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".PagerActivity" />
-        <activity android:name=".DaysListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+        <activity
+            android:name=".DaysListActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ProgramsActivity"
             android:label="@string/app_name"

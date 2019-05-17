@@ -63,10 +63,14 @@ public class SettingsActivity extends AppCompatActivity {
     int points = 2;
     int programRecommended = 0;
 
+    int intentProgramNumber = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        //dayNumber = intentTmp.getIntExtra("arg_day_number",0);
 
         programms = getResources().getStringArray(R.array.programms);
 
@@ -122,6 +126,42 @@ public class SettingsActivity extends AppCompatActivity {
 
         picker = findViewById(R.id.datePicker);
        // picker.setMinDate(System.currentTimeMillis() - 1000);
+
+        //go from main
+        Intent intentTmp = getIntent();
+
+        boolean chooseNew = intentTmp.getBooleanExtra("choose_new", false);
+        boolean startAgain = intentTmp.getBooleanExtra("start_again", false);
+
+        if (chooseNew) {
+            //sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    bLayout.removeView(lay1);
+                    lay2.setVisibility(View.VISIBLE);
+                    scrollView2.setVisibility(View.VISIBLE);
+                    userName = sPref.getString(USER_NAME, "Пользователь");
+                    hello3.setText(userName + ", введите Ваши данные: ");
+                }
+            }, 0);
+        }
+
+        if (startAgain) {
+            //sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    bLayout.removeView(lay1);
+                    bLayout.removeView(scrollView2);
+                    bLayout.removeView(scrollView3);
+                    scrollView4.setVisibility(View.VISIBLE);
+                    lay4.setVisibility(View.VISIBLE);
+
+                }
+            }, 0);
+        }
+        //go from main
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         currentDate = simpleDateFormat.format(new Date());

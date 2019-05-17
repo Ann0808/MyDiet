@@ -69,7 +69,7 @@
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorWhite"
             android:textSize="30sp"
-            android:maxLength="18"
+            android:maxLength="15"
             />
 
         <Button

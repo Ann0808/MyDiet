@@ -1,6 +1,7 @@
 package com.pisk.mydiet;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
@@ -19,8 +20,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -39,6 +43,7 @@ public class MainActivity extends AppCompatActivity
 
     private TextView titleView, tvProgressHorizontal;
     private ListView listView;
+    Button b1, b2;
     ProgressBar pBar;
     int savedProg;
     String savedDate;
@@ -74,8 +79,12 @@ public class MainActivity extends AppCompatActivity
         listView = (ListView) findViewById(R.id.daylist2);
         pBar = findViewById(R.id.pb_horizontal);
         tvProgressHorizontal = findViewById(R.id.tv_progress_horizontal);
+        b1 = findViewById(R.id.button1);
+        b2 = findViewById(R.id.button2);
+
 
         Log.d("myLogs2", "jj: " + savedProg);
+
 
 
         // on resume
@@ -145,6 +154,9 @@ public class MainActivity extends AppCompatActivity
 
             if (dayLefttoStart < 0) {
                 progress = -(int)(((double)dayLefttoStart*100)/(double)28) ;
+                if (progress > 100) {
+                    progress = 100;
+                }
             }
 
             titleView.setText(getResources().getStringArray(R.array.programms)[savedProg - 1]);
@@ -231,6 +243,52 @@ public class MainActivity extends AppCompatActivity
 //                v.setText("kkk");
 //                Log.d("myLogs2","textview: " +v.getText());
 //            }
+
+
+            LinearLayout linearLayout = findViewById(R.id.linearLayout);
+            if (progress == 100) {
+                linearLayout.removeView(listView);
+                TextView finished = findViewById(R.id.finished);
+                finished.setVisibility(View.VISIBLE);
+                LinearLayout buttonsLayout = findViewById(R.id.buttonsLayout);
+                buttonsLayout.setVisibility(View.VISIBLE);
+
+                if (savedProg == 1) {
+                    b1.setBackgroundResource(R.drawable.custom_shape1);
+                    b2.setBackgroundResource(R.drawable.custom_shape1);
+                } else if (savedProg == 2) {
+                    b1.setBackgroundResource(R.drawable.custom_shape2);
+                    b2.setBackgroundResource(R.drawable.custom_shape2);
+                } else if (savedProg == 3) {
+                    b1.setBackgroundResource(R.drawable.custom_shape3);
+                    b2.setBackgroundResource(R.drawable.custom_shape3);
+                } else {
+                    b1.setBackgroundResource(R.drawable.custom_shape4);
+                    b2.setBackgroundResource(R.drawable.custom_shape4);
+                }
+
+            }
+            final Intent intent4 = new Intent(getApplicationContext(), SettingsActivity.class);
+
+            b1.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v)
+                {
+
+                    //intent4.putExtra("arg_program_number", savedProg);
+                    intent4.putExtra("start_again", true);
+                    startActivity(intent4);
+
+                }
+            });
+
+            b2.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v)
+                {
+                    intent4.putExtra("choose_new", true);
+                    startActivity(intent4);
+
+                }
+            });
 
 
 
@@ -323,6 +381,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent2);
 
         } else if (id == R.id.nav_manage) {
+            Intent intent2 = new Intent(this, MyPageActivity.class);
+            startActivity(intent2);
 
         } else if (id == R.id.nav_share) {
 
