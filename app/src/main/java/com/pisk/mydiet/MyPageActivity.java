@@ -26,6 +26,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Field;
 import java.text.ParseException;
@@ -274,6 +275,8 @@ public class MyPageActivity extends AppCompatActivity
 
                 date.setText(currentDate);
 
+                Toast.makeText(getApplicationContext(),"Данные обновлены",Toast.LENGTH_SHORT).show();
+
 
             }
         });
@@ -334,12 +337,21 @@ public class MyPageActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+
+            Intent intent2 = new Intent(this, MainActivity.class);
+            startActivity(intent2);
+
         } else if (id == R.id.nav_gallery) {
+            Intent intent2 = new Intent(this, ProductsActivity.class);
+            startActivity(intent2);
 
         } else if (id == R.id.nav_slideshow) {
 
+            Intent intent2 = new Intent(this, ProgramsActivity.class);
+            startActivity(intent2);
+
         } else if (id == R.id.nav_manage) {
+
 
         } else if (id == R.id.nav_share) {
 

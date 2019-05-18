@@ -157,13 +157,21 @@ public class ProductsActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Toast.makeText(getApplicationContext(),"df",Toast.LENGTH_LONG).show();
-            // Handle the camera action
+
+            Intent intent2 = new Intent(this, MainActivity.class);
+            startActivity(intent2);
+
         } else if (id == R.id.nav_gallery) {
+
 
         } else if (id == R.id.nav_slideshow) {
 
+            Intent intent2 = new Intent(this, ProgramsActivity.class);
+            startActivity(intent2);
+
         } else if (id == R.id.nav_manage) {
+            Intent intent2 = new Intent(this, MyPageActivity.class);
+            startActivity(intent2);
 
         } else if (id == R.id.nav_share) {
 
