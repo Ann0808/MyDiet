@@ -30,8 +30,44 @@
         <item name="colorControlActivated">@color/colorBalance</item>
     </style>
 
+    <style name="MyRadioButtonProgram1" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/colorSuperFit</item>
+        <item name="colorControlActivated">@color/colorSuperFit</item>
+    </style>
+
+    <style name="MyRadioButtonProgram2" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/colorFit</item>
+        <item name="colorControlActivated">@color/colorFit</item>
+    </style>
+
+    <style name="MyRadioButtonProgram3" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/colorBalance</item>
+        <item name="colorControlActivated">@color/colorBalance</item>
+    </style>
+
+    <style name="MyRadioButtonProgram4" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/colorStrong</item>
+        <item name="colorControlActivated">@color/colorStrong</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="CalenderViewCustom" parent="Theme.AppCompat">
+        <item name="colorAccent">@color/colorWhite</item>
+    </style>
+
+    <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="CalenderViewWeekCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="CalenderViewMonthCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
 
 </resources>

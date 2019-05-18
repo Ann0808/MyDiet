@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,13 +18,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MyPageActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,13 +42,16 @@ public class MyPageActivity extends AppCompatActivity
     SharedPreferences sPref;
 
     int savedProg;
-    String savedDate;
+    String currentDate = "";
     String userName;
     EditText viewName;
-    LinearLayout nameLayout, bigLayout;
+    LinearLayout nameLayout, bigLayout, dateLay;
     Spinner spinner;
     ImageView edit;
     Button b1;
+    RadioGroup radioGroup;
+    CalendarView mCalendarView;
+    TextView date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,29 +81,59 @@ public class MyPageActivity extends AppCompatActivity
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
         userName = sPref.getString(USER_NAME, "Пользователь");
         savedProg = sPref.getInt(SAVED_PROGRAM, 0);
+        currentDate = sPref.getString(DATE_START, "");
 
         bigLayout = findViewById(R.id.bigLayout);
         b1 = findViewById(R.id.b1);
-        spinner = findViewById(R.id.spinner);
+        radioGroup = findViewById(R.id.radioGroup1);
+        mCalendarView = findViewById(R.id.datePicker);
+        date = findViewById(R.id.date);
 
+        final String savedDate = sPref.getString(DATE_START, "");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateD = null;
+        try {
+            dateD = sdf.parse(savedDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long millis = dateD.getTime();
+
+        mCalendarView.setDate (millis, true, true);
+        date.setText(savedDate);
+
+//        spinner = findViewById(R.id.spinner);
+//
+//
+//        spinner.setSelection(savedProg - 1);
+
+        RadioButton b;
         int colorBack;
         int colorButton;
         if (savedProg == 1) {
             colorBack = R.color.colorSuperFitLight;
             colorButton = R.drawable.custom_shape1;
+            b = (RadioButton) findViewById(R.id.radio_superfit);
+
         } else if (savedProg == 2) {
             colorBack = R.color.colorFitLight;
             colorButton = R.drawable.custom_shape2;
+            b = (RadioButton) findViewById(R.id.radio_fit);
         } else if (savedProg == 3) {
             colorBack = R.color.colorBalanceLight;
             colorButton = R.drawable.custom_shape3;
+            b = (RadioButton) findViewById(R.id.radio_balance);
         } else {
             colorBack = R.color.colorStrongLight;
             colorButton = R.drawable.custom_shape4;
+            b = (RadioButton) findViewById(R.id.radio_strong);
         }
+
+        b.setChecked(true);
 
         bigLayout.setBackgroundResource(colorBack);
         b1.setBackgroundResource(colorButton);
+
 
         viewName = findViewById(R.id.userName);
         viewName.setText(userName);
@@ -101,6 +141,8 @@ public class MyPageActivity extends AppCompatActivity
         //editName = findViewById(R.id.editName);
         edit = findViewById(R.id.imageView3);
         nameLayout = findViewById(R.id.nameLayout);
+        dateLay = findViewById(R.id.datePickerL);
+        dateLay.removeView(mCalendarView);
 
 
 
@@ -109,15 +151,22 @@ public class MyPageActivity extends AppCompatActivity
             public void onClick(View v)
             {
 
-                //LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) v.getLayoutParams();
-                //params.width = 1;
-                //v.setLayoutParams(params);
-                v.setVisibility(View.INVISIBLE);
+                savedProg = sPref.getInt(SAVED_PROGRAM, 0);
 
-                //LinearLayout.LayoutParams paramsB = (LinearLayout.LayoutParams) b1.getLayoutParams();
-                //paramsB.width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) date.getLayoutParams();
+                params.height = 1;
+                date.setLayoutParams(params);
+
+//                LinearLayout.LayoutParams paramsB = (LinearLayout.LayoutParams) dateLay.getLayoutParams();
+//                paramsB.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+//                dateLay.setLayoutParams(paramsB);
+                //dateLay.setVisibility(View.VISIBLE);
+                dateLay.addView(mCalendarView);
+
+
+
                 b1.setVisibility(View.VISIBLE);
-                //b1.setLayoutParams(paramsB);
+                v.setVisibility(View.INVISIBLE);
 
                 viewName.setClickable(true);
                 viewName.setCursorVisible(true);
@@ -125,9 +174,12 @@ public class MyPageActivity extends AppCompatActivity
                 viewName.setFocusableInTouchMode(true);
                 viewName.requestFocus();
                 viewName.setSelection(viewName.getText().length());
+                for (int i = 0; i< radioGroup.getChildCount();i++) {
+                    radioGroup.getChildAt(i).setClickable(true);
+                }
 
-                InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                im.showSoftInput(viewName, 0);
+//                InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+//                im.showSoftInput(viewName, 0);
                 int color = R.color.colorWhite;
                 if (savedProg == 1) {
                     color = R.color.colorSuperFit;
@@ -157,6 +209,42 @@ public class MyPageActivity extends AppCompatActivity
             public void onClick(View v)
             {
 
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) date.getLayoutParams();
+                params.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                date.setLayoutParams(params);
+
+                dateLay.removeView(mCalendarView);
+
+                int selectedId1 = radioGroup.getCheckedRadioButtonId();
+                int numbProg;
+
+                for (int i = 0; i< radioGroup.getChildCount();i++) {
+                    radioGroup.getChildAt(i).setClickable(false);
+                }
+                int colorBack;
+                int colorButton;
+
+                if (selectedId1 == R.id.radio_superfit) {
+                    numbProg = 1;
+                    colorBack = R.color.colorSuperFitLight;
+                    colorButton = R.drawable.custom_shape1;
+                } else if (selectedId1 == R.id.radio_fit) {
+                    numbProg = 2;
+                    colorBack = R.color.colorFitLight;
+                    colorButton = R.drawable.custom_shape2;
+                } else if (selectedId1 == R.id.radio_balance) {
+                    numbProg = 3;
+                    colorBack = R.color.colorBalanceLight;
+                    colorButton = R.drawable.custom_shape3;
+                } else {
+                    numbProg = 4;
+                    colorBack = R.color.colorStrongLight;
+                    colorButton = R.drawable.custom_shape4;
+                }
+
+                bigLayout.setBackgroundResource(colorBack);
+                b1.setBackgroundResource(colorButton);
+
                 //LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) v.getLayoutParams();
                 //params.width = 1;
                 //v.setLayoutParams(params);
@@ -180,9 +268,26 @@ public class MyPageActivity extends AppCompatActivity
 
                 SharedPreferences.Editor ed = sPref.edit();
                 ed.putString(USER_NAME,viewName.getText().toString());
+                ed.putInt(SAVED_PROGRAM, numbProg);
+                ed.putString(DATE_START,currentDate);
                 ed.commit();
 
+                date.setText(currentDate);
 
+
+            }
+        });
+
+        mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month,
+                                            int dayOfMonth) {
+                month++;
+                String strMonth = month>9 ? String.valueOf(month) : "0" + month;
+                String day = dayOfMonth>9 ? String.valueOf(dayOfMonth) : "0" + dayOfMonth;
+                currentDate = day + "/" + strMonth + "/" + year;
+                //Log.d("myLogs2", "currentDate: " + currentDate);
             }
         });
 
