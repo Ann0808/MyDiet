@@ -11,10 +11,13 @@ import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
+import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -39,6 +42,7 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
@@ -55,6 +59,8 @@ public class MainActivity extends AppCompatActivity
     int savedProg;
     String savedDate;
     int daysGone =0;
+
+    private ShareActionProvider mShareActionProvider;
 
 //    private AlarmManager manager;
 //    private PendingIntent pendingIntent;
@@ -338,17 +344,17 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public View getViewByPosition(int pos, ListView listView) {
-        final int firstListItemPosition = listView.getFirstVisiblePosition();
-        final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
-
-        if (pos < firstListItemPosition || pos > lastListItemPosition ) {
-            return listView.getAdapter().getView(pos, null, listView);
-        } else {
-            final int childIndex = pos - firstListItemPosition;
-            return listView.getChildAt(childIndex);
-        }
-    }
+//    public View getViewByPosition(int pos, ListView listView) {
+//        final int firstListItemPosition = listView.getFirstVisiblePosition();
+//        final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
+//
+//        if (pos < firstListItemPosition || pos > lastListItemPosition ) {
+//            return listView.getAdapter().getView(pos, null, listView);
+//        } else {
+//            final int childIndex = pos - firstListItemPosition;
+//            return listView.getChildAt(childIndex);
+//        }
+//    }
 
     @Override
     public void onBackPressed() {
@@ -406,7 +412,35 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
+            //Intent shareIntent = new Intent(Intent.ACTION_SEND);;
+
+            // Now update the ShareActionProvider with the new share intent
+            //mShareActionProvider.setShareIntent(shareIntent);
+
+            ArrayList<Uri> uris = new ArrayList<>();
+            Uri path = Uri.parse("android.resource://com.pisk.mydiet/" + R.drawable.food);
+            Uri path2 = Uri.parse("android.resource://com.pisk.mydiet/" + R.drawable.paper);
+            uris.add(path);
+            uris.add(path2);
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            //sendIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
+//            sendIntent.putExtra(Intent.EXTRA_TEXT, "Приложение nam");
+ //           sendIntent.putExtra(Intent.EXTRA_STREAM, path);
+
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "lj;dhsgk ;sjhg "+"https://play.google.com/store/apps/details?id=se.feomedia.quizkampen.de.lite");
+           // sendIntent.setType("image/*");
+
+            sendIntent.setType("text/plain");
+            //sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            startActivity(Intent.createChooser(sendIntent,"Поделиться"));
+
+
+
         } else if (id == R.id.nav_send) {
+
+            Intent intent2 = new Intent(this, AboutActivity.class);
+            startActivity(intent2);
 
         }
 
