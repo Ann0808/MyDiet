@@ -1,14 +1,20 @@
 package com.pisk.mydiet;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -28,6 +34,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -48,6 +55,9 @@ public class MainActivity extends AppCompatActivity
     int savedProg;
     String savedDate;
     int daysGone =0;
+
+//    private AlarmManager manager;
+//    private PendingIntent pendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +85,10 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+//        Intent alarmIntent = new Intent(this, AlarmReceiver.class);
+//        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
+
+
         titleView = (TextView) findViewById(R.id.title);
         listView = (ListView) findViewById(R.id.daylist2);
         pBar = findViewById(R.id.pb_horizontal);
@@ -89,9 +103,8 @@ public class MainActivity extends AppCompatActivity
 
         // on resume
 
-
-
     }
+
 
 
     @Override
@@ -274,7 +287,14 @@ public class MainActivity extends AppCompatActivity
                 public void onClick(View v)
                 {
 
+//                    manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+//                    int interval = 10000; // 10 seconds
+
+                    //manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() , interval, pendingIntent);
+                    //Toast.makeText(getApplicationContext(), "Alarm Set", Toast.LENGTH_SHORT).show();
+
                     //intent4.putExtra("arg_program_number", savedProg);
+
                     intent4.putExtra("start_again", true);
                     startActivity(intent4);
 

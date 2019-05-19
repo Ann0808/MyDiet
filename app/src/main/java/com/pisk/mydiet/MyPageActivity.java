@@ -1,5 +1,7 @@
 package com.pisk.mydiet;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.reflect.Field;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -275,6 +278,34 @@ public class MyPageActivity extends AppCompatActivity
 
                 date.setText(currentDate);
 
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                Date date;
+                long millis = System.currentTimeMillis();
+                try {
+                    date = sdf.parse(currentDate + " 11:00:00");
+
+                    millis = date.getTime();
+                    //
+//                    Date dateNotification = new Date(millis);
+//                    DateFormat df = new SimpleDateFormat("dd.MM.yy HH:mm:ss");
+//                    String firstDate = df.format(dateNotification);
+//                    Log.d("myLogs2", "date of today's notification is: " + firstDate);
+                    //
+                    startAlert(millis,true);
+                    millis = millis - 24*60*60*1000;
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    Log.d("myLogs2", "not ok");
+                }
+                if (millis > System.currentTimeMillis()) {
+                    startAlert(millis,false);
+
+//                    Date dateNotification = new Date(millis);
+//                    DateFormat df = new SimpleDateFormat("dd.MM.yy HH:mm:ss");
+//                    String firstDate = df.format(dateNotification);
+//                    Log.d("myLogs2", "date of notification is: " + firstDate);
+                }
+
                 Toast.makeText(getApplicationContext(),"Данные обновлены",Toast.LENGTH_SHORT).show();
 
 
@@ -296,6 +327,24 @@ public class MyPageActivity extends AppCompatActivity
 
 
     }
+
+    public void startAlert(long time, boolean today) {
+
+        Intent intent;
+
+        if (today) {
+            intent = new Intent(this, MyBroadcastReceiverToday.class);
+        } else {
+            intent = new Intent(this, MyBroadcastReceiver.class);
+        }
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this.getApplicationContext(), 234, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+        //Toast.makeText(this, "Alarm set to after " + (timeInSec * 1000) + " seconds",Toast.LENGTH_LONG).show();
+    }
+
 
 
     @Override
