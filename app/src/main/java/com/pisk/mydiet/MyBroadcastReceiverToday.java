@@ -27,14 +27,14 @@ public class MyBroadcastReceiverToday extends BroadcastReceiver {
                 // обязательные настройки
                 .setSmallIcon(R.drawable.balance)
                 //.setContentTitle(res.getString(R.string.notifytitle)) // Заголовок уведомления
-                .setContentTitle("Напоминание")
+                .setContentTitle("Напоминание :)")
                 //.setContentText(res.getString(R.string.notifytext))
                 .setContentText("Сегодня начало диеты") // Текст уведомления
                 // необязательные настройки
                 .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.strong)) // большая
                 // картинка
                 //.setTicker(res.getString(R.string.warning)) // текст в строке состояния
-                .setTicker("Последнее китайское предупреждение!")
+                //.setTicker("Последнее китайское предупреждение!")
                 .setWhen(System.currentTimeMillis())
                 .setAutoCancel(true); // автоматически закрыть уведомление после нажатия
 
@@ -54,6 +54,6 @@ public class MyBroadcastReceiverToday extends BroadcastReceiver {
 
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(101, builder.build());
+        notificationManager.notify(102, builder.build());
     }
 }

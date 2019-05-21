@@ -10,9 +10,9 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/apple" />
+        app:srcCompat="@drawable/back4" />
 
     <LinearLayout
         android:id="@+id/lay1"
@@ -122,7 +122,7 @@
                 android:textColorLink="@color/colorWhite"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="30dp"/>
 
 
                 <TextView
@@ -153,7 +153,7 @@
                     android:paddingRight="10dp"
                     android:showDividers="middle"
                     android:theme="@style/DefaultNumberPickerTheme"
-                    android:layout_marginBottom="20dp"/>
+                    android:layout_marginBottom="40dp"/>
 
 
             <TextView
@@ -184,7 +184,7 @@
                 android:paddingRight="10dp"
                 android:showDividers="middle"
                 android:theme="@style/DefaultNumberPickerTheme"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="40dp"/>
 
             <TextView
                 android:id="@+id/textView4"
@@ -202,15 +202,17 @@
                 android:textColorLink="@color/colorWhite"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="20dp"/>
 
             <RadioGroup
                 android:id="@+id/radioGroup1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="40dp"
+                android:background="@color/colorGrey"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 >
 
                 <RadioButton
@@ -220,17 +222,18 @@
                     android:layout_weight="1"
                     android:checked="true"
                     android:text="Похудеть"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBalance"
                     android:textSize="25sp"
                     android:shadowColor="@color/colorPrimaryDark"
-                    android:shadowDx="1"
-                    android:shadowDy="1"
-                    android:shadowRadius="3"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="6"
                     android:theme="@style/MyRadioButton"
                     android:scaleX="1.2"
                     android:scaleY="1.2"
                     android:translationX="30dp"
-                    android:layout_marginBottom="5dp"/>
+                    android:layout_marginBottom="20dp"
+                    android:textStyle="bold"/>
 
                 <RadioButton
                     android:id="@+id/radio_balance"
@@ -241,14 +244,15 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="25sp"
                     android:shadowColor="@color/colorPrimaryDark"
-                    android:shadowDx="1"
-                    android:shadowDy="1"
-                    android:shadowRadius="3"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="6"
                     android:theme="@style/MyRadioButton"
                     android:scaleX="1.2"
                     android:scaleY="1.2"
                     android:translationX="30dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:textStyle="bold"
                     />
 
                 <RadioButton
@@ -260,13 +264,14 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="25sp"
                     android:shadowColor="@color/colorPrimaryDark"
-                    android:shadowDx="1"
-                    android:shadowDy="1"
-                    android:shadowRadius="3"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="6"
                     android:theme="@style/MyRadioButton"
                     android:scaleX="1.2"
                     android:scaleY="1.2"
-                    android:translationX="30dp"/>
+                    android:translationX="30dp"
+                    android:textStyle="bold"/>
 
             </RadioGroup>
 
@@ -286,15 +291,17 @@
                 android:textColorLink="@color/colorWhite"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="20dp"/>
 
             <RadioGroup
                 android:id="@+id/radioGroup2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:layout_marginBottom="20dp">
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginBottom="40dp"
+                android:background="@color/colorGrey">
 
                 <RadioButton
                     android:id="@+id/radio_1"
@@ -303,17 +310,18 @@
                     android:layout_weight="1"
                     android:checked="true"
                     android:text="Не занимаюсь"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBalance"
                     android:textSize="25sp"
                     android:shadowColor="@color/colorPrimaryDark"
-                    android:shadowDx="1"
-                    android:shadowDy="1"
-                    android:shadowRadius="3"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="6"
                     android:theme="@style/MyRadioButton"
                     android:scaleX="1.2"
                     android:scaleY="1.2"
                     android:translationX="30dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:textStyle="bold"
                     />
 
                 <RadioButton
@@ -325,14 +333,15 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="25sp"
                     android:shadowColor="@color/colorPrimaryDark"
-                    android:shadowDx="1"
-                    android:shadowDy="1"
-                    android:shadowRadius="3"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="6"
                     android:theme="@style/MyRadioButton"
                     android:scaleX="1.2"
                     android:scaleY="1.2"
                     android:translationX="30dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:textStyle="bold"
                     />
 
                 <RadioButton
@@ -344,13 +353,14 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="25sp"
                     android:shadowColor="@color/colorPrimaryDark"
-                    android:shadowDx="1"
-                    android:shadowDy="1"
-                    android:shadowRadius="3"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="6"
                     android:theme="@style/MyRadioButton"
                     android:scaleX="1.2"
                     android:scaleY="1.2"
-                    android:translationX="30dp"/>
+                    android:translationX="30dp"
+                    android:textStyle="bold"/>
 
             </RadioGroup>
 

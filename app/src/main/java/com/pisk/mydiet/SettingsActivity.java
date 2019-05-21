@@ -166,6 +166,34 @@ public class SettingsActivity extends AppCompatActivity {
         }
         //go from main
 
+        radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+               for(int i=0; i< group.getChildCount();i++) {
+                   RadioButton rb = (RadioButton) group.getChildAt(i);
+                   rb.setTextColor(getResources().getColor(R.color.colorWhite));
+               }
+               RadioButton rb = findViewById(checkedId);
+               rb.setTextColor(getResources().getColor(R.color.colorBalance));
+            }
+        });
+
+        radioGroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                for(int i=0; i< group.getChildCount();i++) {
+                    RadioButton rb = (RadioButton) group.getChildAt(i);
+                    rb.setTextColor(getResources().getColor(R.color.colorWhite));
+                }
+                RadioButton rb = findViewById(checkedId);
+                rb.setTextColor(getResources().getColor(R.color.colorBalance));
+            }
+        });
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         currentDate = simpleDateFormat.format(new Date());
 
@@ -228,6 +256,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                 int selectedId1 = radioGroup1.getCheckedRadioButtonId();
                 int selectedId2 = radioGroup2.getCheckedRadioButtonId();
+
 
                 switch(selectedId1){
                     case R.id.radio_slim:

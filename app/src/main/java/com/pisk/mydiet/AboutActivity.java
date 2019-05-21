@@ -51,6 +51,7 @@ public class AboutActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().getItem(4).setChecked(true);
 
         title = findViewById(R.id.title1);
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
@@ -96,7 +97,7 @@ public class AboutActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_main) {
 
             Intent intent2 = new Intent(this, MainActivity.class);
             startActivity(intent2);

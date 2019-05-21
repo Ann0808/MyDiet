@@ -53,6 +53,7 @@ public class ProgramsActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().getItem(2).setChecked(true);
 
 
  //      TextView textView = (TextView) findViewById(R.id.textview);
@@ -163,7 +164,7 @@ public class ProgramsActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_main) {
 
             Intent intent2 = new Intent(this, MainActivity.class);
             startActivity(intent2);

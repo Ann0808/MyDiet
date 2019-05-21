@@ -28,15 +28,10 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         builder.setContentIntent(contentIntent)
                 // обязательные настройки
                 .setSmallIcon(R.drawable.balance)
-                //.setContentTitle(res.getString(R.string.notifytitle)) // Заголовок уведомления
-                .setContentTitle("Напоминание")
-                //.setContentText(res.getString(R.string.notifytext))
+                .setContentTitle("Напоминание!")
                 .setContentText("Завтра начало диеты") // Текст уведомления
                 // необязательные настройки
                 .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.strong)) // большая
-                // картинка
-                //.setTicker(res.getString(R.string.warning)) // текст в строке состояния
-                .setTicker("Последнее китайское предупреждение!")
                 .setWhen(System.currentTimeMillis())
                 .setAutoCancel(true); // автоматически закрыть уведомление после нажатия
 

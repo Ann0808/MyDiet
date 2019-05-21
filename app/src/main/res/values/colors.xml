@@ -6,23 +6,31 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorLGreen">#8BC34A</color>
 
-    <color name="colorSuperFit">#BF2196F3</color>
-    <color name="colorFit">#BFFE006F</color>
+    <!--<color name="colorSuperFit">#B391C233</color>-->
+    <!--<color name="colorFit">#BF84CEEC</color>-->
+    <!--<color name="colorBalance">#BF009688</color>-->
+    <!--<color name="colorStrong">#B3FF9140</color>-->
+    <!--<color name="colorDays">#BF000000</color>-->
+
+    <color name="colorSuperFit">#BF98C543</color>
+    <color name="colorFit">#BF84CEEC</color>
     <color name="colorBalance">#BF009688</color>
-    <color name="colorStrong">#BFFF5722</color>
+    <color name="colorStrong">#B3FF9140</color>
     <color name="colorDays">#BF000000</color>
 
-    <color name="colorSuperFitDay">#662196F3</color>
-    <color name="colorFitDay">#66FE006F</color>
+    <color name="colorSuperFitDay">#6698C543</color>
+    <color name="colorFitDay">#6684CEEC</color>
     <color name="colorBalanceDay">#66009688</color>
-    <color name="colorStrongDay">#66FF5722</color>
+    <color name="colorStrongDay">#66FF9140</color>
     <color name="colorDaysDay">#66000000</color>
 
-    <color name="colorSuperFitLight">#332196F3</color>
-    <color name="colorFitLight">#33FE006F</color>
+    <color name="colorSuperFitLight">#3398C543</color>
+    <color name="colorFitLight">#3384CEEC</color>
     <color name="colorBalanceLight">#33009688</color>
-    <color name="colorStrongLight">#33FF5722</color>
+    <color name="colorStrongLight">#33FF9140</color>
     <color name="colorDaysLight">#33000000</color>
+
+    <color name="colorGrey">#4D000000</color>
 
 
 
