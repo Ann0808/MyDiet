@@ -479,5 +479,11 @@ public class SettingsActivity extends AppCompatActivity {
         ed.commit();
     }
 
+    @Override
+    public void onBackPressed() {
+        final Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
 
 }
