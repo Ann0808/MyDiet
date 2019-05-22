@@ -43,26 +43,26 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:textColor="@color/colorPrimaryDark">
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginBottom="10dp">
             </TextView>
 
             <ImageView
                 android:id="@+id/photoRecept"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="300px"
                 android:layout_centerHorizontal="true"
+                android:scaleType="centerCrop"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/tvPage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
                 android:padding="0dp"
                 android:text="@string/ingridients"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -75,18 +75,16 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_margin="10dp"
+                android:textSize="25sp"
                 android:text="TextView" />
 
             <TextView
                 android:id="@+id/tvPage2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
                 android:padding="0dp"
                 android:text="@string/recipe"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -99,20 +97,18 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_margin="10dp"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="25sp"/>
 
             <TextView
                 android:id="@+id/tvPage3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:padding="0dp"
-                android:text="@string/kkal"
+                android:text=""
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold" />
