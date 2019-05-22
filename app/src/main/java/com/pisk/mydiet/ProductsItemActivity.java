@@ -4,7 +4,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -122,18 +126,28 @@ public class ProductsItemActivity extends AppCompatActivity
             TableRow tableRow = new TableRow(this);
             tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                     TableRow.LayoutParams.WRAP_CONTENT));
-            tableRow.setWeightSum(2);
-            tableRow.setPadding(0,5,0,5);
+            tableRow.setWeightSum(3);
+            tableRow.setPadding(10,15,10,15);
+
             TextView tv = new TextView(this);
             tv.setWidth(0);
             tv.setLayoutParams(new TableRow.LayoutParams(0,
-                    TableRow.LayoutParams.WRAP_CONTENT,1.0f));
+                    TableRow.LayoutParams.WRAP_CONTENT,2.0f));
             tv.setGravity(Gravity.LEFT);
             tv.setText(product);
             tv.setTextColor(getResources().getColor(R.color.colorWhite));
             tv.setTextSize(25);
             tv.setTypeface(Typeface.DEFAULT_BOLD);
             tv.setShadowLayer(2.0f, 2, 2, Color.BLACK);
+
+            ShapeDrawable border = new ShapeDrawable(new RectShape());
+            border.getPaint().setStyle(Paint.Style.STROKE);
+            border.getPaint().setColor(Color.WHITE);
+            border.getPaint().setStrokeWidth(5);
+
+            tableRow.setBackgroundDrawable(border);
+
+
 
             TextView tv2 = new TextView(getApplicationContext());
             tv2.setWidth(0);
