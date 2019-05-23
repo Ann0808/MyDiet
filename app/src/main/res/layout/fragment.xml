@@ -33,19 +33,21 @@
                 tools:ignore="Suspicious0dp"
                 android:visibility="invisible"></TextView>
 
-            <TextView
-                android:id="@+id/nameDish"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:padding="0dp"
-                android:text="Название"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="@color/colorPrimaryDark"
-                android:layout_marginBottom="10dp">
-            </TextView>
+                <TextView
+                    android:id="@+id/nameDish"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:padding="0dp"
+                    android:text="Название"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    ></TextView>
+
 
             <ImageView
                 android:id="@+id/photoRecept"
@@ -75,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_margin="10dp"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:text="TextView" />
 
             <TextView
@@ -98,7 +100,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_margin="10dp"
                 android:text="TextView"
-                android:textSize="25sp"/>
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/tvPage3"
@@ -106,15 +108,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
                 android:padding="0dp"
                 android:text=""
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold" />
+
+            <!--<TextView-->
+                <!--android:id="@+id/next"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:gravity="center"-->
+                <!--android:text="Листните ⟶"-->
+                <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+                <!--android:textColor="@color/colorWhite"-->
+                <!--android:shadowColor="@color/colorPrimaryDark"-->
+                <!--android:shadowDx="2"-->
+                <!--android:shadowDy="2"-->
+                <!--android:shadowRadius="3"-->
+                <!--android:textStyle="bold"-->
+                <!--android:visibility="invisible"-->
+                <!--&gt;</TextView>-->
+
         </LinearLayout>
     </ScrollView>
-
 
 
 </RelativeLayout>

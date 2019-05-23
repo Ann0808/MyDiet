@@ -10,7 +10,10 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -18,7 +21,7 @@ import android.widget.TextView;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
-public class PagerActivity extends FragmentActivity {
+public class PagerActivity extends AppCompatActivity {
 
     static final String TAG = "myLogs";
     static final int PAGE_COUNT = 5;
@@ -45,6 +48,11 @@ public class PagerActivity extends FragmentActivity {
 
         pager = (ViewPager) findViewById(R.id.pager);
         pagerTab = (PagerTabStrip) findViewById(R.id.pagerTabStrip);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         //viewDate = findViewById(R.id.date);
         //ViewPager.LayoutParams params = new ViewPager.LayoutParams();
         //params.height = ViewPager.LayoutParams.WRAP_CONTENT;
@@ -130,6 +138,17 @@ public class PagerActivity extends FragmentActivity {
         }
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }
