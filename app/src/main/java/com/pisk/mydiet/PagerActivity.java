@@ -52,6 +52,7 @@ public class PagerActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("К списку дней");
 
         //viewDate = findViewById(R.id.date);
         //ViewPager.LayoutParams params = new ViewPager.LayoutParams();
@@ -122,15 +123,15 @@ public class PagerActivity extends AppCompatActivity {
 
             switch (position){
 
-                case 0: charSequence  = "Завтрак";
+                case 0: charSequence  = "Завтрак ⟶";
                     break;
-                case 1: charSequence  = "Перекус";
+                case 1: charSequence  = "Перекус ⟶";
                     break;
-                case 2: charSequence  = "Обед";
+                case 2: charSequence  = "Обед ⟶";
                     break;
-                case 3: charSequence  = "Полдник";
+                case 3: charSequence  = "Полдник ⟶";
                     break;
-                default: charSequence  = "Ужин";
+                default: charSequence  = "⟵ Ужин";
                     break;
             }
 

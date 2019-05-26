@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class ProductsItemActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -76,7 +77,7 @@ public class ProductsItemActivity extends AppCompatActivity
         TextView title = findViewById(R.id.title5);
         title.setText("Список продуктов " + "\n"+ "на " +weekNumber+"-ю неделю");
 
-        productCount = new HashMap<String, String>();;
+        productCount = new TreeMap<>();
 
         dbHelper = new DatabaseHelper(getApplicationContext());
         // создаем базу данных
