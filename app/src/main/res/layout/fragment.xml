@@ -31,7 +31,8 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:gravity="center"
                 tools:ignore="Suspicious0dp"
-                android:visibility="invisible"></TextView>
+                android:visibility="invisible"
+                android:fontFamily="@font/kurale_regular"></TextView>
 
                 <TextView
                     android:id="@+id/nameDish"
@@ -46,6 +47,7 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
                     android:layout_weight="1"
+                    android:fontFamily="@font/kurale_regular"
                     ></TextView>
 
 
@@ -69,7 +71,8 @@
                 android:text="@string/ingridients"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"
+                android:fontFamily="@font/kurale_regular"></TextView>
 
             <TextView
                 android:id="@+id/ingridients"
@@ -78,7 +81,8 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_margin="10dp"
                 android:textSize="20sp"
-                android:text="TextView" />
+                android:text="TextView"
+                android:fontFamily="@font/kurale_regular"/>
 
             <TextView
                 android:id="@+id/tvPage2"
@@ -91,7 +95,8 @@
                 android:text="@string/recipe"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/kurale_regular"/>
 
             <TextView
                 android:id="@+id/recipe"
@@ -100,7 +105,8 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_margin="10dp"
                 android:text="TextView"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:fontFamily="@font/kurale_regular"/>
 
             <TextView
                 android:id="@+id/tvPage3"
@@ -112,7 +118,8 @@
                 android:text=""
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/kurale_regular"/>
 
             <!--<TextView-->
                 <!--android:id="@+id/next"-->

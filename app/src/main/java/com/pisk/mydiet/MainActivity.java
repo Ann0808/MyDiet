@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity
                     Log.d("myLogs2", "text: " + mytextview.getText());
 
                     if (position < daysGone) {
-                        mytextview.setText(mytextview.getText() +" (Пройден ✓)");
+                        mytextview.setText(mytextview.getText() +"\n(Пройден ✓)");
                     }
 
                     if (savedProg == 1) {

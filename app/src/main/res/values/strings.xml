@@ -8,7 +8,7 @@
         <item>Strong 2000 kcal</item>
     </string-array>
 
-    <string name="ingridients">Ингридиенты:</string>
+    <string name="ingridients">Ингредиенты:</string>
     <string name="recipe">Приготовление:</string>
     <string name="kkal">КБЖУ :</string>
 
