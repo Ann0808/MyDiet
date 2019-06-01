@@ -101,8 +101,8 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
         dbHelper.create_db();
         db = dbHelper.open();
 
-        String[] columns = new String[]{dbHelper.RECIPE,dbHelper.INRIDIENTS,dbHelper.KKAL,
-                dbHelper.IMAGE,dbHelper.NAME};
+//        String[] columns = new String[]{dbHelper.RECIPE,dbHelper.INRIDIENTS,dbHelper.KKAL,
+//                dbHelper.IMAGE,dbHelper.NAME};
 //        String selection = dbHelper.PROGRAM_NUMBER + "= ?";
 //         String[] selectionArgs = new String[] { "1" };
 
@@ -110,10 +110,19 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
 //        Log.d(TAG2, "pageNumber is: " + pageNumber);
 //        Log.d(TAG2, "dayNumber is: " + dayNumber);
 
+        String table = "recipes as R inner join images as I on R.image_id = I.id";
+
+//        String[] columns = new String[]{dbHelper.RECIPE,dbHelper.INRIDIENTS,dbHelper.KKAL,
+//                dbHelper.IMAGE,dbHelper.NAME};
+
+        String columns[] = { "R.recipe as recipe", "R.ingridients as ingridients",
+                "R.kkal as kkal",
+                "I.image as image",  "R.name as name",};
+
         String WHERE = dbHelper.PROGRAM_NUMBER + "='" + programNumber + "' AND " +
                 dbHelper.FOOD_TIME + "='" + pageNumber + "' AND " +
                 dbHelper.DAY + "='" + dayNumber + "'";
-        cursor = db.query(dbHelper.TABLE, columns, WHERE, null, null, null, null);
+        cursor = db.query(table, columns, WHERE, null, null, null, null);
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
