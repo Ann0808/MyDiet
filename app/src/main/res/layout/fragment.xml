@@ -32,7 +32,7 @@
                 android:gravity="center"
                 tools:ignore="Suspicious0dp"
                 android:visibility="invisible"
-                android:fontFamily="@font/kurale_regular"></TextView>
+                android:fontFamily="@font/robotoreg"></TextView>
 
                 <TextView
                     android:id="@+id/nameDish"
@@ -82,7 +82,7 @@
                 android:layout_margin="10dp"
                 android:textSize="20sp"
                 android:text="TextView"
-                android:fontFamily="@font/kurale_regular"/>
+                android:fontFamily="@font/robotoreg"/>
 
             <TextView
                 android:id="@+id/tvPage2"
@@ -106,7 +106,7 @@
                 android:layout_margin="10dp"
                 android:text="TextView"
                 android:textSize="20sp"
-                android:fontFamily="@font/kurale_regular"/>
+                android:fontFamily="@font/robotoreg"/>
 
             <TextView
                 android:id="@+id/tvPage3"

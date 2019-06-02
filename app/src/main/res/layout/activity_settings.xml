@@ -28,7 +28,7 @@
             android:id="@+id/hello"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:fontFamily="@font/kurale_regular"
             android:gravity="center"
             android:shadowColor="@color/colorPrimaryDark"
             android:shadowDx="2"
@@ -54,7 +54,8 @@
             android:textColor="@color/colorWhite"
             android:textColorLink="@color/colorWhite"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/kurale_regular"/>
 
         <EditText
             android:id="@+id/userName"
@@ -70,6 +71,7 @@
             android:textColorHint="@color/colorWhite"
             android:textSize="30sp"
             android:maxLength="15"
+            android:fontFamily="@font/robotoreg"
             />
 
         <Button
@@ -88,7 +90,8 @@
             android:textColorLink="@color/colorWhite"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:visibility="visible" />
+            android:visibility="visible"
+            android:fontFamily="@font/kurale_regular"/>
 
     </LinearLayout>
 

@@ -24,7 +24,8 @@
         android:textColorLink="@color/colorWhite"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/kurale_regular"/>
     <RelativeLayout
         android:id="@+id/rl_progress_bar_set"
         android:layout_width="fill_parent"
