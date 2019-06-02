@@ -122,11 +122,11 @@ public class AboutActivity extends AppCompatActivity
             // Now update the ShareActionProvider with the new share intent
             //mShareActionProvider.setShareIntent(shareIntent);
 
-            ArrayList<Uri> uris = new ArrayList<>();
-            Uri path = Uri.parse("android.resource://com.pisk.mydiet/" + R.drawable.food);
-            Uri path2 = Uri.parse("android.resource://com.pisk.mydiet/" + R.drawable.paper);
-            uris.add(path);
-            uris.add(path2);
+//            ArrayList<Uri> uris = new ArrayList<>();
+//            Uri path = Uri.parse("android.resource://com.pisk.mydiet/" + R.drawable.food);
+//            Uri path2 = Uri.parse("android.resource://com.pisk.mydiet/" + R.drawable.paper);
+//            uris.add(path);
+//            uris.add(path2);
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
             //sendIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
