@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,7 +48,7 @@ public class MyPageActivity extends AppCompatActivity
     String currentDate = "";
     String userName;
     EditText viewName;
-    LinearLayout nameLayout, bigLayout, dateLay, radioL, programL;
+    LinearLayout nameLayout, bigLayout, dateLay, radioL, programL, lay2;
     Spinner spinner;
     //ImageView edit;
     Button b1;
@@ -99,6 +100,7 @@ public class MyPageActivity extends AppCompatActivity
         mCalendarView = findViewById(R.id.datePicker);
         date = findViewById(R.id.date);
         program = findViewById(R.id.program);
+        lay2 = findViewById(R.id.lay2);
 
         final String savedDate = sPref.getString(DATE_START, "");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -162,7 +164,6 @@ public class MyPageActivity extends AppCompatActivity
         dateLay.removeView(mCalendarView);
         radioL.removeView(radioGroup);
 
-
         edit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
@@ -178,11 +179,9 @@ public class MyPageActivity extends AppCompatActivity
                 LinearLayout.LayoutParams paramsB = (LinearLayout.LayoutParams) v.getLayoutParams();
                 paramsB.height = 1;
                 v.setLayoutParams(paramsB);
-                //dateLay.setVisibility(View.VISIBLE);
+                dateLay.setVisibility(View.VISIBLE);
                 dateLay.addView(mCalendarView);
                 radioL.addView(radioGroup);
-
-
 
                 b1.setVisibility(View.VISIBLE);
                 v.setVisibility(View.INVISIBLE);
