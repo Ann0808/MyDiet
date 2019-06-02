@@ -44,27 +44,27 @@
                 android:text="@string/hello"
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
-                android:textSize="30sp"
+                android:textSize="40sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/hello2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/userName"
-                android:layout_marginTop="60dp"
-                android:layout_marginBottom="105dp"
-                android:fontFamily="@font/kurale_regular"
-                android:gravity="center"
-                android:shadowColor="@color/colorPrimaryDark"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="5"
-                android:text="@string/hello2"
-                android:textColor="@color/colorWhite"
-                android:textColorLink="@color/colorWhite"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+            <!--<TextView-->
+                <!--android:id="@+id/hello2"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignBottom="@+id/userName"-->
+                <!--android:layout_marginTop="60dp"-->
+                <!--android:layout_marginBottom="105dp"-->
+                <!--android:fontFamily="@font/kurale_regular"-->
+                <!--android:gravity="center"-->
+                <!--android:shadowColor="@color/colorPrimaryDark"-->
+                <!--android:shadowDx="1"-->
+                <!--android:shadowDy="1"-->
+                <!--android:shadowRadius="5"-->
+                <!--android:text="@string/hello2"-->
+                <!--android:textColor="@color/colorWhite"-->
+                <!--android:textColorLink="@color/colorWhite"-->
+                <!--android:textSize="20sp"-->
+                <!--android:textStyle="bold" />-->
 
             <EditText
                 android:id="@+id/userName"
@@ -125,82 +125,83 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp">
 
-            <TextView
-                android:id="@+id/hello3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:shadowColor="@color/colorPrimaryDark"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:shadowRadius="6"
-                android:textColor="@color/colorWhite"
-                android:textColorLink="@color/colorWhite"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="30dp"/>
+            <!--<TextView-->
+                <!--android:id="@+id/hello3"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:shadowColor="@color/colorPrimaryDark"-->
+                <!--android:shadowDx="2"-->
+                <!--android:shadowDy="2"-->
+                <!--android:shadowRadius="6"-->
+                <!--android:textColor="@color/colorWhite"-->
+                <!--android:textColorLink="@color/colorWhite"-->
+                <!--android:textSize="30sp"-->
+                <!--android:textStyle="bold"-->
+                <!--android:layout_marginBottom="30dp"-->
+                <!--android:fontFamily="@font/kurale_regular"/>-->
 
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <!--<TextView-->
+                    <!--android:id="@+id/textView2"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:fontFamily="@font/kurale_regular"-->
+                    <!--android:gravity="center"-->
+                    <!--android:paddingLeft="10dp"-->
+                    <!--android:shadowColor="@color/colorPrimaryDark"-->
+                    <!--android:shadowDx="2"-->
+                    <!--android:shadowDy="2"-->
+                    <!--android:shadowRadius="6"-->
+                    <!--android:text="Ваш вес:"-->
+                    <!--android:textColor="@color/colorWhite"-->
+                    <!--android:textColorLink="@color/colorWhite"-->
+                    <!--android:textSize="30sp"-->
+                    <!--android:textStyle="bold" />-->
 
-                    android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:shadowColor="@color/colorPrimaryDark"
-                    android:shadowDx="2"
-                    android:shadowDy="2"
-                    android:shadowRadius="6"
-                    android:text="Ваш вес:"
-                    android:textColor="@color/colorWhite"
-                    android:textColorLink="@color/colorWhite"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
+                <!--<NumberPicker-->
+                    <!--android:id="@+id/weight"-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
 
-                <NumberPicker
-                    android:id="@+id/weight"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingRight="10dp"
-                    android:showDividers="middle"
-                    android:theme="@style/DefaultNumberPickerTheme"
-                    android:layout_marginBottom="40dp"/>
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:paddingRight="10dp"-->
+                    <!--android:showDividers="middle"-->
+                    <!--android:theme="@style/DefaultNumberPickerTheme"-->
+                    <!--android:layout_marginBottom="40dp"/>-->
 
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <!--<TextView-->
+                <!--android:id="@+id/textView3"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
 
-                android:gravity="center"
-                android:paddingLeft="10dp"
-                android:shadowColor="@color/colorPrimaryDark"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:shadowRadius="6"
-                android:text="Ваш рост:"
-                android:textColor="@color/colorWhite"
-                android:textColorLink="@color/colorWhite"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                <!--android:gravity="center"-->
+                <!--android:paddingLeft="10dp"-->
+                <!--android:shadowColor="@color/colorPrimaryDark"-->
+                <!--android:shadowDx="2"-->
+                <!--android:shadowDy="2"-->
+                <!--android:shadowRadius="6"-->
+                <!--android:text="Ваш рост:"-->
+                <!--android:textColor="@color/colorWhite"-->
+                <!--android:textColorLink="@color/colorWhite"-->
+                <!--android:textSize="30sp"-->
+                <!--android:textStyle="bold" />-->
 
-            <NumberPicker
-                android:id="@+id/growth"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+            <!--<NumberPicker-->
+                <!--android:id="@+id/growth"-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
 
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingRight="10dp"
-                android:showDividers="middle"
-                android:theme="@style/DefaultNumberPickerTheme"
-                android:layout_marginBottom="40dp"/>
+                <!--android:gravity="center"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingRight="10dp"-->
+                <!--android:showDividers="middle"-->
+                <!--android:theme="@style/DefaultNumberPickerTheme"-->
+                <!--android:layout_marginBottom="40dp"/>-->
 
             <TextView
                 android:id="@+id/textView4"
@@ -216,9 +217,10 @@
                 android:text="Ваша цель:"
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
-                android:textSize="30sp"
+                android:textSize="40sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/kurale_regular"/>
 
             <RadioGroup
                 android:id="@+id/radioGroup1"
@@ -249,7 +251,8 @@
                     android:scaleY="1.2"
                     android:translationX="30dp"
                     android:layout_marginBottom="20dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:fontFamily="@font/robotoreg"/>
 
                 <RadioButton
                     android:id="@+id/radio_balance"
@@ -269,6 +272,7 @@
                     android:translationX="30dp"
                     android:layout_marginBottom="20dp"
                     android:textStyle="bold"
+                    android:fontFamily="@font/robotoreg"
                     />
 
                 <RadioButton
@@ -287,7 +291,8 @@
                     android:scaleX="1.2"
                     android:scaleY="1.2"
                     android:translationX="30dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:fontFamily="@font/robotoreg"/>
 
             </RadioGroup>
 
@@ -305,9 +310,10 @@
                 android:text="Физическая активность:"
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
-                android:textSize="30sp"
+                android:textSize="40sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/kurale_regular"/>
 
             <RadioGroup
                 android:id="@+id/radioGroup2"
@@ -338,6 +344,7 @@
                     android:translationX="30dp"
                     android:layout_marginBottom="20dp"
                     android:textStyle="bold"
+                    android:fontFamily="@font/robotoreg"
                     />
 
                 <RadioButton
@@ -358,6 +365,7 @@
                     android:translationX="30dp"
                     android:layout_marginBottom="20dp"
                     android:textStyle="bold"
+                    android:fontFamily="@font/robotoreg"
                     />
 
                 <RadioButton
@@ -376,6 +384,7 @@
                     android:scaleX="1.2"
                     android:scaleY="1.2"
                     android:translationX="30dp"
+                    android:fontFamily="@font/robotoreg"
                     android:textStyle="bold"/>
 
             </RadioGroup>
@@ -396,7 +405,8 @@
                 android:textColorLink="@color/colorWhite"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                android:visibility="visible" />
+                android:visibility="visible"
+                android:fontFamily="@font/kurale_regular"/>
 
         </LinearLayout>
 
@@ -435,6 +445,7 @@
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:text="Выберите программу: "
+                android:fontFamily="@font/kurale_regular"
                 />
 
             <TextView
@@ -451,6 +462,7 @@
                 android:textColorLink="@color/colorWhite"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/robotoreg"
                />
 
             <Button
@@ -469,7 +481,8 @@
                 android:textColorLink="@color/colorWhite"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                android:drawableRight="@drawable/superfit"/>
+                android:drawableRight="@drawable/superfit"
+                android:fontFamily="@font/kurale_regular"/>
             <Button
                 android:id="@+id/buttonF"
                 android:layout_width="match_parent"
@@ -486,7 +499,8 @@
                 android:textColorLink="@color/colorWhite"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                android:drawableRight="@drawable/fit"/>
+                android:drawableRight="@drawable/fit"
+                android:fontFamily="@font/kurale_regular"/>
             <Button
                 android:id="@+id/buttonB"
                 android:layout_width="match_parent"
@@ -503,6 +517,7 @@
                 android:textColorLink="@color/colorWhite"
                 android:textSize="30sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/kurale_regular"
                 android:drawableRight="@drawable/balance"/>
             <Button
                 android:id="@+id/buttonS"
@@ -520,6 +535,7 @@
                 android:textColorLink="@color/colorWhite"
                 android:textSize="30sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/kurale_regular"
                 android:drawableRight="@drawable/strong"/>
         </LinearLayout>
 
@@ -555,9 +571,10 @@
                 android:text="Первый день диеты:"
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/kurale_regular"/>
 
             <CalendarView
                 android:id="@+id/datePicker"
@@ -587,7 +604,8 @@
                 android:textColorLink="@color/colorWhite"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:visibility="visible" />
+                android:visibility="visible"
+                android:fontFamily="@font/kurale_regular"/>
 
 
         </LinearLayout>

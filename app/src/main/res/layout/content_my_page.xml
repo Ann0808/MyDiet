@@ -55,7 +55,8 @@
                         android:textColor="@color/colorWhite"
                         android:textColorLink="@color/colorWhite"
                         android:textSize="30sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/kurale_regular"/>
 
                     <!--<ImageView-->
                         <!--android:id="@+id/imageView3"-->
@@ -95,16 +96,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginRight="12dp"
+                        android:paddingRight="5dp"
+                        android:layout_marginRight="10dp"
                         android:shadowColor="@color/colorPrimaryDark"
-                        android:shadowDx="2"
-                        android:shadowDy="2"
-                        android:shadowRadius="6"
+                        android:shadowDx="1"
+                        android:shadowDy="1"
+                        android:shadowRadius="3"
                         android:text="Имя:"
                         android:textColor="@color/colorWhite"
                         android:textColorLink="@color/colorWhite"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/robotoreg"/>
 
                     <EditText
                         android:id="@+id/userName"
@@ -127,7 +130,8 @@
                         android:shadowDy="2"
                         android:shadowRadius="3"
                         android:textColor="@color/colorWhite"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:fontFamily="@font/robotoreg"/>
 
                 </LinearLayout>
 
@@ -148,14 +152,48 @@
                     android:textColor="@color/colorWhite"
                     android:textColorLink="@color/colorWhite"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/robotoreg"/>
+
+            <LinearLayout
+                android:id="@+id/programL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/program"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:paddingRight="5dp"
+                    android:shadowColor="@color/colorPrimaryDark"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="3"
+                    android:textColor="@color/colorWhite"
+                    android:textColorLink="@color/colorWhite"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/robotoreg"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/radioL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <RadioGroup
                     android:id="@+id/radioGroup1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="invisible">
 
                     <RadioButton
                         android:id="@+id/radio_superfit"
@@ -175,7 +213,8 @@
                         android:textColor="@color/colorWhite"
                         android:textSize="20sp"
                         android:theme="@style/MyRadioButtonProgram1"
-                        android:translationX="30dp" />
+                        android:translationX="30dp"
+                        android:fontFamily="@font/robotoreg"/>
 
                     <RadioButton
                         android:id="@+id/radio_fit"
@@ -194,7 +233,8 @@
                         android:textColor="@color/colorWhite"
                         android:textSize="20sp"
                         android:theme="@style/MyRadioButtonProgram2"
-                        android:translationX="30dp" />
+                        android:translationX="30dp"
+                        android:fontFamily="@font/robotoreg"/>
 
                     <RadioButton
                         android:id="@+id/radio_balance"
@@ -212,7 +252,8 @@
                         android:textColor="@color/colorWhite"
                         android:textSize="20sp"
                         android:theme="@style/MyRadioButtonProgram3"
-                        android:translationX="30dp" />
+                        android:translationX="30dp"
+                        android:fontFamily="@font/robotoreg"/>
 
                     <RadioButton
                         android:id="@+id/radio_strong"
@@ -232,9 +273,14 @@
                         android:textColor="@color/colorWhite"
                         android:textSize="20sp"
                         android:theme="@style/MyRadioButtonProgram4"
-                        android:translationX="30dp" />
+                        android:translationX="30dp"
+                        android:fontFamily="@font/robotoreg"/>
 
                 </RadioGroup>
+
+            </LinearLayout>
+
+
 
                 <TextView
                     android:id="@+id/title4"
@@ -252,7 +298,8 @@
                     android:textColor="@color/colorWhite"
                     android:textColorLink="@color/colorWhite"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/robotoreg"/>
 
                 <TextView
                     android:id="@+id/date"
@@ -268,7 +315,8 @@
                     android:shadowRadius="3"
                     android:textColor="@color/colorWhite"
                     android:textColorLink="@color/colorWhite"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:fontFamily="@font/robotoreg"/>
 
                 <LinearLayout
                     android:id="@+id/datePickerL"
@@ -309,27 +357,29 @@
                     android:textColorLink="@color/colorWhite"
                     android:textSize="30sp"
                     android:textStyle="bold"
-                    android:visibility="visible" />
+                    android:visibility="visible"
+                    android:fontFamily="@font/kurale_regular"/>
 
                 <Button
                     android:id="@+id/b1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:layout_gravity="center"
                     android:background="@drawable/custom_shape3"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
                     android:shadowColor="@color/colorPrimaryDark"
                     android:shadowDx="2"
                     android:shadowDy="2"
                     android:shadowRadius="5"
-                    android:text="Ок"
+                    android:text="Сохранить"
                     android:textAppearance="?android:attr/textAppearanceListItemSmall"
                     android:textColor="@color/colorWhite"
                     android:textColorLink="@color/colorWhite"
                     android:textSize="30sp"
                     android:textStyle="bold"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:fontFamily="@font/kurale_regular"/>
 
             </LinearLayout>
         </ScrollView>

@@ -36,14 +36,14 @@ import java.util.Date;
 public class SettingsActivity extends AppCompatActivity {
 
     Button b1, b2, b3, b4, superFit, fit, balance, strong, finish;
-    NumberPicker weight, growth;
+//    NumberPicker weight, growth;
     EditText name;
     LinearLayout lay1, lay2, lay3, lay4;
     RelativeLayout bLayout;
     ScrollView scrollView2, scrollView3, scrollView4;
     Animation anim, anim2;
     SharedPreferences sPref;
-    TextView hello3, hello4, recommend;
+    TextView hello4, recommend;
     private RadioGroup radioGroup1, radioGroup2;
     private RadioButton radioSelected1, radioSelected2;
     Calendar dateAndTime=Calendar.getInstance();
@@ -54,8 +54,8 @@ public class SettingsActivity extends AppCompatActivity {
 
     final String SAVED_PROGRAM = "saved_program";
     final String USER_NAME = "user_name";
-    final String USER_WEIGHT = "user_weight";
-    final String USER_GROWTH = "user_growth";
+//    final String USER_WEIGHT = "user_weight";
+//    final String USER_GROWTH = "user_growth";
     final String USER_GOAL = "user_goal";
     final String DATE_START = "date_start";
 
@@ -95,19 +95,19 @@ public class SettingsActivity extends AppCompatActivity {
         balance.setText(programms[2]);
         strong.setText(programms[3]);
 
-        weight = findViewById(R.id.weight);
-        growth = findViewById(R.id.growth);
+//        weight = findViewById(R.id.weight);
+//        growth = findViewById(R.id.growth);
         name = findViewById(R.id.userName);
 
         //setDividerColor(weight,R.color.colorAccent);
 
-        weight.setMaxValue(170);
-        weight.setMinValue(40);
-        weight.setValue(60);
-
-        growth.setMaxValue(210);
-        growth.setMinValue(120);
-        growth.setValue(160);
+//        weight.setMaxValue(170);
+//        weight.setMinValue(40);
+//        weight.setValue(60);
+//
+//        growth.setMaxValue(210);
+//        growth.setMinValue(120);
+//        growth.setValue(160);
 
         bLayout = findViewById(R.id.biglayout);
 
@@ -116,7 +116,7 @@ public class SettingsActivity extends AppCompatActivity {
         lay3 = findViewById(R.id.lay3);
         lay4 = findViewById(R.id.lay4);
 
-        hello3 = findViewById(R.id.hello3);
+//        hello3 = findViewById(R.id.hello3);
         hello4 = findViewById(R.id.hello4);
         recommend = findViewById(R.id.rec1);
 
@@ -128,13 +128,22 @@ public class SettingsActivity extends AppCompatActivity {
         radioGroup2 = findViewById(R.id.radioGroup2);
 
         picker = findViewById(R.id.datePicker);
-        picker.setMinDate(System.currentTimeMillis() - 1000);
+        picker.setMinDate(System.currentTimeMillis() -1000 + 1000*60*60*24);
+        picker.setDate(System.currentTimeMillis() -1000 + 1000*60*60*24);
 
         //go from main
         Intent intentTmp = getIntent();
 
         boolean chooseNew = intentTmp.getBooleanExtra("choose_new", false);
         boolean startAgain = intentTmp.getBooleanExtra("start_again", false);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        currentDate = simpleDateFormat.format(new Date());
+
+        sPref = getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putString(DATE_START,currentDate);
+        ed.commit();
 
         if (chooseNew) {
             //sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
@@ -144,8 +153,8 @@ public class SettingsActivity extends AppCompatActivity {
                     bLayout.removeView(lay1);
                     lay2.setVisibility(View.VISIBLE);
                     scrollView2.setVisibility(View.VISIBLE);
-                    userName = sPref.getString(USER_NAME, "Пользователь");
-                    hello3.setText(userName + ", введите Ваши данные: ");
+//                    userName = sPref.getString(USER_NAME, "Пользователь");
+//                    hello3.setText(userName + ", введите Ваши данные: ");
                 }
             }, 0);
         }
@@ -194,8 +203,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        currentDate = simpleDateFormat.format(new Date());
+
 
         picker.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 
@@ -224,8 +232,8 @@ public class SettingsActivity extends AppCompatActivity {
                 ed.commit();
 
                 //sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
-                userName = sPref.getString(USER_NAME, "Пользователь");
-                hello3.setText(userName + ", введите Ваши данные: ");
+//                userName = sPref.getString(USER_NAME, "Пользователь");
+//                hello3.setText(userName + ", введите Ваши данные: ");
                 //Toast.makeText(getApplicationContext(), "program" + savedText, Toast.LENGTH_SHORT).show();
 
                 anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha);
@@ -290,7 +298,7 @@ public class SettingsActivity extends AppCompatActivity {
                     programRecommended = 3;
                 }
 
-                String textRecomendation = "(Исходя из Ваших данных, мы рекомендуем " + programms[programRecommended] + ")";
+                String textRecomendation = "(Мы рекомендуем Вам" + "\n" + programms[programRecommended] + ")";
                 recommend.setText(textRecomendation);
 //                if (programRecommended == 0) {
 //
@@ -305,11 +313,11 @@ public class SettingsActivity extends AppCompatActivity {
                 //hello4.setText(textRecomendation);
 
                 sPref = getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
-                SharedPreferences.Editor ed = sPref.edit();
-                ed.putInt(USER_WEIGHT,weight.getValue());
-                ed.putInt(USER_GROWTH,growth.getValue());
-
-                ed.commit();
+//                SharedPreferences.Editor ed = sPref.edit();
+//                ed.putInt(USER_WEIGHT,weight.getValue());
+//                ed.putInt(USER_GROWTH,growth.getValue());
+//
+//                ed.commit();
 
 //                sPref = getPreferences(MODE_PRIVATE);
 //                int savedText = sPref.getInt(SAVED_PROGRAM, 0);
@@ -414,7 +422,11 @@ public class SettingsActivity extends AppCompatActivity {
 //                    String firstDate = df.format(dateNotification);
 //                    Log.d("myLogs2", "date of today's notification is: " + firstDate);
                     //
-                    startAlert(millis,true);
+                    if (millis > System.currentTimeMillis()) {
+
+                        startAlert(millis,true);
+                    }
+
                     millis = millis - 24*60*60*1000;
                 } catch (ParseException e) {
                     e.printStackTrace();

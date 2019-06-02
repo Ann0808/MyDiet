@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity
 
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
         savedProg = sPref.getInt(SAVED_PROGRAM, 0);
-        savedDate = sPref.getString(DATE_START,"1/1/2019");
+        savedDate = sPref.getString(DATE_START,"");
         //Log.d("myLogs2", "days left: " + savedDate);
 
 

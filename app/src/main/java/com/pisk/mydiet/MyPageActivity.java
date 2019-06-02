@@ -47,13 +47,13 @@ public class MyPageActivity extends AppCompatActivity
     String currentDate = "";
     String userName;
     EditText viewName;
-    LinearLayout nameLayout, bigLayout, dateLay, navHead;
+    LinearLayout nameLayout, bigLayout, dateLay, radioL, programL;
     Spinner spinner;
     //ImageView edit;
     Button b1;
     RadioGroup radioGroup;
     CalendarView mCalendarView;
-    TextView date;
+    TextView date, program;
     Button edit;
 
     @Override
@@ -92,10 +92,13 @@ public class MyPageActivity extends AppCompatActivity
 
         bigLayout = findViewById(R.id.bigLayout);
         b1 = findViewById(R.id.b1);
+        radioL = findViewById(R.id.radioL);
+        programL = findViewById(R.id.programL);
         edit = findViewById(R.id.edit);
         radioGroup = findViewById(R.id.radioGroup1);
         mCalendarView = findViewById(R.id.datePicker);
         date = findViewById(R.id.date);
+        program = findViewById(R.id.program);
 
         final String savedDate = sPref.getString(DATE_START, "");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -137,6 +140,8 @@ public class MyPageActivity extends AppCompatActivity
             b = (RadioButton) findViewById(R.id.radio_strong);
         }
 
+        program.setText(getResources().getStringArray(R.array.programms)[savedProg - 1]);
+
         b.setChecked(true);
 
         //bigLayout.setBackgroundResource(colorBack);
@@ -155,8 +160,7 @@ public class MyPageActivity extends AppCompatActivity
         nameLayout = findViewById(R.id.nameLayout);
         dateLay = findViewById(R.id.datePickerL);
         dateLay.removeView(mCalendarView);
-
-
+        radioL.removeView(radioGroup);
 
 
         edit.setOnClickListener(new View.OnClickListener() {
@@ -169,16 +173,21 @@ public class MyPageActivity extends AppCompatActivity
                 params.height = 1;
                 date.setLayoutParams(params);
 
+                programL.removeView(program);
+
                 LinearLayout.LayoutParams paramsB = (LinearLayout.LayoutParams) v.getLayoutParams();
                 paramsB.height = 1;
                 v.setLayoutParams(paramsB);
                 //dateLay.setVisibility(View.VISIBLE);
                 dateLay.addView(mCalendarView);
+                radioL.addView(radioGroup);
 
 
 
                 b1.setVisibility(View.VISIBLE);
                 v.setVisibility(View.INVISIBLE);
+                radioGroup.setVisibility(View.VISIBLE);
+                program.setVisibility(View.INVISIBLE);
 
                 viewName.setClickable(true);
                 viewName.setCursorVisible(true);
@@ -231,13 +240,16 @@ public class MyPageActivity extends AppCompatActivity
                 edit.setLayoutParams(paramsB);
 
                 dateLay.removeView(mCalendarView);
+                programL.addView(program);
+                program.setVisibility(View.VISIBLE);
+                radioL.removeView(radioGroup);
 
                 int selectedId1 = radioGroup.getCheckedRadioButtonId();
                 int numbProg;
 
-                for (int i = 0; i< radioGroup.getChildCount();i++) {
-                    radioGroup.getChildAt(i).setClickable(false);
-                }
+//                for (int i = 0; i< radioGroup.getChildCount();i++) {
+//                    radioGroup.getChildAt(i).setClickable(false);
+//                }
                 int colorBack;
                 int colorButton;
 
@@ -253,11 +265,12 @@ public class MyPageActivity extends AppCompatActivity
                     numbProg = 3;
                     colorBack = R.color.colorBalanceLight;
                     colorButton = R.drawable.custom_shape3;
-                } else {
+                }else {
                     numbProg = 4;
                     colorBack = R.color.colorStrongLight;
                     colorButton = R.drawable.custom_shape4;
                 }
+                program.setText(getResources().getStringArray(R.array.programms)[numbProg - 1]);
 
                 //bigLayout.setBackgroundResource(colorBack);
                 b1.setBackgroundResource(colorButton);
@@ -307,7 +320,10 @@ public class MyPageActivity extends AppCompatActivity
 //                    String firstDate = df.format(dateNotification);
 //                    Log.d("myLogs2", "date of today's notification is: " + firstDate);
                     //
-                    startAlert(millis,true);
+                    if (millis > System.currentTimeMillis()) {
+
+                        startAlert(millis,true);
+                    }
                     millis = millis - 24*60*60*1000;
                 } catch (ParseException e) {
                     e.printStackTrace();
