@@ -12,11 +12,18 @@
     <!--<color name="colorStrong">#B3FF9140</color>-->
     <!--<color name="colorDays">#BF000000</color>-->
 
+    <!--<color name="colorSuperFit">#98C543</color>-->
+    <!--<color name="colorFit">#84CEEC</color>-->
+    <!--<color name="colorBalance">#009688</color>-->
+    <!--<color name="colorStrong">#FF9140</color>-->
+
     <color name="colorSuperFit">#BF98C543</color>
     <color name="colorFit">#BF84CEEC</color>
     <color name="colorBalance">#BF009688</color>
     <color name="colorStrong">#B3FF9140</color>
-    <color name="colorDays">#BF000000</color>
+
+
+    <color name="colorMask">#99000000</color>
 
     <color name="colorSuperFitDay">#6698C543</color>
     <color name="colorFitDay">#6684CEEC</color>

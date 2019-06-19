@@ -138,7 +138,8 @@ public class SettingsActivity extends AppCompatActivity {
         boolean startAgain = intentTmp.getBooleanExtra("start_again", false);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        currentDate = simpleDateFormat.format(new Date());
+        //currentDate = simpleDateFormat.format(new Date());
+        currentDate = simpleDateFormat.format(System.currentTimeMillis() -1000 + 1000*60*60*24);
 
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
         SharedPreferences.Editor ed = sPref.edit();

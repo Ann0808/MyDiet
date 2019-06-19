@@ -18,4 +18,5 @@
     android:textColor="@color/colorWhite"
     android:textColorLink="@color/colorWhite"
     android:textSize="30sp"
+    android:fontFamily="@font/robotoreg"
     />

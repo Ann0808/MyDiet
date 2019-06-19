@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity
     final String SAVED_PROGRAM = "saved_program";
     final String DATE_START = "date_start";
 
+    View hView;
+    ImageView menuImage;
     private TextView titleView, tvProgressHorizontal;
     private ListView listView;
     Button b1, b2;
@@ -79,10 +82,10 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
 
-//        Intent alarmIntent = new Intent(this, AlarmReceiver.class);
-//        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
+        hView =  navigationView.getHeaderView(0);
+        menuImage = hView.findViewById(R.id.imageViewHead);
 
-
+        //menuImage.setImageResource(R.drawable.balance);
         titleView = (TextView) findViewById(R.id.title);
         listView = (ListView) findViewById(R.id.daylist2);
         pBar = findViewById(R.id.pb_horizontal);
@@ -127,24 +130,32 @@ public class MainActivity extends AppCompatActivity
                         android.graphics.PorterDuff.Mode.SRC_IN);
                 titleView.setBackgroundResource(R.drawable.custom_shape1);
                 titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.superfit, 0);
+                hView.setBackgroundResource(R.color.colorSuperFit);
+
             } else if (savedProg == 2) {
                 pBar.getProgressDrawable().setColorFilter(
                         getResources().getColor(R.color.colorFitDay),
                         android.graphics.PorterDuff.Mode.SRC_IN);
                 titleView.setBackgroundResource(R.drawable.custom_shape2);
                 titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.fit, 0);
+                hView.setBackgroundResource(R.color.colorFit);
+
             } else if (savedProg == 3) {
                 pBar.getProgressDrawable().setColorFilter(
                         getResources().getColor(R.color.colorBalanceDay),
                         android.graphics.PorterDuff.Mode.SRC_IN);
                 titleView.setBackgroundResource(R.drawable.custom_shape3);
                 titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.balance, 0);
+                hView.setBackgroundResource(R.color.colorBalance);
+
             } else {
                 pBar.getProgressDrawable().setColorFilter(
                         getResources().getColor(R.color.colorStrongDay),
                         android.graphics.PorterDuff.Mode.SRC_IN);
                 titleView.setBackgroundResource(R.drawable.custom_shape4);
                 titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.strong, 0);
+                hView.setBackgroundResource(R.color.colorStrong);
+
             }
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

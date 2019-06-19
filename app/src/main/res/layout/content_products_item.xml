@@ -12,7 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/food_back" />
+        app:srcCompat="@drawable/food1" />
+
+    <LinearLayout
+        android:id="@+id/mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:background="@color/colorMask"
+        android:orientation="vertical"/>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scrollView"
@@ -41,12 +49,14 @@
             android:textSize="30sp"
             android:textStyle="bold"
             android:layout_marginBottom="20dp"
+            android:fontFamily="@font/kurale_regular"
             />
 
         <TableLayout
             android:id="@+id/tableLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kurale_regular">
         </TableLayout>
 
     </LinearLayout>

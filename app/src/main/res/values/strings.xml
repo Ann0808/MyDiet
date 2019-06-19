@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyDiet</string>
+    <string name="app_name">Рецепт здоровья</string>
 
     <string-array name="programms">
         <item>Slim 1000 kcal</item>
@@ -19,7 +19,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="title_activity_main">MyDiet</string>
+    <string name="title_activity_main">Рецепт здоровья</string>
     <string name="title_activity_programs">Programs</string>
     <string name="title_activity_settings">SettingsActivity</string>
 

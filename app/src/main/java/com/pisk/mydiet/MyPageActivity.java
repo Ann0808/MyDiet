@@ -269,7 +269,7 @@ public class MyPageActivity extends AppCompatActivity
                     colorBack = R.color.colorStrongLight;
                     colorButton = R.drawable.custom_shape4;
                 }
-                program.setText(getResources().getStringArray(R.array.programms)[savedProg - 1]);
+                program.setText(getResources().getStringArray(R.array.programms)[numbProg - 1]);
 
                 //bigLayout.setBackgroundResource(colorBack);
                 b1.setBackgroundResource(colorButton);

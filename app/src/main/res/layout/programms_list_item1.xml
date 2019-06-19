@@ -26,6 +26,7 @@
         android:textColor="@color/colorWhite"
         android:textColorLink="@color/colorWhite"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:fontFamily="@font/kurale_regular"/>
 
 </LinearLayout>

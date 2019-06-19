@@ -479,7 +479,7 @@
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:drawableRight="@drawable/superfit"
                 android:fontFamily="@font/kurale_regular"/>
@@ -497,7 +497,7 @@
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:drawableRight="@drawable/fit"
                 android:fontFamily="@font/kurale_regular"/>
@@ -515,7 +515,7 @@
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/kurale_regular"
                 android:drawableRight="@drawable/balance"/>
@@ -533,7 +533,7 @@
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/kurale_regular"
                 android:drawableRight="@drawable/strong"/>

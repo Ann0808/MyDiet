@@ -23,9 +23,7 @@
             android:label="@string/title_activity_my_page"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ProductsItemActivity"
-            android:label="@string/title_activity_products_item"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".ProductsItemActivity" />
         <activity
             android:name=".ProductsActivity"
             android:label="@string/title_activity_products"

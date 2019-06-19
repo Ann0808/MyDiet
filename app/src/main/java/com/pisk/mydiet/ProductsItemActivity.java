@@ -12,6 +12,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -31,8 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class ProductsItemActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class ProductsItemActivity extends AppCompatActivity {
 
     int weekNumber;
     int programNumber;
@@ -47,26 +48,31 @@ public class ProductsItemActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products_item);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
+//
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
+//
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("К списку недель");
 
 
         Intent intentTmp = getIntent();
@@ -101,12 +107,13 @@ public class ProductsItemActivity extends AppCompatActivity
 
                 } while (cursor.moveToNext());
             }
-            cursor.close();
+
         } else {
 
 
         }
 
+        cursor.close();
         dbHelper.close();
 
 //        int ROWS = productCount.size();
@@ -116,6 +123,7 @@ public class ProductsItemActivity extends AppCompatActivity
         TableLayout tableLayout = (TableLayout) findViewById(R.id.tableLayout);
 
         int i=0;
+        Typeface typeface = ResourcesCompat.getFont(getApplicationContext(), R.font.robotoreg);
 
         for(Map.Entry<String,String> entry : productCount.entrySet()) {
             String product = entry.getKey();
@@ -138,7 +146,7 @@ public class ProductsItemActivity extends AppCompatActivity
             tv.setText(product);
             tv.setTextColor(getResources().getColor(R.color.colorWhite));
             tv.setTextSize(25);
-            tv.setTypeface(Typeface.DEFAULT_BOLD);
+            tv.setTypeface(typeface);
             tv.setShadowLayer(2.0f, 2, 2, Color.BLACK);
 
             ShapeDrawable border = new ShapeDrawable(new RectShape());
@@ -158,7 +166,7 @@ public class ProductsItemActivity extends AppCompatActivity
             tv2.setText(count);
             tv2.setTextColor(getResources().getColor(R.color.colorWhite));
             tv2.setTextSize(25);
-            tv2.setTypeface(Typeface.DEFAULT_BOLD);
+            tv2.setTypeface(typeface);
             tv2.setShadowLayer(2.0f, 2, 2, Color.BLACK);
 
 
@@ -198,69 +206,80 @@ public class ProductsItemActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.settings, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+//    @Override
+//    public void onBackPressed() {
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else {
+//            super.onBackPressed();
+//        }
+//    }
 
-        if (id == R.id.nav_main) {
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.settings, menu);
+//        return true;
+//    }
 
-            Intent intent2 = new Intent(this, MainActivity.class);
-            startActivity(intent2);
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
-        } else if (id == R.id.nav_gallery) {
-            Intent intent2 = new Intent(this, ProductsActivity.class);
-            startActivity(intent2);
-
-        } else if (id == R.id.nav_slideshow) {
-
-            Intent intent2 = new Intent(this, ProgramsActivity.class);
-            startActivity(intent2);
-
-        } else if (id == R.id.nav_manage) {
-            Intent intent2 = new Intent(this, MyPageActivity.class);
-            startActivity(intent2);
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
+//    @SuppressWarnings("StatementWithEmptyBody")
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem item) {
+//        // Handle navigation view item clicks here.
+//        int id = item.getItemId();
+//
+//        if (id == R.id.nav_main) {
+//
+//            Intent intent2 = new Intent(this, MainActivity.class);
+//            startActivity(intent2);
+//
+//        } else if (id == R.id.nav_gallery) {
+//            Intent intent2 = new Intent(this, ProductsActivity.class);
+//            startActivity(intent2);
+//
+//        } else if (id == R.id.nav_slideshow) {
+//
+//            Intent intent2 = new Intent(this, ProgramsActivity.class);
+//            startActivity(intent2);
+//
+//        } else if (id == R.id.nav_manage) {
+//            Intent intent2 = new Intent(this, MyPageActivity.class);
+//            startActivity(intent2);
+//
+//        } else if (id == R.id.nav_share) {
+//
+//        } else if (id == R.id.nav_send) {
+//
+//        }
+//
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
+//        return true;
+//    }
 }
