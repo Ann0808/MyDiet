@@ -25,7 +25,7 @@
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:textColor="@color/colorWhite"
         android:textColorLink="@color/colorWhite"
-        android:textSize="30sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         android:fontFamily="@font/kurale_regular"/>
 

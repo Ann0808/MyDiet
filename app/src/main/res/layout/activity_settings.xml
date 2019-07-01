@@ -44,7 +44,7 @@
                 android:text="@string/hello"
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
-                android:textSize="40sp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
             <!--<TextView-->
@@ -81,7 +81,7 @@
                 android:maxLength="15"
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:layout_centerVertical="true"/>
 
             <Button
@@ -217,7 +217,7 @@
                 android:text="Ваша цель:"
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
-                android:textSize="40sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="@font/kurale_regular"/>
@@ -241,7 +241,7 @@
                     android:checked="true"
                     android:text="Похудеть"
                     android:textColor="@color/colorBalance"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:shadowColor="@color/colorPrimaryDark"
                     android:shadowDx="2"
                     android:shadowDy="2"
@@ -261,7 +261,7 @@
                     android:layout_weight="1"
                     android:text="Поддержать форму"
                     android:textColor="@color/colorWhite"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:shadowColor="@color/colorPrimaryDark"
                     android:shadowDx="2"
                     android:shadowDy="2"
@@ -282,7 +282,7 @@
                     android:layout_weight="1"
                     android:text="Набрать вес"
                     android:textColor="@color/colorWhite"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:shadowColor="@color/colorPrimaryDark"
                     android:shadowDx="2"
                     android:shadowDy="2"
@@ -310,7 +310,7 @@
                 android:text="Физическая активность:"
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
-                android:textSize="40sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="@font/kurale_regular"/>
@@ -333,7 +333,7 @@
                     android:checked="true"
                     android:text="Не занимаюсь"
                     android:textColor="@color/colorBalance"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:shadowColor="@color/colorPrimaryDark"
                     android:shadowDx="2"
                     android:shadowDy="2"
@@ -354,7 +354,7 @@
                     android:layout_weight="1"
                     android:text="1-2 раза в неделю"
                     android:textColor="@color/colorWhite"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:shadowColor="@color/colorPrimaryDark"
                     android:shadowDx="2"
                     android:shadowDy="2"
@@ -375,7 +375,7 @@
                     android:layout_weight="1"
                     android:text="Почти каждый день"
                     android:textColor="@color/colorWhite"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:shadowColor="@color/colorPrimaryDark"
                     android:shadowDx="2"
                     android:shadowDy="2"
@@ -479,7 +479,7 @@
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
-                android:textSize="25sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:drawableRight="@drawable/superfit"
                 android:fontFamily="@font/kurale_regular"/>
@@ -497,7 +497,7 @@
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
-                android:textSize="25sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:drawableRight="@drawable/fit"
                 android:fontFamily="@font/kurale_regular"/>
@@ -515,7 +515,7 @@
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
-                android:textSize="25sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/kurale_regular"
                 android:drawableRight="@drawable/balance"/>
@@ -533,7 +533,7 @@
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
-                android:textSize="25sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/kurale_regular"
                 android:drawableRight="@drawable/strong"/>

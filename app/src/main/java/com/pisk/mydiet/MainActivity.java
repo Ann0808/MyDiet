@@ -437,7 +437,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_about) {
 
             Intent intent2 = new Intent(this, AboutActivity.class);
             startActivity(intent2);
