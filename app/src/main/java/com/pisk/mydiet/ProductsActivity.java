@@ -103,7 +103,8 @@ public class ProductsActivity extends AppCompatActivity
 //        listView.setHeaderDividersEnabled(true);
         listView.setAdapter(adapter);
 
-        final Intent intent = new Intent(this, ProductsItemActivity.class);
+        //final Intent intent = new Intent(this, ProductsItemActivity.class);
+        final Intent intent = new Intent(this, PagerProductsActivity.class);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -111,7 +112,7 @@ public class ProductsActivity extends AppCompatActivity
                                     long id) {
 
                 intent.putExtra("arg_week_number", (position + 1));
-                intent.putExtra("arg_program_number", programNumber);
+                //intent.putExtra("arg_program_number", programNumber);
                 startActivity(intent);
             }
         });

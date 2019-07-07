@@ -50,6 +50,9 @@
         </activity>
         <activity android:name=".PagerActivity"
             android:screenOrientation="portrait"/>
+
+        <activity android:name=".PagerProductsActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".DaysListActivity"
             android:theme="@style/AppTheme.NoActionBar"

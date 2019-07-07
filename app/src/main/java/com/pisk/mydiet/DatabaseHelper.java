@@ -34,6 +34,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
     static final String PRODUCT = "product";
     static final String COUNT = "count";
     static final String PROGRAM_NUMBER_PR = "program";
+    static final String CATEGORY = "category";
 
 
     private Context myContext;
