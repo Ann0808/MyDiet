@@ -25,10 +25,6 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ProductsItemActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity
             android:name=".ProductsActivity"
             android:label="@string/title_activity_products"
             android:theme="@style/AppTheme.NoActionBar"
@@ -56,6 +52,7 @@
         <activity
             android:name=".DaysListActivity"
             android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/title_activity_days_list"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ProgramsActivity"

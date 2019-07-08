@@ -1,6 +1,7 @@
 package com.pisk.mydiet;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,6 +20,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class ProgramsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -26,6 +29,13 @@ public class ProgramsActivity extends AppCompatActivity
     private ListView listView;
     private int countProgramms = 4;
     static final String TAG = "myLogs";
+
+    final String SAVED_PROGRAM = "saved_program";
+    SharedPreferences sPref;
+    int programNumber;
+
+    View hView;
+    ImageView menuImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +64,30 @@ public class ProgramsActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(2).setChecked(true);
+
+        hView =  navigationView.getHeaderView(0);
+        menuImage = hView.findViewById(R.id.imageViewHead);
+
+        sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
+        programNumber = sPref.getInt(SAVED_PROGRAM, 0);
+
+        if (programNumber == 1) {
+
+            hView.setBackgroundResource(R.color.colorSuperFit);
+
+        } else if (programNumber == 2) {
+
+            hView.setBackgroundResource(R.color.colorFit);
+
+        } else if (programNumber == 3) {
+
+            hView.setBackgroundResource(R.color.colorBalance);
+
+        } else {
+
+            hView.setBackgroundResource(R.color.colorStrong);
+
+        }
 
 
  //      TextView textView = (TextView) findViewById(R.id.textview);
@@ -182,8 +216,16 @@ public class ProgramsActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+            Intent sendIntent = MenuClick.share();
+            startActivity(Intent.createChooser(sendIntent,"Поделиться"));
 
+        } else if (id == R.id.nav_about) {
+
+            Intent intent2 = new Intent(this, AboutActivity.class);
+            startActivity(intent2);
+
+        } else if (id == R.id.nav_send) {
+            Toast.makeText(getApplicationContext(), "send", Toast.LENGTH_SHORT).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

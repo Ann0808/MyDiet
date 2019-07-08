@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -412,38 +413,18 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-            //Intent shareIntent = new Intent(Intent.ACTION_SEND);;
-
-            // Now update the ShareActionProvider with the new share intent
-            //mShareActionProvider.setShareIntent(shareIntent);
-
-//            ArrayList<Uri> uris = new ArrayList<>();
-//            Uri path = Uri.parse("android.resource://com.pisk.mydiet/" + R.drawable.food);
-//            Uri path2 = Uri.parse("android.resource://com.pisk.mydiet/" + R.drawable.paper);
-//            uris.add(path);
-//            uris.add(path2);
-            Intent sendIntent = new Intent();
-            sendIntent.setAction(Intent.ACTION_SEND);
-            //sendIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
-//            sendIntent.putExtra(Intent.EXTRA_TEXT, "Приложение nam");
- //           sendIntent.putExtra(Intent.EXTRA_STREAM, path);
-
-            sendIntent.putExtra(Intent.EXTRA_TEXT, "lj;dhsgk ;sjhg "+"https://play.google.com/store/apps/details?id=se.feomedia.quizkampen.de.lite");
-           // sendIntent.setType("image/*");
-
-            sendIntent.setType("text/plain");
-            //sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Intent sendIntent = MenuClick.share();
             startActivity(Intent.createChooser(sendIntent,"Поделиться"));
-
-
 
         } else if (id == R.id.nav_about) {
 
             Intent intent2 = new Intent(this, AboutActivity.class);
             startActivity(intent2);
 
-
+        } else if (id == R.id.nav_send) {
+            Toast.makeText(getApplicationContext(), "send", Toast.LENGTH_SHORT).show();
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -17,8 +17,10 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ProductsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -28,6 +30,9 @@ public class ProductsActivity extends AppCompatActivity
     final String SAVED_PROGRAM = "saved_program";
     SharedPreferences sPref;
     TextView title;
+
+    View hView;
+    ImageView menuImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,9 @@ public class ProductsActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(1).setChecked(true);
 
+        hView =  navigationView.getHeaderView(0);
+        menuImage = hView.findViewById(R.id.imageViewHead);
+
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
         programNumber = sPref.getInt(SAVED_PROGRAM, 0);
 
@@ -78,18 +86,22 @@ public class ProductsActivity extends AppCompatActivity
                 if (programNumber == 1) {
 
                     mytextview.setBackgroundResource(R.drawable.custom_shape1);
+                    hView.setBackgroundResource(R.color.colorSuperFit);
 
                 } else if (programNumber == 2) {
 
                     mytextview.setBackgroundResource(R.drawable.custom_shape2);
+                    hView.setBackgroundResource(R.color.colorFit);
 
                 } else if (programNumber == 3) {
 
                     mytextview.setBackgroundResource(R.drawable.custom_shape3);
+                    hView.setBackgroundResource(R.color.colorBalance);
 
                 } else {
 
                     mytextview.setBackgroundResource(R.drawable.custom_shape4);
+                    hView.setBackgroundResource(R.color.colorStrong);
 
                 }
 
@@ -176,8 +188,16 @@ public class ProductsActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+            Intent sendIntent = MenuClick.share();
+            startActivity(Intent.createChooser(sendIntent,"Поделиться"));
 
+        } else if (id == R.id.nav_about) {
+
+            Intent intent2 = new Intent(this, AboutActivity.class);
+            startActivity(intent2);
+
+        } else if (id == R.id.nav_send) {
+            Toast.makeText(getApplicationContext(), "send", Toast.LENGTH_SHORT).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

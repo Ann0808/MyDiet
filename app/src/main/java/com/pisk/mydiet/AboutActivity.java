@@ -15,7 +15,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -25,7 +28,12 @@ public class AboutActivity extends AppCompatActivity
     TextView title;
     final String USER_NAME = "user_name";
 
+    final String SAVED_PROGRAM = "saved_program";
+    int savedProg;
     SharedPreferences sPref;
+    View hView;
+    ImageView menuImage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +61,32 @@ public class AboutActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(4).setChecked(true);
 
-        title = findViewById(R.id.title1);
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
+
+        hView =  navigationView.getHeaderView(0);
+        menuImage = hView.findViewById(R.id.imageViewHead);
+
+        savedProg = sPref.getInt(SAVED_PROGRAM, 0);
+
+        if (savedProg == 1) {
+
+            hView.setBackgroundResource(R.color.colorSuperFit);
+
+        } else if (savedProg == 2) {
+
+            hView.setBackgroundResource(R.color.colorFit);
+
+        } else if (savedProg == 3) {
+
+            hView.setBackgroundResource(R.color.colorBalance);
+
+        } else {
+
+            hView.setBackgroundResource(R.color.colorStrong);
+
+        }
+
+        title = findViewById(R.id.title1);
         String userName = sPref.getString(USER_NAME, "Пользователь");
         title.setText(userName + "! \n Добро пожаловать в " + getResources().getString(R.string.app_name) + "!");
     }
@@ -117,33 +149,15 @@ public class AboutActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-            //Intent shareIntent = new Intent(Intent.ACTION_SEND);;
-
-            // Now update the ShareActionProvider with the new share intent
-            //mShareActionProvider.setShareIntent(shareIntent);
-
-//            ArrayList<Uri> uris = new ArrayList<>();
-//            Uri path = Uri.parse("android.resource://com.pisk.mydiet/" + R.drawable.food);
-//            Uri path2 = Uri.parse("android.resource://com.pisk.mydiet/" + R.drawable.paper);
-//            uris.add(path);
-//            uris.add(path2);
-            Intent sendIntent = new Intent();
-            sendIntent.setAction(Intent.ACTION_SEND);
-            //sendIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
-//            sendIntent.putExtra(Intent.EXTRA_TEXT, "Приложение nam");
-            //           sendIntent.putExtra(Intent.EXTRA_STREAM, path);
-
-            sendIntent.putExtra(Intent.EXTRA_TEXT, "lj;dhsgk ;sjhg "+"https://play.google.com/store/apps/details?id=se.feomedia.quizkampen.de.lite");
-            // sendIntent.setType("image/*");
-
-            sendIntent.setType("text/plain");
-            //sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Intent sendIntent = MenuClick.share();
             startActivity(Intent.createChooser(sendIntent,"Поделиться"));
 
 
+        } else if (id == R.id.nav_about) {
+
 
         } else if (id == R.id.nav_send) {
-
+            Toast.makeText(getApplicationContext(), "send", Toast.LENGTH_SHORT).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

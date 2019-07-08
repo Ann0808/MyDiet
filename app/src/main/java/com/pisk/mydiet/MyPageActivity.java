@@ -22,6 +22,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -57,6 +58,9 @@ public class MyPageActivity extends AppCompatActivity
     TextView date, program;
     Button edit;
 
+    View hView;
+    ImageView menuImage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +86,9 @@ public class MyPageActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(3).setChecked(true);
+
+        hView =  navigationView.getHeaderView(0);
+        menuImage = hView.findViewById(R.id.imageViewHead);
 
 //        navHead = findViewById(R.id.nav_head);
 //        navHead.setBackgroundResource(R.color.colorStrongLight);
@@ -127,19 +134,28 @@ public class MyPageActivity extends AppCompatActivity
             colorBack = R.color.colorSuperFitLight;
             colorButton = R.drawable.custom_shape1;
             b = (RadioButton) findViewById(R.id.radio_superfit);
+            hView.setBackgroundResource(R.color.colorSuperFit);
 
         } else if (savedProg == 2) {
+
             colorBack = R.color.colorFitLight;
             colorButton = R.drawable.custom_shape2;
             b = (RadioButton) findViewById(R.id.radio_fit);
+            hView.setBackgroundResource(R.color.colorFit);
+
         } else if (savedProg == 3) {
+
             colorBack = R.color.colorBalanceLight;
             colorButton = R.drawable.custom_shape3;
             b = (RadioButton) findViewById(R.id.radio_balance);
+            hView.setBackgroundResource(R.color.colorBalance);
+
         } else {
             colorBack = R.color.colorStrongLight;
             colorButton = R.drawable.custom_shape4;
             b = (RadioButton) findViewById(R.id.radio_strong);
+            hView.setBackgroundResource(R.color.colorStrong);
+
         }
 
         program.setText(getResources().getStringArray(R.array.programms)[savedProg - 1]);
@@ -435,8 +451,17 @@ public class MyPageActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+            Intent sendIntent = MenuClick.share();
+            startActivity(Intent.createChooser(sendIntent,"Поделиться"));
 
+
+        } else if (id == R.id.nav_about) {
+
+            Intent intent2 = new Intent(this, AboutActivity.class);
+            startActivity(intent2);
+
+        } else if (id == R.id.nav_send) {
+            Toast.makeText(getApplicationContext(), "send", Toast.LENGTH_SHORT).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -1,6 +1,7 @@
 package com.pisk.mydiet;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,8 +18,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DaysListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -27,6 +30,12 @@ public class DaysListActivity extends AppCompatActivity
     private TextView titleView;
     //Bundle b;
     int programNumber;
+
+    SharedPreferences sPref;
+    final String SAVED_PROGRAM = "saved_program";
+    int savedProg;
+    View hView;
+    ImageView menuImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +63,22 @@ public class DaysListActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        hView =  navigationView.getHeaderView(0);
+        menuImage = hView.findViewById(R.id.imageViewHead);
+
+//        sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
+//        savedProg = sPref.getInt(SAVED_PROGRAM, 0);
+//
+//        if (savedProg == 1) {
+//            hView.setBackgroundResource(R.color.colorSuperFit);
+//        } else if (savedProg == 2) {
+//            hView.setBackgroundResource(R.color.colorFit);
+//        } else if (savedProg == 3) {
+//            hView.setBackgroundResource(R.color.colorBalance);
+//        } else {
+//            hView.setBackgroundResource(R.color.colorStrong);
+//        }
+
         Intent intentTmp = getIntent();
         //b = intentTmp.getBundleExtra("bund");
         programNumber = intentTmp.getIntExtra("arg_program_number",0);
@@ -65,21 +90,26 @@ public class DaysListActivity extends AppCompatActivity
         ColorDrawable sage = null;
 
         if (programNumber == 1) {
-            sage = new ColorDrawable(this.getResources().getColor(R.color.colorSuperFit));
+            //sage = new ColorDrawable(this.getResources().getColor(R.color.colorSuperFit));
             titleView.setBackgroundResource(R.drawable.custom_shape1);
             titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.superfit, 0);
+            hView.setBackgroundResource(R.color.colorSuperFit);
+
         } else if (programNumber == 2) {
-            sage = new ColorDrawable(this.getResources().getColor(R.color.colorFit));
+            //sage = new ColorDrawable(this.getResources().getColor(R.color.colorFit));
             titleView.setBackgroundResource(R.drawable.custom_shape2);
             titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.fit, 0);
+            hView.setBackgroundResource(R.color.colorFit);
         } else if (programNumber == 3) {
-            sage = new ColorDrawable(this.getResources().getColor(R.color.colorBalance));
+            //sage = new ColorDrawable(this.getResources().getColor(R.color.colorBalance));
             titleView.setBackgroundResource(R.drawable.custom_shape3);
             titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.balance, 0);
+            hView.setBackgroundResource(R.color.colorBalance);
         } else {
-            sage = new ColorDrawable(this.getResources().getColor(R.color.colorStrong));
+            //sage = new ColorDrawable(this.getResources().getColor(R.color.colorStrong));
             titleView.setBackgroundResource(R.drawable.custom_shape4);
             titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.strong, 0);
+            hView.setBackgroundResource(R.color.colorStrong);
         }
 
         titleView.setText(getResources().getStringArray(R.array.programms)[programNumber - 1]);
@@ -213,8 +243,16 @@ public class DaysListActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+            Intent sendIntent = MenuClick.share();
+            startActivity(Intent.createChooser(sendIntent,"Поделиться"));
 
+        } else if (id == R.id.nav_about) {
+
+            Intent intent2 = new Intent(this, AboutActivity.class);
+            startActivity(intent2);
+
+        } else if (id == R.id.nav_send) {
+            Toast.makeText(getApplicationContext(), "send", Toast.LENGTH_SHORT).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
