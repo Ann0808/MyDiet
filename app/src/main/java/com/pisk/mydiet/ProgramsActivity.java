@@ -1,5 +1,7 @@
 package com.pisk.mydiet;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -7,6 +9,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,6 +39,9 @@ public class ProgramsActivity extends AppCompatActivity
 
     View hView;
     ImageView menuImage;
+
+    final String HINT_PROGRAMS = "hint_programs";
+    boolean hintPrograms = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +75,38 @@ public class ProgramsActivity extends AppCompatActivity
         menuImage = hView.findViewById(R.id.imageViewHead);
 
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
+
+        hintPrograms = sPref.getBoolean(HINT_PROGRAMS,false);
+
+        if (!hintPrograms) {
+
+            LayoutInflater inflater = this.getLayoutInflater();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setView(inflater.inflate(R.layout.dialog_programs, null));
+            builder.setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                    SharedPreferences.Editor ed = sPref.edit();
+                    ed.putBoolean(HINT_PROGRAMS,true);
+                    ed.commit();
+
+                }
+            });
+
+            final AlertDialog alert = builder.create();
+
+            alert.setOnShowListener( new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface arg0) {
+                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                }
+            });
+
+            alert.show();
+
+        }
+
         programNumber = sPref.getInt(SAVED_PROGRAM, 0);
 
         if (programNumber == 1) {
@@ -225,7 +263,12 @@ public class ProgramsActivity extends AppCompatActivity
             startActivity(intent2);
 
         } else if (id == R.id.nav_send) {
-            Toast.makeText(getApplicationContext(), "send", Toast.LENGTH_SHORT).show();
+            try {
+                Intent i = MenuClick.send();
+                this.startActivity(i);
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Ошибка. Установите приложение Telegram.", Toast.LENGTH_LONG).show();
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -252,7 +252,12 @@ public class DaysListActivity extends AppCompatActivity
             startActivity(intent2);
 
         } else if (id == R.id.nav_send) {
-            Toast.makeText(getApplicationContext(), "send", Toast.LENGTH_SHORT).show();
+            try {
+                Intent i = MenuClick.send();
+                this.startActivity(i);
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Ошибка. Установите приложение Telegram.", Toast.LENGTH_LONG).show();
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

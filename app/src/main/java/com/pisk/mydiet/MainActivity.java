@@ -1,5 +1,8 @@
 package com.pisk.mydiet;
 
+import android.app.AlertDialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -8,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -40,6 +44,7 @@ public class MainActivity extends AppCompatActivity
     SharedPreferences sPref;
     final String SAVED_PROGRAM = "saved_program";
     final String DATE_START = "date_start";
+    final String HINT_DAYS = "hint_days";
 
     View hView;
     ImageView menuImage;
@@ -50,6 +55,7 @@ public class MainActivity extends AppCompatActivity
     int savedProg;
     String savedDate;
     int daysGone =0;
+    boolean hintDays = false;
 
     private ShareActionProvider mShareActionProvider;
 
@@ -95,12 +101,6 @@ public class MainActivity extends AppCompatActivity
         b2 = findViewById(R.id.button2);
 
 
-        Log.d("myLogs2", "jj: " + savedProg);
-
-
-
-        // on resume
-
     }
 
 
@@ -115,7 +115,37 @@ public class MainActivity extends AppCompatActivity
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
         savedProg = sPref.getInt(SAVED_PROGRAM, 0);
         savedDate = sPref.getString(DATE_START,"");
+        hintDays = sPref.getBoolean(HINT_DAYS,false);
         //Log.d("myLogs2", "days left: " + savedDate);
+
+        if (!hintDays) {
+
+            LayoutInflater inflater = this.getLayoutInflater();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setView(inflater.inflate(R.layout.dialog_days, null));
+            builder.setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                    SharedPreferences.Editor ed = sPref.edit();
+                    ed.putBoolean(HINT_DAYS,true);
+                    ed.commit();
+
+                }
+            });
+
+            final AlertDialog alert = builder.create();
+
+            alert.setOnShowListener( new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface arg0) {
+                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                }
+            });
+
+            alert.show();
+
+        }
 
 
         //Log.d("myLogs2", "days left: " + dayLefttoStart);
@@ -422,7 +452,14 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent2);
 
         } else if (id == R.id.nav_send) {
-            Toast.makeText(getApplicationContext(), "send", Toast.LENGTH_SHORT).show();
+
+           try {
+               Intent i = MenuClick.send();
+               this.startActivity(i);
+           } catch (Exception e) {
+               Toast.makeText(getApplicationContext(), "Ошибка. Установите приложение Telegram.", Toast.LENGTH_LONG).show();
+           }
+
         }
 
 
