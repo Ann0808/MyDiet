@@ -174,7 +174,7 @@ public class PageProductsFragment extends Fragment implements NavigationView.OnN
             tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                     TableRow.LayoutParams.WRAP_CONTENT));
             tableRow.setWeightSum(3);
-            tableRow.setPadding(10,15,10,15);
+            tableRow.setPadding(30,15,30,15);
 
             TextView tv = new TextView(this.getContext());
             tv.setWidth(0);
@@ -191,6 +191,7 @@ public class PageProductsFragment extends Fragment implements NavigationView.OnN
             border.getPaint().setStyle(Paint.Style.STROKE);
             border.getPaint().setColor(Color.WHITE);
             border.getPaint().setStrokeWidth(5);
+
 
             tableRow.setBackgroundDrawable(border);
 
