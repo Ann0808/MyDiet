@@ -118,34 +118,7 @@ public class MainActivity extends AppCompatActivity
         hintDays = sPref.getBoolean(HINT_DAYS,false);
         //Log.d("myLogs2", "days left: " + savedDate);
 
-        if (!hintDays) {
 
-            LayoutInflater inflater = this.getLayoutInflater();
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setView(inflater.inflate(R.layout.dialog_days, null));
-            builder.setPositiveButton("ОК", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                    SharedPreferences.Editor ed = sPref.edit();
-                    ed.putBoolean(HINT_DAYS,true);
-                    ed.commit();
-
-                }
-            });
-
-            final AlertDialog alert = builder.create();
-
-            alert.setOnShowListener( new DialogInterface.OnShowListener() {
-                @Override
-                public void onShow(DialogInterface arg0) {
-                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-                }
-            });
-
-            alert.show();
-
-        }
 
 
         //Log.d("myLogs2", "days left: " + dayLefttoStart);
@@ -155,6 +128,36 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else {
+
+            if (!hintDays) {
+
+                LayoutInflater inflater = this.getLayoutInflater();
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setView(inflater.inflate(R.layout.dialog_days, null));
+                builder.setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        SharedPreferences.Editor ed = sPref.edit();
+                        ed.putBoolean(HINT_DAYS,true);
+                        ed.commit();
+
+                    }
+                });
+
+                final AlertDialog alert = builder.create();
+
+                alert.setOnShowListener( new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface arg0) {
+                        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                    }
+                });
+
+                alert.show();
+
+            }
+
             if (savedProg == 1) {
                 pBar.getProgressDrawable().setColorFilter(
                         getResources().getColor(R.color.colorSuperFitDay),
