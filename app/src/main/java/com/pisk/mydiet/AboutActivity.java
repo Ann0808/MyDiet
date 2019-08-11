@@ -33,6 +33,7 @@ public class AboutActivity extends AppCompatActivity
     SharedPreferences sPref;
     View hView;
     ImageView menuImage;
+    TextView titleView;
 
 
     @Override
@@ -68,27 +69,45 @@ public class AboutActivity extends AppCompatActivity
 
         savedProg = sPref.getInt(SAVED_PROGRAM, 0);
 
+        titleView = findViewById(R.id.title1);
+
         if (savedProg == 1) {
 
+            hView.setBackgroundResource(R.color.colorSuperFit);
+
+            titleView.setBackgroundResource(R.drawable.custom_shape1);
+            titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.superfit, 0);
             hView.setBackgroundResource(R.color.colorSuperFit);
 
         } else if (savedProg == 2) {
 
             hView.setBackgroundResource(R.color.colorFit);
 
+            titleView.setBackgroundResource(R.drawable.custom_shape2);
+            titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.fit, 0);
+            hView.setBackgroundResource(R.color.colorFit);
+
         } else if (savedProg == 3) {
 
+            hView.setBackgroundResource(R.color.colorBalance);
+
+            titleView.setBackgroundResource(R.drawable.custom_shape3);
+            titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.balance, 0);
             hView.setBackgroundResource(R.color.colorBalance);
 
         } else {
 
             hView.setBackgroundResource(R.color.colorStrong);
 
+            titleView.setBackgroundResource(R.drawable.custom_shape4);
+            titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.strong, 0);
+            hView.setBackgroundResource(R.color.colorStrong);
+
         }
 
-        title = findViewById(R.id.title1);
-        String userName = sPref.getString(USER_NAME, "Пользователь");
-        title.setText(userName + "! \n Добро пожаловать в " + getResources().getString(R.string.app_name) + "!");
+
+        //String userName = sPref.getString(USER_NAME, "Пользователь");
+        titleView.setText( getResources().getString(R.string.app_name) );
     }
 
     @Override

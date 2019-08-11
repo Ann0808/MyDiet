@@ -18,7 +18,7 @@ public class MenuClick {
     public static Intent send() {
 
         Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse("http://telegram.me/lavrxp"));
+        i.setData(Uri.parse("http://telegram.me/proporcii"));
         final String appName = "org.telegram.messenger";
         i.setPackage(appName);
         return i;
