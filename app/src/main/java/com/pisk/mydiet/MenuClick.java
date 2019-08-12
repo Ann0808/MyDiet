@@ -8,7 +8,7 @@ public class MenuClick {
     public static Intent share() {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "lj;dhsgk ;sjhg "+"https://play.google.com/store/apps/details?id=se.feomedia.quizkampen.de.lite");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "");
 
         sendIntent.setType("text/plain");
 
