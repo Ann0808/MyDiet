@@ -7,8 +7,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -67,11 +70,14 @@ public class SettingsActivity extends AppCompatActivity {
     int programRecommended = 0;
 
     int intentProgramNumber = 0;
+    private boolean firstPage = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        firstPage = true;
 
         //dayNumber = intentTmp.getIntExtra("arg_day_number",0);
 
@@ -223,6 +229,9 @@ public class SettingsActivity extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
+
+                firstPage = false;
+
                 v.setBackgroundResource(R.drawable.dcustom_shape3);
                 //Toast.makeText(getApplicationContext(),"",Toast.LENGTH_SHORT).show();
                 String usernameLocal = name.getText().toString();
@@ -442,6 +451,7 @@ public class SettingsActivity extends AppCompatActivity {
 //                    Log.d("myLogs2", "date of notification is: " + firstDate);
                 }
                 final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("from_settings", true);
                 startActivity(intent);
 
             }
@@ -494,8 +504,21 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        final Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
+
+        Log.d("FP", "this" + firstPage);
+
+        if (!firstPage) {
+
+            final Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                finishAffinity();
+            }
+            System.exit(0);
+        }
+
     }
 
 

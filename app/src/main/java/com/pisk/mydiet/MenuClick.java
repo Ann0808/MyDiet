@@ -8,7 +8,9 @@ public class MenuClick {
     public static Intent share() {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Рекомендую это приложение для тех, кто хочет похудеть или набрать массу, питаясь вкусно и правильно :) " +
+
+                "https://play.google.com/store/apps/details?id=com.pisk.mydiet");
 
         sendIntent.setType("text/plain");
 

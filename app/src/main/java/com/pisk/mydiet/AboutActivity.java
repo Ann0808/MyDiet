@@ -105,8 +105,6 @@ public class AboutActivity extends AppCompatActivity
 
         }
 
-
-        //String userName = sPref.getString(USER_NAME, "Пользователь");
         titleView.setText( getResources().getString(R.string.app_name) );
     }
 

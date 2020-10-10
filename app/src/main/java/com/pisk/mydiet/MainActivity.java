@@ -1,15 +1,16 @@
 package com.pisk.mydiet;
 
 import android.app.AlertDialog;
-import android.app.DialogFragment;
+//import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
+//import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.widget.ShareActionProvider;
+//import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +36,7 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
@@ -57,7 +58,9 @@ public class MainActivity extends AppCompatActivity
     int daysGone =0;
     boolean hintDays = false;
 
-    private ShareActionProvider mShareActionProvider;
+    boolean fromSettings = false;
+
+    //private ShareActionProvider mShareActionProvider;
 
 //    private AlarmManager manager;
 //    private PendingIntent pendingIntent;
@@ -99,6 +102,10 @@ public class MainActivity extends AppCompatActivity
         tvProgressHorizontal = findViewById(R.id.tv_progress_horizontal);
         b1 = findViewById(R.id.button1);
         b2 = findViewById(R.id.button2);
+
+
+        Intent intentTmp = getIntent();
+        fromSettings = intentTmp.getBooleanExtra("from_settings",false);
 
 
     }
@@ -392,8 +399,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+
+        Log.d("FP", "from settings " + fromSettings);
+
+        if ((drawer.isDrawerOpen(GravityCompat.START))||(fromSettings)) {
             drawer.closeDrawer(GravityCompat.START);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                finishAffinity();
+            }
+            System.exit(0);
         } else {
             super.onBackPressed();
         }
