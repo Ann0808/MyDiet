@@ -101,19 +101,8 @@ public class SettingsActivity extends AppCompatActivity {
         balance.setText(programms[2]);
         strong.setText(programms[3]);
 
-//        weight = findViewById(R.id.weight);
-//        growth = findViewById(R.id.growth);
         name = findViewById(R.id.userName);
 
-        //setDividerColor(weight,R.color.colorAccent);
-
-//        weight.setMaxValue(170);
-//        weight.setMinValue(40);
-//        weight.setValue(60);
-//
-//        growth.setMaxValue(210);
-//        growth.setMinValue(120);
-//        growth.setValue(160);
 
         bLayout = findViewById(R.id.biglayout);
 
