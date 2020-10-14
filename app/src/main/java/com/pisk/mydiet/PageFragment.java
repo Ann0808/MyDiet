@@ -165,24 +165,6 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
         TextView recipe = (TextView) view.findViewById(R.id.recipe);
         TextView kcal = (TextView) view.findViewById(R.id.tvPage3);
         TextView nameDish = view.findViewById(R.id.nameDish);
-        //TextView next = view.findViewById(R.id.next);
-
-//        if (pageNumber == 1) {
-//            //next.setVisibility(View.VISIBLE);
-//            next.setText("");
-//        } else {
-//            next.setText("");
-//        }
-//
-//        if(programNumber ==1) {
-//            next.setBackgroundResource(R.color.colorSuperFit);
-//        } else if(programNumber ==2) {
-//            next.setBackgroundResource(R.color.colorFit);
-//        } else if(programNumber ==3) {
-//            next.setBackgroundResource(R.color.colorBalance);
-//        } else {
-//            next.setBackgroundResource(R.color.colorStrong);
-//        }
 
         TextView viewDate = (TextView) view.findViewById(R.id.date);
         ViewGroup.LayoutParams params = viewDate.getLayoutParams();
