@@ -45,9 +45,8 @@ import java.util.Date;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    Button b1, b2, b3, b4, finish;
-            //superFit, fit, balance, strong, finish;
-//    NumberPicker weight, growth;
+    Button b2, b4, finish;
+
     EditText name;
     LinearLayout lay1, lay2, lay3, lay4;
     RelativeLayout bLayout;
@@ -56,28 +55,20 @@ public class SettingsActivity extends AppCompatActivity {
     SharedPreferences sPref;
     TextView hello4, recommend;
     private RadioGroup radioGroup1, radioGroup2;
-    private RadioButton radioSelected1, radioSelected2;
-    Calendar dateAndTime=Calendar.getInstance();
     DatePickerDialog.OnDateSetListener d;
-    TextView currentDateTime;
     CalendarView picker;
 
 
     final String SAVED_PROGRAM = "saved_program";
     final String USER_NAME = "user_name";
-//    final String USER_WEIGHT = "user_weight";
-//    final String USER_GROWTH = "user_growth";
-    final String USER_GOAL = "user_goal";
     final String DATE_START = "date_start";
 
     String[] programms;
 
-    String userName = "";
     String currentDate = "";
     int points = 2;
     int programRecommended = 0;
 
-    int intentProgramNumber = 0;
     private boolean firstPage = false;
 
     DatabaseHelper dbHelper;
@@ -91,15 +82,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         firstPage = true;
 
-        //dayNumber = intentTmp.getIntExtra("arg_day_number",0);
-
         programms = getResources().getStringArray(R.array.programms);
 
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
 
-        //b1 = (Button) findViewById(R.id.button1);
         b2 = findViewById(R.id.button2);
-        //b3 = (Button) findViewById(R.id.button3);
         b4 = findViewById(R.id.button4);
         finish = findViewById(R.id.buttonFinish);
         name = findViewById(R.id.userName);
@@ -130,8 +117,7 @@ public class SettingsActivity extends AppCompatActivity {
         dbHelper.create_db();
         db = dbHelper.open();
         String table = "programs as R ";
-        String columns[] = { "R.id as id, R.name as name", "R.image as image",
-                             "R.color as color", "R.lightColor as lightColor",  "R.dayColor as dayColor"};
+        String columns[] = { "R.id as id, R.name as name", "R.image as image", "R.color as color", "R.lightColor as lightColor"};
         cursor = db.query(table, columns, null, null, null, null, null);
 
         if (cursor != null) {
@@ -139,20 +125,17 @@ public class SettingsActivity extends AppCompatActivity {
                 int nameColIndex = cursor.getColumnIndex(dbHelper.PrNAME);
                 int imageColIndex = cursor.getColumnIndex(dbHelper.PrIMAGE);
                 int colorColIndex = cursor.getColumnIndex(dbHelper.PrCOLOR);
-                int lightColorColIndex = cursor.getColumnIndex(dbHelper.PrlightColor);
-                int dayColorColIndex = cursor.getColumnIndex(dbHelper.PrdayColor);
                 int idColIndex = cursor.getColumnIndex(dbHelper.Prid);
+                int idLightColor = cursor.getColumnIndex(dbHelper.PrlightColor);
 
                 do {
                     String lName = cursor.getString(nameColIndex);
                     String lImage = cursor.getString(imageColIndex);
                     String lColor = cursor.getString(colorColIndex);
-                    String lLightColor = cursor.getString(lightColorColIndex);
-                    String lDayColor = cursor.getString(dayColorColIndex);
                     final int lProgramNumber = cursor.getInt(idColIndex);
+                    final String  lLightColor = cursor.getString(idLightColor);
 
                     Button buttonProgram = new Button(this);
-                    //float buttonProgramHeight = getResources().getDimension(R.dimen.button_height);
                     int buttonProgramHeight = (int) TypedValue.applyDimension(
                             TypedValue.COMPLEX_UNIT_DIP,
                             getResources().getDimension(R.dimen.button_height),
@@ -160,17 +143,15 @@ public class SettingsActivity extends AppCompatActivity {
                     );
                     buttonProgram.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, buttonProgramHeight));
                     buttonProgram.setText(lName);
-                    //buttonProgram.setId(lProgramNumber);
                     buttonProgram.setBackgroundResource(R.drawable.custom_shape);
-
-                    Drawable limg = decodeDrawable(getApplicationContext(),lImage);
-                   // Drawable limg = getApplicationContext().getResources().getDrawable(R.drawable.strong);
-                    limg.setBounds(0, 0, 150, 240);
-                    buttonProgram.setCompoundDrawables(null, null, limg, null);
-
                     GradientDrawable drawable = (GradientDrawable) buttonProgram.getBackground();
                     drawable.setColor(Color.parseColor(lColor));
                     buttonProgram.setTypeface(buttonProgram.getTypeface(), Typeface.BOLD);
+
+                    Drawable limg = CommonFunctions.decodeDrawable(getApplicationContext(),lImage);
+                    limg.setBounds(0, 0, 150, 240);
+                    buttonProgram.setCompoundDrawables(null, null, limg, null);
+
 
                     buttonProgram.setShadowLayer(5,1,1, R.color.colorPrimaryDark);
                     buttonProgram.setTextColor(getResources().getColor(R.color.colorWhite));
@@ -181,8 +162,11 @@ public class SettingsActivity extends AppCompatActivity {
                     buttonProgram.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                          makeAnimationButton();
-                          setSAVED_PROGRAM(lProgramNumber);
+                            v.setBackgroundResource(R.drawable.custom_shape);
+                            GradientDrawable drawable = (GradientDrawable) v.getBackground();
+                            drawable.setColor(Color.parseColor(lLightColor));
+                            makeAnimationButton();
+                            setSAVED_PROGRAM(lProgramNumber);
                         }});
 
                 }while (cursor.moveToNext());
@@ -270,7 +254,6 @@ public class SettingsActivity extends AppCompatActivity {
                 String strMonth = month>9 ? String.valueOf(month) : "0" + month;
                 String day = dayOfMonth>9 ? String.valueOf(dayOfMonth) : "0" + dayOfMonth;
                 currentDate = day + "/" + strMonth + "/" + year;
-                Log.d("myLogs2", "currentDate: " + currentDate);
             }
         });
 
@@ -282,10 +265,8 @@ public class SettingsActivity extends AppCompatActivity {
                 firstPage = false;
 
                 v.setBackgroundResource(R.drawable.dcustom_shape3);
-                //Toast.makeText(getApplicationContext(),"",Toast.LENGTH_SHORT).show();
                 String usernameLocal = name.getText().toString();
                 if (usernameLocal.length() == 0) usernameLocal = "Пользователь";
-                //sPref = getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
                 SharedPreferences.Editor ed = sPref.edit();
                 ed.putString(USER_NAME,usernameLocal);
                 ed.commit();
@@ -353,7 +334,7 @@ public class SettingsActivity extends AppCompatActivity {
                     programRecommended = 3;
                 }
 
-                String textRecomendation = "(Мы рекомендуем Вам" + "\n" + programms[programRecommended] + ")";
+                String textRecomendation = "Мы рекомендуем Вам";
                 recommend.setText(textRecomendation);
 
 
@@ -394,12 +375,7 @@ public class SettingsActivity extends AppCompatActivity {
                     date = sdf.parse(currentDate + " 11:00:00");
 
                     millis = date.getTime();
-                    //
-//                    Date dateNotification = new Date(millis);
-//                    DateFormat df = new SimpleDateFormat("dd.MM.yy HH:mm:ss");
-//                    String firstDate = df.format(dateNotification);
-//                    Log.d("myLogs2", "date of today's notification is: " + firstDate);
-                    //
+
                     if (millis > System.currentTimeMillis()) {
 
                         startAlert(millis,true);
@@ -408,11 +384,10 @@ public class SettingsActivity extends AppCompatActivity {
                     millis = millis - 24*60*60*1000;
                 } catch (ParseException e) {
                     e.printStackTrace();
-                    Log.d("myLogs2", "not ok");
                 }
                 if (millis > System.currentTimeMillis()) {
                     startAlert(millis,false);
-                    
+
                 }
                 final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("from_settings", true);
@@ -469,8 +444,6 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        Log.d("FP", "this" + firstPage);
-
         if (!firstPage) {
 
             final Intent intent = new Intent(this, SettingsActivity.class);
@@ -483,23 +456,6 @@ public class SettingsActivity extends AppCompatActivity {
             System.exit(0);
         }
 
-    }
-
-    public static Drawable decodeDrawable(Context context, String base64) {
-        Drawable ret = null;//from w ww.  ja  va  2  s  .  c  o  m
-        if (!base64.equals("")) {
-            ByteArrayInputStream bais = new ByteArrayInputStream(
-                    Base64.decode(base64.getBytes(), Base64.DEFAULT));
-            ret = Drawable.createFromResourceStream(context.getResources(),
-                    null, bais, null, null);
-            try {
-                bais.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return ret;
     }
 
 

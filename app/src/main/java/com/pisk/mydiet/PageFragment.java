@@ -123,7 +123,6 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
                 int kkalColIndex = cursor.getColumnIndex(dbHelper.KKAL);
                 int imageColIndex = cursor.getColumnIndex(dbHelper.IMAGE);
                 int nameColIndex = cursor.getColumnIndex(dbHelper.NAME);
-                Log.d(TAG2, "image index: " + imageColIndex);
                 //String str;
                 do {
                     products = cursor.getString(ingridientsColIndex);

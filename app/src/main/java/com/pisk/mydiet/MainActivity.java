@@ -1,11 +1,20 @@
 package com.pisk.mydiet;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 //import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 //import android.net.Uri;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -56,14 +65,16 @@ public class MainActivity extends AppCompatActivity
     int savedProg;
     String savedDate;
     int daysGone =0;
+    int countDays = 0;
     boolean hintDays = false;
+    String lLightColor = "";
 
     boolean fromSettings = false;
 
-    //private ShareActionProvider mShareActionProvider;
+    DatabaseHelper dbHelper;
+    SQLiteDatabase db;
+    Cursor cursor;
 
-//    private AlarmManager manager;
-//    private PendingIntent pendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +114,6 @@ public class MainActivity extends AppCompatActivity
         b1 = findViewById(R.id.button1);
         b2 = findViewById(R.id.button2);
 
-
         Intent intentTmp = getIntent();
         fromSettings = intentTmp.getBooleanExtra("from_settings",false);
 
@@ -112,6 +122,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onResume() {
 
@@ -123,12 +134,7 @@ public class MainActivity extends AppCompatActivity
         savedProg = sPref.getInt(SAVED_PROGRAM, 0);
         savedDate = sPref.getString(DATE_START,"");
         hintDays = sPref.getBoolean(HINT_DAYS,false);
-        //Log.d("myLogs2", "days left: " + savedDate);
 
-
-
-
-        //Log.d("myLogs2", "days left: " + dayLefttoStart);
 
         if (savedProg == 0) {  //change to ==0
             //intent.putExtra("arg_program_number", 0);
@@ -165,38 +171,38 @@ public class MainActivity extends AppCompatActivity
 
             }
 
-            if (savedProg == 1) {
-                pBar.getProgressDrawable().setColorFilter(
-                        getResources().getColor(R.color.colorSuperFitDay),
-                        android.graphics.PorterDuff.Mode.SRC_IN);
-                titleView.setBackgroundResource(R.drawable.custom_shape1);
-                titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.superfit, 0);
-                hView.setBackgroundResource(R.color.colorSuperFit);
+            dbHelper = new DatabaseHelper(getApplicationContext());
+            dbHelper.create_db();
+            db = dbHelper.open();
+            String table = "programs as R ";
+            String columns[] = { "R.id as id", "R.name as name", "R.image as image", "R.color as color",
+                    "R.dayColor as dayColor", "R.lightColor as lightColor", "R.countDays as countDays"};
 
-            } else if (savedProg == 2) {
-                pBar.getProgressDrawable().setColorFilter(
-                        getResources().getColor(R.color.colorFitDay),
-                        android.graphics.PorterDuff.Mode.SRC_IN);
-                titleView.setBackgroundResource(R.drawable.custom_shape2);
-                titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.fit, 0);
-                hView.setBackgroundResource(R.color.colorFit);
+            String WHERE = dbHelper.Prid + "='" + savedProg + "'";
+            cursor = db.query(table, columns, WHERE, null, null, null, null);
 
-            } else if (savedProg == 3) {
-                pBar.getProgressDrawable().setColorFilter(
-                        getResources().getColor(R.color.colorBalanceDay),
-                        android.graphics.PorterDuff.Mode.SRC_IN);
-                titleView.setBackgroundResource(R.drawable.custom_shape3);
-                titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.balance, 0);
-                hView.setBackgroundResource(R.color.colorBalance);
+            if (cursor != null) {
+                if (cursor.moveToFirst())  {
+                    String lName = cursor.getString(cursor.getColumnIndex(dbHelper.PrNAME));
+                    String lImage = cursor.getString(cursor.getColumnIndex(dbHelper.PrIMAGE));
+                    String lColor = cursor.getString(cursor.getColumnIndex(dbHelper.PrCOLOR));
+                    String lColorDay = cursor.getString(cursor.getColumnIndex(dbHelper.PrdayColor));
+                    lLightColor = cursor.getString(cursor.getColumnIndex(dbHelper.PrlightColor));;
 
-            } else {
-                pBar.getProgressDrawable().setColorFilter(
-                        getResources().getColor(R.color.colorStrongDay),
-                        android.graphics.PorterDuff.Mode.SRC_IN);
-                titleView.setBackgroundResource(R.drawable.custom_shape4);
-                titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.strong, 0);
-                hView.setBackgroundResource(R.color.colorStrong);
+                    countDays = cursor.getInt(cursor.getColumnIndex(dbHelper.PrCountDays));
 
+                    pBar.getProgressDrawable().setColorFilter(Color.parseColor(lColorDay), android.graphics.PorterDuff.Mode.SRC_IN);
+                    titleView.setText(lName);
+                    titleView.setBackgroundResource(R.drawable.custom_shape);
+                    GradientDrawable drawable = (GradientDrawable) titleView.getBackground();
+                    drawable.setColor(Color.parseColor(lColor));
+                    titleView.setTypeface(titleView.getTypeface(), Typeface.BOLD);
+                    Drawable limg = CommonFunctions.decodeDrawable(getApplicationContext(),lImage);
+                    Bitmap bitmap = ((BitmapDrawable) limg).getBitmap();
+                    Drawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 170, 300, true));
+                    titleView.setCompoundDrawablesWithIntrinsicBounds(null, null, d, null);
+                    hView.getBackground().setColorFilter(Color.parseColor(lColor),android.graphics.PorterDuff.Mode.SRC_IN);
+                }
             }
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -218,11 +224,10 @@ public class MainActivity extends AppCompatActivity
                 }
             }
 
-            titleView.setText(getResources().getStringArray(R.array.programms)[savedProg - 1]);
             pBar.setProgress(progress);
             tvProgressHorizontal.setText(progress + "%");
 
-            final String[] days = new String[28];
+            final String[] days = new String[countDays];
 
             daysGone = -dayLefttoStart;
             Log.d("myLogs2", "days gone: " + daysGone);
@@ -234,7 +239,6 @@ public class MainActivity extends AppCompatActivity
                 DateFormat df = new SimpleDateFormat("dd.MM.yy");
                 String firstDate = df.format(dateStart);
                 days[i] = "День " + (i+1) + " (" + firstDate + ")";
-                //Log.d("myLogs2",days[i]);
                 localDate += (24 * 60 * 60 * 1000);
             }
 
@@ -247,38 +251,16 @@ public class MainActivity extends AppCompatActivity
 
                     TextView mytextview=(TextView)view;
 
-                    Log.d("myLogs2", "text: " + mytextview.getText());
-
                     if (position < daysGone) {
                         mytextview.setText(mytextview.getText() +"\n(Пройден ✓)");
                     }
 
-                    if (savedProg == 1) {
+                    mytextview.setBackgroundResource(R.drawable.custom_shape);
 
-                        mytextview.setBackgroundResource(R.drawable.dcustom_shape1);
-
-
-                    } else if (savedProg == 2) {
-
-                        mytextview.setBackgroundResource(R.drawable.dcustom_shape2);
-
-                    } else if (savedProg == 3) {
-
-                        mytextview.setBackgroundResource(R.drawable.dcustom_shape3);
-
-                    } else {
-
-                        mytextview.setBackgroundResource(R.drawable.dcustom_shape4);
-
+                    if (lLightColor != "") {
+                        GradientDrawable drawable = (GradientDrawable) mytextview.getBackground();
+                        drawable.setColor(Color.parseColor(lLightColor));
                     }
-
-
-                    //Object obj = listView.getItemAtPosition();
-                    // if (position < daysGone) {
-                    //     mytextview.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.strong, 0);
-                    // }
-
-                    //Log.d("myLogs2","fgjhj: " + v.getText());
 
                     return view;
                 }
@@ -287,21 +269,10 @@ public class MainActivity extends AppCompatActivity
 
 
             listView.setDivider(null);
-//        listView.setHeaderDividersEnabled(true);
 
             listView.setAdapter(adapter);
 
             listView.setSelection(daysGone); //scroll to current day
-
-
-            //TextView v = (TextView) listView.getChildAt(0);
-            //Log.d("myLogs2", "posittttt: " + v.getText());
-//            for(int j=0; j<5; j++) {
-//                TextView v = (TextView) getViewByPosition(j,listView);
-//                //v.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.strong, 0);
-//                v.setText("kkk");
-//                Log.d("myLogs2","textview: " +v.getText());
-//            }
 
 
             LinearLayout linearLayout = findViewById(R.id.linearLayout);
