@@ -3,15 +3,27 @@ package com.pisk.mydiet;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -24,6 +36,8 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,7 +45,8 @@ import java.util.Date;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    Button b1, b2, b3, b4, superFit, fit, balance, strong, finish;
+    Button b1, b2, b3, b4, finish;
+            //superFit, fit, balance, strong, finish;
 //    NumberPicker weight, growth;
     EditText name;
     LinearLayout lay1, lay2, lay3, lay4;
@@ -65,6 +80,10 @@ public class SettingsActivity extends AppCompatActivity {
     int intentProgramNumber = 0;
     private boolean firstPage = false;
 
+    DatabaseHelper dbHelper;
+    SQLiteDatabase db;
+    Cursor cursor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,17 +102,6 @@ public class SettingsActivity extends AppCompatActivity {
         //b3 = (Button) findViewById(R.id.button3);
         b4 = findViewById(R.id.button4);
         finish = findViewById(R.id.buttonFinish);
-
-        superFit = findViewById(R.id.buttonSF);
-        fit = findViewById(R.id.buttonF);
-        balance = findViewById(R.id.buttonB);
-        strong = findViewById(R.id.buttonS);
-
-        superFit.setText(programms[0]);
-        fit.setText(programms[1]);
-        balance.setText(programms[2]);
-        strong.setText(programms[3]);
-
         name = findViewById(R.id.userName);
 
 
@@ -104,7 +112,6 @@ public class SettingsActivity extends AppCompatActivity {
         lay3 = findViewById(R.id.lay3);
         lay4 = findViewById(R.id.lay4);
 
-//        hello3 = findViewById(R.id.hello3);
         hello4 = findViewById(R.id.hello4);
         recommend = findViewById(R.id.rec1);
 
@@ -119,6 +126,70 @@ public class SettingsActivity extends AppCompatActivity {
         picker.setMinDate(System.currentTimeMillis() -1000);
         picker.setDate(System.currentTimeMillis() -1000);
 
+        dbHelper = new DatabaseHelper(getApplicationContext());
+        dbHelper.create_db();
+        db = dbHelper.open();
+        String table = "programs as R ";
+        String columns[] = { "R.id as id, R.name as name", "R.image as image",
+                             "R.color as color", "R.lightColor as lightColor",  "R.dayColor as dayColor"};
+        cursor = db.query(table, columns, null, null, null, null, null);
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                int nameColIndex = cursor.getColumnIndex(dbHelper.PrNAME);
+                int imageColIndex = cursor.getColumnIndex(dbHelper.PrIMAGE);
+                int colorColIndex = cursor.getColumnIndex(dbHelper.PrCOLOR);
+                int lightColorColIndex = cursor.getColumnIndex(dbHelper.PrlightColor);
+                int dayColorColIndex = cursor.getColumnIndex(dbHelper.PrdayColor);
+                int idColIndex = cursor.getColumnIndex(dbHelper.Prid);
+
+                do {
+                    String lName = cursor.getString(nameColIndex);
+                    String lImage = cursor.getString(imageColIndex);
+                    String lColor = cursor.getString(colorColIndex);
+                    String lLightColor = cursor.getString(lightColorColIndex);
+                    String lDayColor = cursor.getString(dayColorColIndex);
+                    final int lProgramNumber = cursor.getInt(idColIndex);
+
+                    Button buttonProgram = new Button(this);
+                    //float buttonProgramHeight = getResources().getDimension(R.dimen.button_height);
+                    int buttonProgramHeight = (int) TypedValue.applyDimension(
+                            TypedValue.COMPLEX_UNIT_DIP,
+                            getResources().getDimension(R.dimen.button_height),
+                            getResources().getDisplayMetrics()
+                    );
+                    buttonProgram.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, buttonProgramHeight));
+                    buttonProgram.setText(lName);
+                    //buttonProgram.setId(lProgramNumber);
+                    buttonProgram.setBackgroundResource(R.drawable.custom_shape);
+
+                    Drawable limg = decodeDrawable(getApplicationContext(),lImage);
+                   // Drawable limg = getApplicationContext().getResources().getDrawable(R.drawable.strong);
+                    limg.setBounds(0, 0, 150, 240);
+                    buttonProgram.setCompoundDrawables(null, null, limg, null);
+
+                    GradientDrawable drawable = (GradientDrawable) buttonProgram.getBackground();
+                    drawable.setColor(Color.parseColor(lColor));
+                    buttonProgram.setTypeface(buttonProgram.getTypeface(), Typeface.BOLD);
+
+                    buttonProgram.setShadowLayer(5,1,1, R.color.colorPrimaryDark);
+                    buttonProgram.setTextColor(getResources().getColor(R.color.colorWhite));
+                    buttonProgram.setTextSize(TypedValue.COMPLEX_UNIT_SP,22);
+
+                    lay3.addView(buttonProgram);
+
+                    buttonProgram.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                          makeAnimationButton();
+                          setSAVED_PROGRAM(lProgramNumber);
+                        }});
+
+                }while (cursor.moveToNext());
+            }
+        }
+
+
         //go from main
         Intent intentTmp = getIntent();
 
@@ -126,7 +197,6 @@ public class SettingsActivity extends AppCompatActivity {
         boolean startAgain = intentTmp.getBooleanExtra("start_again", false);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        //currentDate = simpleDateFormat.format(new Date());
         currentDate = simpleDateFormat.format(System.currentTimeMillis() -1000);
 
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
@@ -135,21 +205,18 @@ public class SettingsActivity extends AppCompatActivity {
         ed.commit();
 
         if (chooseNew) {
-            //sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {
                     bLayout.removeView(lay1);
                     lay2.setVisibility(View.VISIBLE);
                     scrollView2.setVisibility(View.VISIBLE);
-//                    userName = sPref.getString(USER_NAME, "Пользователь");
-//                    hello3.setText(userName + ", введите Ваши данные: ");
+
                 }
             }, 0);
         }
 
         if (startAgain) {
-            //sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {
@@ -223,10 +290,6 @@ public class SettingsActivity extends AppCompatActivity {
                 ed.putString(USER_NAME,usernameLocal);
                 ed.commit();
 
-                //sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
-//                userName = sPref.getString(USER_NAME, "Пользователь");
-//                hello3.setText(userName + ", введите Ваши данные: ");
-                //Toast.makeText(getApplicationContext(), "program" + savedText, Toast.LENGTH_SHORT).show();
 
                 anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha);
                 anim2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha2);
@@ -292,29 +355,10 @@ public class SettingsActivity extends AppCompatActivity {
 
                 String textRecomendation = "(Мы рекомендуем Вам" + "\n" + programms[programRecommended] + ")";
                 recommend.setText(textRecomendation);
-//                if (programRecommended == 0) {
-//
-//                } else if (programRecommended == 1) {
-//
-//                } else if (programRecommended == 2) {
-//
-//                } else {
-//
-//                }
 
-                //hello4.setText(textRecomendation);
 
                 sPref = getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
-//                SharedPreferences.Editor ed = sPref.edit();
-//                ed.putInt(USER_WEIGHT,weight.getValue());
-//                ed.putInt(USER_GROWTH,growth.getValue());
-//
-//                ed.commit();
 
-//                sPref = getPreferences(MODE_PRIVATE);
-//                int savedText = sPref.getInt(SAVED_PROGRAM, 0);
-//
-//                Toast.makeText(getApplicationContext(), "Text saved" + savedText, Toast.LENGTH_SHORT).show();
                 anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha);
                 anim2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha2);
                 lay2.startAnimation(anim);
@@ -333,64 +377,6 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-
-        superFit.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
-                v.setBackgroundResource(R.drawable.dcustom_shape1);
-                makeAnimationButton();
-                setSAVED_PROGRAM(1);
-
-//                final Calendar cldr = Calendar.getInstance();
-//                int day = cldr.get(Calendar.DAY_OF_MONTH);
-//                int month = cldr.get(Calendar.MONTH);
-//                int year = cldr.get(Calendar.YEAR);
-//
-//                picker = new DatePickerDialog(SettingsActivity.this,
-//                        new DatePickerDialog.OnDateSetListener() {
-//                            @Override
-//                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-//                               Toast.makeText(getApplicationContext(),
-//                                       dayOfMonth + "/" + (monthOfYear + 1) + "/" + year,
-//                                       Toast.LENGTH_LONG).show();
-//                            }
-//                        }, year, month, day);
-//
-//                picker.setTitle("choose date start");
-//                picker.show();
-            }
-        });
-
-
-        fit.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
-                v.setBackgroundResource(R.drawable.dcustom_shape2);
-                makeAnimationButton();
-                setSAVED_PROGRAM(2);
-
-            }
-        });
-
-        balance.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
-                v.setBackgroundResource(R.drawable.dcustom_shape3);
-                makeAnimationButton();
-                setSAVED_PROGRAM(3);
-
-            }
-        });
-
-        strong.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
-                v.setBackgroundResource(R.drawable.dcustom_shape4);
-                makeAnimationButton();
-                setSAVED_PROGRAM(4); //change to 4
-
-            }
-        });
 
         finish.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
@@ -426,11 +412,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
                 if (millis > System.currentTimeMillis()) {
                     startAlert(millis,false);
-
-//                    Date dateNotification = new Date(millis);
-//                    DateFormat df = new SimpleDateFormat("dd.MM.yy HH:mm:ss");
-//                    String firstDate = df.format(dateNotification);
-//                    Log.d("myLogs2", "date of notification is: " + firstDate);
+                    
                 }
                 final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("from_settings", true);
@@ -501,6 +483,23 @@ public class SettingsActivity extends AppCompatActivity {
             System.exit(0);
         }
 
+    }
+
+    public static Drawable decodeDrawable(Context context, String base64) {
+        Drawable ret = null;//from w ww.  ja  va  2  s  .  c  o  m
+        if (!base64.equals("")) {
+            ByteArrayInputStream bais = new ByteArrayInputStream(
+                    Base64.decode(base64.getBytes(), Base64.DEFAULT));
+            ret = Drawable.createFromResourceStream(context.getResources(),
+                    null, bais, null, null);
+            try {
+                bais.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return ret;
     }
 
 

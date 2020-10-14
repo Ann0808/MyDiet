@@ -14,7 +14,7 @@ import java.io.OutputStream;
 
 class DatabaseHelper extends SQLiteOpenHelper {
     private static String DB_PATH; // полный путь к базе данных
-    private static String DB_NAME = "myDiet.db";
+    private static String DB_NAME = "Food.db";
     private static final int SCHEMA = 1; // версия базы данных
     static final String TABLE = "recipes"; // название таблицы в бд
     static final String TABLE_PRODUCTS = "products"; // название таблицы в бд
@@ -35,6 +35,14 @@ class DatabaseHelper extends SQLiteOpenHelper {
     static final String COUNT = "count";
     static final String PROGRAM_NUMBER_PR = "program";
     static final String CATEGORY = "category";
+
+    // названия столбцов TABLE_Programs
+    static final String PrNAME = "name";
+    static final String PrIMAGE = "image";
+    static final String PrCOLOR = "color";
+    static final String PrlightColor = "lightColor";
+    static final String PrdayColor = "dayColor";
+    static final String Prid = "id";
 
 
     private Context myContext;
