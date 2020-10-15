@@ -43,6 +43,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
     static final String PrlightColor = "lightColor";
     static final String PrdayColor = "dayColor";
     static final String PrCountDays = "countDays";
+    static final String PrCountMeal = "countMeal";
     static final String Prid = "id";
 
 

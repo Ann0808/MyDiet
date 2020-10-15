@@ -2,6 +2,11 @@ package com.pisk.mydiet;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -67,39 +72,17 @@ public class AboutActivity extends AppCompatActivity
 
         titleView = findViewById(R.id.title1);
 
-        if (savedProg == 1) {
+        DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
+        ProgramInfo prInfo = CommonFunctions.getProgramInfoFromDatabase(dbHelper,savedProg);
+        hView.setBackgroundColor(Color.parseColor(prInfo.lColor));
+        titleView.setBackgroundResource(R.drawable.custom_shape);
+        GradientDrawable drawable = (GradientDrawable) titleView.getBackground();
+        drawable.setColor(Color.parseColor(prInfo.lColor));
+        Drawable limg = CommonFunctions.decodeDrawable(getApplicationContext(),prInfo.lImage);
+        Bitmap bitmap = ((BitmapDrawable) limg).getBitmap();
+        Drawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 170, 300, true));
+        titleView.setCompoundDrawablesWithIntrinsicBounds(null, null, d, null);
 
-            hView.setBackgroundResource(R.color.colorSuperFit);
-
-            titleView.setBackgroundResource(R.drawable.custom_shape1);
-            titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.superfit, 0);
-            hView.setBackgroundResource(R.color.colorSuperFit);
-
-        } else if (savedProg == 2) {
-
-            hView.setBackgroundResource(R.color.colorFit);
-
-            titleView.setBackgroundResource(R.drawable.custom_shape2);
-            titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.fit, 0);
-            hView.setBackgroundResource(R.color.colorFit);
-
-        } else if (savedProg == 3) {
-
-            hView.setBackgroundResource(R.color.colorBalance);
-
-            titleView.setBackgroundResource(R.drawable.custom_shape3);
-            titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.balance, 0);
-            hView.setBackgroundResource(R.color.colorBalance);
-
-        } else {
-
-            hView.setBackgroundResource(R.color.colorStrong);
-
-            titleView.setBackgroundResource(R.drawable.custom_shape4);
-            titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.strong, 0);
-            hView.setBackgroundResource(R.color.colorStrong);
-
-        }
 
         titleView.setText( getResources().getString(R.string.app_name) );
     }

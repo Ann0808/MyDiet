@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity
     int countDays = 0;
     boolean hintDays = false;
     String lLightColor = "";
+    String lColor = "";
 
     boolean fromSettings = false;
 
@@ -172,38 +173,26 @@ public class MainActivity extends AppCompatActivity
             }
 
             dbHelper = new DatabaseHelper(getApplicationContext());
-            dbHelper.create_db();
-            db = dbHelper.open();
-            String table = "programs as R ";
-            String columns[] = { "R.id as id", "R.name as name", "R.image as image", "R.color as color",
-                    "R.dayColor as dayColor", "R.lightColor as lightColor", "R.countDays as countDays"};
+            ProgramInfo prInfo = CommonFunctions.getProgramInfoFromDatabase(dbHelper,savedProg);
 
-            String WHERE = dbHelper.Prid + "='" + savedProg + "'";
-            cursor = db.query(table, columns, WHERE, null, null, null, null);
+            String lName = prInfo.lName;
+            String lImage = prInfo.lImage;
+            lColor = prInfo.lColor;
+            final String lColorDay = prInfo.lColorDay;
+            lLightColor = prInfo.lLightColor;
+            countDays = prInfo.countDays;
 
-            if (cursor != null) {
-                if (cursor.moveToFirst())  {
-                    String lName = cursor.getString(cursor.getColumnIndex(dbHelper.PrNAME));
-                    String lImage = cursor.getString(cursor.getColumnIndex(dbHelper.PrIMAGE));
-                    String lColor = cursor.getString(cursor.getColumnIndex(dbHelper.PrCOLOR));
-                    String lColorDay = cursor.getString(cursor.getColumnIndex(dbHelper.PrdayColor));
-                    lLightColor = cursor.getString(cursor.getColumnIndex(dbHelper.PrlightColor));;
-
-                    countDays = cursor.getInt(cursor.getColumnIndex(dbHelper.PrCountDays));
-
-                    pBar.getProgressDrawable().setColorFilter(Color.parseColor(lColorDay), android.graphics.PorterDuff.Mode.SRC_IN);
-                    titleView.setText(lName);
-                    titleView.setBackgroundResource(R.drawable.custom_shape);
-                    GradientDrawable drawable = (GradientDrawable) titleView.getBackground();
-                    drawable.setColor(Color.parseColor(lColor));
-                    titleView.setTypeface(titleView.getTypeface(), Typeface.BOLD);
-                    Drawable limg = CommonFunctions.decodeDrawable(getApplicationContext(),lImage);
-                    Bitmap bitmap = ((BitmapDrawable) limg).getBitmap();
-                    Drawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 170, 300, true));
-                    titleView.setCompoundDrawablesWithIntrinsicBounds(null, null, d, null);
-                    hView.getBackground().setColorFilter(Color.parseColor(lColor),android.graphics.PorterDuff.Mode.SRC_IN);
-                }
-            }
+            pBar.getProgressDrawable().setColorFilter(Color.parseColor(lColorDay), android.graphics.PorterDuff.Mode.SRC_IN);
+            titleView.setText(lName);
+            titleView.setBackgroundResource(R.drawable.custom_shape);
+            GradientDrawable drawable = (GradientDrawable) titleView.getBackground();
+            drawable.setColor(Color.parseColor(lColor));
+            titleView.setTypeface(titleView.getTypeface(), Typeface.BOLD);
+            Drawable limg = CommonFunctions.decodeDrawable(getApplicationContext(),lImage);
+            Bitmap bitmap = ((BitmapDrawable) limg).getBitmap();
+            Drawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 170, 300, true));
+            titleView.setCompoundDrawablesWithIntrinsicBounds(null, null, d, null);
+            hView.getBackground().setColorFilter(Color.parseColor(lColor),android.graphics.PorterDuff.Mode.SRC_IN);
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             Date date = null;
@@ -259,7 +248,7 @@ public class MainActivity extends AppCompatActivity
 
                     if (lLightColor != "") {
                         GradientDrawable drawable = (GradientDrawable) mytextview.getBackground();
-                        drawable.setColor(Color.parseColor(lLightColor));
+                        drawable.setColor(Color.parseColor(lColorDay));
                     }
 
                     return view;
@@ -282,20 +271,12 @@ public class MainActivity extends AppCompatActivity
                 finished.setVisibility(View.VISIBLE);
                 LinearLayout buttonsLayout = findViewById(R.id.buttonsLayout);
                 buttonsLayout.setVisibility(View.VISIBLE);
-
-                if (savedProg == 1) {
-                    b1.setBackgroundResource(R.drawable.custom_shape1);
-                    b2.setBackgroundResource(R.drawable.custom_shape1);
-                } else if (savedProg == 2) {
-                    b1.setBackgroundResource(R.drawable.custom_shape2);
-                    b2.setBackgroundResource(R.drawable.custom_shape2);
-                } else if (savedProg == 3) {
-                    b1.setBackgroundResource(R.drawable.custom_shape3);
-                    b2.setBackgroundResource(R.drawable.custom_shape3);
-                } else {
-                    b1.setBackgroundResource(R.drawable.custom_shape4);
-                    b2.setBackgroundResource(R.drawable.custom_shape4);
-                }
+                b1.setBackgroundResource(R.drawable.custom_shape);
+                b2.setBackgroundResource(R.drawable.custom_shape);
+                GradientDrawable draw = (GradientDrawable) b1.getBackground();
+                draw.setColor(Color.parseColor(lColor));
+                draw = (GradientDrawable) b2.getBackground();
+                draw.setColor(Color.parseColor(lColor));
 
             }
             final Intent intent4 = new Intent(getApplicationContext(), SettingsActivity.class);
@@ -303,14 +284,6 @@ public class MainActivity extends AppCompatActivity
             b1.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v)
                 {
-
-//                    manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-//                    int interval = 10000; // 10 seconds
-
-                    //manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() , interval, pendingIntent);
-                    //Toast.makeText(getApplicationContext(), "Alarm Set", Toast.LENGTH_SHORT).show();
-
-                    //intent4.putExtra("arg_program_number", savedProg);
 
                     intent4.putExtra("start_again", true);
                     startActivity(intent4);
@@ -338,16 +311,9 @@ public class MainActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
                                     long id) {
 
-//                int newPos = position;
-//                if (newPos !=0 ) {
-//                    newPos++;
-//                }
-//                b.putInt("arg_day_number", newPos);
-//                intent.putExtra("bund", b);
                 intent3.putExtra("arg_day_number", (position + 1));
                 intent3.putExtra("arg_program_number", savedProg);
                 intent3.putExtra("arg_date", listView.getItemAtPosition(position).toString());
-                //Log.d("myLogs2", "clicked date " + listView.getItemAtPosition(position).toString());
                 startActivity(intent3);
             }
         });
@@ -355,17 +321,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-//    public View getViewByPosition(int pos, ListView listView) {
-//        final int firstListItemPosition = listView.getFirstVisiblePosition();
-//        final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
-//
-//        if (pos < firstListItemPosition || pos > lastListItemPosition ) {
-//            return listView.getAdapter().getView(pos, null, listView);
-//        } else {
-//            final int childIndex = pos - firstListItemPosition;
-//            return listView.getChildAt(childIndex);
-//        }
-//    }
 
     @Override
     public void onBackPressed() {
