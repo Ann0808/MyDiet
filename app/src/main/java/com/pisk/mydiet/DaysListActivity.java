@@ -2,7 +2,13 @@ package com.pisk.mydiet;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -28,12 +34,11 @@ public class DaysListActivity extends AppCompatActivity
 
     private ListView listView;
     private TextView titleView;
-    //Bundle b;
+    String lLightColor = "";
+    String lColor = "";
+    int countDays = 0;
     int programNumber;
 
-    SharedPreferences sPref;
-    final String SAVED_PROGRAM = "saved_program";
-    int savedProg;
     View hView;
     ImageView menuImage;
 
@@ -41,6 +46,9 @@ public class DaysListActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_days_list);
+
+        Intent intentTmp = getIntent();
+        programNumber = intentTmp.getIntExtra("arg_program_number",0);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -66,55 +74,32 @@ public class DaysListActivity extends AppCompatActivity
         hView =  navigationView.getHeaderView(0);
         menuImage = hView.findViewById(R.id.imageViewHead);
 
-//        sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
-//        savedProg = sPref.getInt(SAVED_PROGRAM, 0);
-//
-//        if (savedProg == 1) {
-//            hView.setBackgroundResource(R.color.colorSuperFit);
-//        } else if (savedProg == 2) {
-//            hView.setBackgroundResource(R.color.colorFit);
-//        } else if (savedProg == 3) {
-//            hView.setBackgroundResource(R.color.colorBalance);
-//        } else {
-//            hView.setBackgroundResource(R.color.colorStrong);
-//        }
+        DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
+        ProgramInfo prInfo = CommonFunctions.getProgramInfoFromDatabase(dbHelper,programNumber);
 
-        Intent intentTmp = getIntent();
-        //b = intentTmp.getBundleExtra("bund");
-        programNumber = intentTmp.getIntExtra("arg_program_number",0);
+        String lName = prInfo.lName;
+        String lImage = prInfo.lImage;
+        lColor = prInfo.lColor;
+        final String lColorDay = prInfo.lColorDay;
+        lLightColor = prInfo.lLightColor;
+        countDays = prInfo.countDays;
 
         listView = (ListView) findViewById(R.id.daylist2);
 
         titleView = (TextView) findViewById(R.id.title);
 
-        ColorDrawable sage = null;
+        titleView.setText(lName);
+        titleView.setBackgroundResource(R.drawable.custom_shape);
+        GradientDrawable drawable = (GradientDrawable) titleView.getBackground();
+        drawable.setColor(Color.parseColor(lColor));
+        titleView.setTypeface(titleView.getTypeface(), Typeface.BOLD);
+        Drawable limg = CommonFunctions.decodeDrawable(getApplicationContext(),lImage);
+        Bitmap bitmap = ((BitmapDrawable) limg).getBitmap();
+        Drawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 170, 300, true));
+        titleView.setCompoundDrawablesWithIntrinsicBounds(null, null, d, null);
+        hView.getBackground().setColorFilter(Color.parseColor(lColor),android.graphics.PorterDuff.Mode.SRC_IN);
 
-        if (programNumber == 1) {
-            //sage = new ColorDrawable(this.getResources().getColor(R.color.colorSuperFit));
-            titleView.setBackgroundResource(R.drawable.custom_shape1);
-            titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.superfit, 0);
-            hView.setBackgroundResource(R.color.colorSuperFit);
-
-        } else if (programNumber == 2) {
-            //sage = new ColorDrawable(this.getResources().getColor(R.color.colorFit));
-            titleView.setBackgroundResource(R.drawable.custom_shape2);
-            titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.fit, 0);
-            hView.setBackgroundResource(R.color.colorFit);
-        } else if (programNumber == 3) {
-            //sage = new ColorDrawable(this.getResources().getColor(R.color.colorBalance));
-            titleView.setBackgroundResource(R.drawable.custom_shape3);
-            titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.balance, 0);
-            hView.setBackgroundResource(R.color.colorBalance);
-        } else {
-            //sage = new ColorDrawable(this.getResources().getColor(R.color.colorStrong));
-            titleView.setBackgroundResource(R.drawable.custom_shape4);
-            titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.strong, 0);
-            hView.setBackgroundResource(R.color.colorStrong);
-        }
-
-        titleView.setText(getResources().getStringArray(R.array.programms)[programNumber - 1]);
-
-        final String[] days = new String[28];
+        final String[] days = new String[countDays];
 
         for (int i = 0; i < days.length; i++) {
             days[i] = "День " + (i+1);
@@ -128,40 +113,18 @@ public class DaysListActivity extends AppCompatActivity
                 View view = super.getView(position, convertView, parent);
 
                 TextView mytextview=(TextView)view;
-
-                if (programNumber == 1) {
-
-                    mytextview.setBackgroundResource(R.drawable.dcustom_shape1);
-
-                } else if (programNumber == 2) {
-
-                    mytextview.setBackgroundResource(R.drawable.dcustom_shape2);
-
-                } else if (programNumber == 3) {
-
-                    mytextview.setBackgroundResource(R.drawable.dcustom_shape3);
-
-                } else {
-
-                    mytextview.setBackgroundResource(R.drawable.dcustom_shape4);
-
+                mytextview.setBackgroundResource(R.drawable.custom_shape);
+                if (lLightColor != "") {
+                    GradientDrawable drawable = (GradientDrawable) mytextview.getBackground();
+                    drawable.setColor(Color.parseColor(lColorDay));
                 }
 
                 return view;
             }
         };
 
-//        listView.setDivider(sage);
         listView.setDivider(null);
-//        listView.setHeaderDividersEnabled(true);
         listView.setAdapter(adapter);
-
-//        for (int i = 0; i < days.length; i++) {
-//            TextView view = (TextView) adapter.getView(i,null,null);
-//            Log.d("design", "text is: " + view.getText());
-//            view.setText("hh");
-//        }
-
 
 
         final Intent intent = new Intent(this, PagerActivity.class);
@@ -171,12 +134,6 @@ public class DaysListActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
                                     long id) {
 
-//                int newPos = position;
-//                if (newPos !=0 ) {
-//                    newPos++;
-//                }
-//                b.putInt("arg_day_number", newPos);
-//                intent.putExtra("bund", b);
                 intent.putExtra("arg_day_number", (position + 1));
                 intent.putExtra("arg_program_number", programNumber);
                 startActivity(intent);

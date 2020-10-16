@@ -73,8 +73,6 @@ public class MainActivity extends AppCompatActivity
     boolean fromSettings = false;
 
     DatabaseHelper dbHelper;
-    SQLiteDatabase db;
-    Cursor cursor;
 
 
     @Override

@@ -181,11 +181,7 @@ public class ProgramsActivity extends AppCompatActivity
                     buttonProgram.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            //v.setBackgroundResource(R.drawable.custom_shape);
-
                             v.startAnimation(buttonClick);
-                            //GradientDrawable drawable = (GradientDrawable) v.getBackground();
-                            //drawable.setColor(Color.parseColor(lLightColor));
                             intent.putExtra("arg_program_number", lProgramNumber);
                             startActivity(intent);
                         }});
