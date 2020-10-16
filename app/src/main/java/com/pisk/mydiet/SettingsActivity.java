@@ -113,6 +113,7 @@ public class SettingsActivity extends AppCompatActivity {
         picker.setMinDate(System.currentTimeMillis() -1000);
         picker.setDate(System.currentTimeMillis() -1000);
 
+        // заменить это потом на получение по апи ++
         dbHelper = new DatabaseHelper(getApplicationContext());
         dbHelper.create_db();
         db = dbHelper.open();
@@ -172,7 +173,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }while (cursor.moveToNext());
             }
         }
-
+    // заменить это потом на получение по апи --
 
         //go from main
         Intent intentTmp = getIntent();

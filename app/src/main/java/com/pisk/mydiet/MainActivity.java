@@ -122,7 +122,6 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
     @SuppressLint("ResourceType")
     @Override
     protected void onResume() {
@@ -258,11 +257,8 @@ public class MainActivity extends AppCompatActivity
 
 
             listView.setDivider(null);
-
             listView.setAdapter(adapter);
-
             listView.setSelection(daysGone); //scroll to current day
-
 
             LinearLayout linearLayout = findViewById(R.id.linearLayout);
             if (progress == 100) {

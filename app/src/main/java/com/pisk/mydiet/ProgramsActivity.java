@@ -5,15 +5,28 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import com.google.android.material.navigation.NavigationView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Handler;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -23,6 +36,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ProgramsActivity extends AppCompatActivity
@@ -42,6 +57,10 @@ public class ProgramsActivity extends AppCompatActivity
 
     final String HINT_PROGRAMS = "hint_programs";
     boolean hintPrograms = false;
+
+    DatabaseHelper dbHelper;
+    SQLiteDatabase db;
+    Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,96 +126,81 @@ public class ProgramsActivity extends AppCompatActivity
 
         }
 
-        programNumber = sPref.getInt(SAVED_PROGRAM, 0);
 
-        if (programNumber == 1) {
+        dbHelper = new DatabaseHelper(getApplicationContext());
+        dbHelper.create_db();
+        db = dbHelper.open();
+        String table = "programs as R ";
+        String columns[] = { "R.id as id, R.name as name", "R.image as image", "R.color as color", "R.lightColor as lightColor"};
+        cursor = db.query(table, columns, null, null, null, null, null);
 
-            hView.setBackgroundResource(R.color.colorSuperFit);
-
-        } else if (programNumber == 2) {
-
-            hView.setBackgroundResource(R.color.colorFit);
-
-        } else if (programNumber == 3) {
-
-            hView.setBackgroundResource(R.color.colorBalance);
-
-        } else {
-
-            hView.setBackgroundResource(R.color.colorStrong);
-
-        }
-
-
- //      TextView textView = (TextView) findViewById(R.id.textview);
-//        textView.measure(0, 0);
-//       Log.d(TAG, "width is: " + textView.getMeasuredWidth());
-//        textView.getLayoutParams().height = (int) (textView.getMeasuredWidth()*0.3);
-
-        listView = (ListView) findViewById(R.id.listView);
-
-        Resources res = getResources();
-        final String[] programms = res.getStringArray(R.array.programms);
-
-        final ListViewItem[] items = new ListViewItem[countProgramms];
-
-        for (int i = 0; i < items.length; i++) {
-            if (i == 0) {
-                items[i] = new ListViewItem(programms[i], CustomAdapter.TYPE_SuperFit);
-            } else if (i == 1) {
-                items[i] = new ListViewItem(programms[i], CustomAdapter.TYPE_Fit);
-            } else if (i == 2) {
-                items[i] = new ListViewItem(programms[i], CustomAdapter.TYPE_Balance);
-            } else {
-                items[i] = new ListViewItem(programms[i], CustomAdapter.TYPE_Strong);
-            }
-        }
-
-        CustomAdapter customAdapter = new CustomAdapter(this, R.id.textview, items);
-
-//        Display display = getWindowManager().getDefaultDisplay();
-//        DisplayMetrics outMetrics = new DisplayMetrics ();
- //       display.getMetrics(outMetrics);
-
-//        float density  = getResources().getDisplayMetrics().density;
-        //float dpHeight = outMetrics.heightPixels / density;
-//        float dpWidth  = outMetrics.widthPixels / density;
-
-
-//        View convertView = customAdapter.getView(3,null, this.listView);
-//        TextView textView = convertView.findViewById(R.id.textview);
-//        textView.measure(0, 0);
-//        Log.d(TAG, "height is: " + textView.getMeasuredHeight());
-//        Log.d(TAG, "width is: " + dpWidth);
-//        textView.getLayoutParams().height = (int) (dpWidth*2);
-
-
-        listView.setDivider(getResources().getDrawable(android.R.color.transparent));
-        listView.setAdapter(customAdapter);
-
+        LinearLayout layPrograms = findViewById(R.id.layPrograms);
 
         final Intent intent = new Intent(this, DaysListActivity.class);
+        final AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                int nameColIndex = cursor.getColumnIndex(dbHelper.PrNAME);
+                int imageColIndex = cursor.getColumnIndex(dbHelper.PrIMAGE);
+                int colorColIndex = cursor.getColumnIndex(dbHelper.PrCOLOR);
+                int idColIndex = cursor.getColumnIndex(dbHelper.Prid);
+                int idLightColor = cursor.getColumnIndex(dbHelper.PrlightColor);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
-                                    long id) {
+                do {
+                    String lName = cursor.getString(nameColIndex);
+                    String lImage = cursor.getString(imageColIndex);
+                    String lColor = cursor.getString(colorColIndex);
+                    final int lProgramNumber = cursor.getInt(idColIndex);
+                    final String  lLightColor = cursor.getString(idLightColor);
 
-                Log.d(TAG, "position is: " + position);
+                    Button buttonProgram = new Button(this);
+                    int buttonProgramHeight = (int) TypedValue.applyDimension(
+                            TypedValue.COMPLEX_UNIT_DIP,
+                            getResources().getDimension(R.dimen.button_height),
+                            getResources().getDisplayMetrics()
+                    );
+                    buttonProgram.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, buttonProgramHeight));
+                    buttonProgram.setText(lName);
+                    buttonProgram.setBackgroundResource(R.drawable.custom_shape);
+                    GradientDrawable drawable = (GradientDrawable) buttonProgram.getBackground();
+                    drawable.setColor(Color.parseColor(lColor));
+                    buttonProgram.setTypeface(buttonProgram.getTypeface(), Typeface.BOLD);
 
-//                int newPos = position;
-//                Bundle b = new Bundle();
-//                if (newPos !=0 ) {
-//                    newPos++;
-//                }
-                //b.putInt("arg_program_number", newPos);
-                //intent.putExtra("bund", b);
-                intent.putExtra("arg_program_number", (position + 1));
-                startActivity(intent);
+                    Drawable limg = CommonFunctions.decodeDrawable(getApplicationContext(),lImage);
+                    limg.setBounds(0, 0, 150, 240);
+                    buttonProgram.setCompoundDrawables(null, null, limg, null);
+
+
+                    buttonProgram.setShadowLayer(5,1,1, R.color.colorPrimaryDark);
+                    buttonProgram.setTextColor(getResources().getColor(R.color.colorWhite));
+                    buttonProgram.setTextSize(TypedValue.COMPLEX_UNIT_SP,22);
+
+                    layPrograms.addView(buttonProgram);
+
+
+                    buttonProgram.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //v.setBackgroundResource(R.drawable.custom_shape);
+
+                            v.startAnimation(buttonClick);
+                            //GradientDrawable drawable = (GradientDrawable) v.getBackground();
+                            //drawable.setColor(Color.parseColor(lLightColor));
+                            intent.putExtra("arg_program_number", lProgramNumber);
+                            startActivity(intent);
+                        }});
+
+                }while (cursor.moveToNext());
             }
-        });
+        }
+
+        programNumber = sPref.getInt(SAVED_PROGRAM, 0);
+        ProgramInfo prInfo = CommonFunctions.getProgramInfoFromDatabase(dbHelper,programNumber);
+        String lColor = prInfo.lColor;
+        hView.getBackground().setColorFilter(Color.parseColor(lColor),android.graphics.PorterDuff.Mode.SRC_IN);
 
     }
+
 
     @Override
     public void onBackPressed() {

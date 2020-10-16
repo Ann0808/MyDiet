@@ -3,18 +3,12 @@ package com.pisk.mydiet;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.util.Base64;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class CommonFunctions {
 
@@ -46,16 +40,6 @@ public class CommonFunctions {
         String WHERE = dbHelper.Prid + "='" + savedProg + "'";
         Cursor cursor = db.query(table, columns, WHERE, null, null, null, null);
 
-//        String lName = "";
-//        String lImage = "";
-//        String lColor = "";
-//        String lColorDay = "";
-//        String lLightColor = "";
-
-        int countDays = 0;
-        int countMeal = 0;
-
-//        ProgramInfo prInro = new ProgramInfo(lName, lImage, lColor, lColorDay, lLightColor, countDays, countMeal);
         ProgramInfo prInro = new ProgramInfo();
 
         if (cursor != null) {
