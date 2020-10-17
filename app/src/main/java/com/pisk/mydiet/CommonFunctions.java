@@ -8,6 +8,8 @@ import android.util.Base64;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class CommonFunctions {
@@ -58,5 +60,34 @@ public class CommonFunctions {
 
         return prInro;
 
+    }
+
+    public static Map<Integer,CharSequence> getTitlesMap(int numberPages) {
+        Map<Integer, CharSequence> hashMap = new HashMap<>();
+        if (numberPages == 6) {
+            hashMap.put(0, "Завтрак ⟶");
+            hashMap.put(1, "Ланч ⟶");
+            hashMap.put(2, "Обед ⟶");
+            hashMap.put(3, "Полдник ⟶");
+            hashMap.put(4, "Ужин ⟶");
+            hashMap.put(5, "⟵ Перекус");
+        } else if(numberPages == 5){
+            hashMap.put(0, "Завтрак ⟶");
+            hashMap.put(1, "Перекус ⟶");
+            hashMap.put(2, "Обед ⟶");
+            hashMap.put(3, "Полдник ⟶");
+            hashMap.put(4, "⟵ Ужин");
+        } else if(numberPages == 4) {
+            hashMap.put(0, "Завтрак ⟶");
+            hashMap.put(1, "Обед ⟶");
+            hashMap.put(2, "Полдник ⟶");
+            hashMap.put(3, "⟵ Ужин");
+        } else {
+            hashMap.put(0, "Завтрак ⟶");
+            hashMap.put(1, "Обед ⟶");
+            hashMap.put(2, "⟵ Ужин");
+        }
+
+        return hashMap;
     }
 }

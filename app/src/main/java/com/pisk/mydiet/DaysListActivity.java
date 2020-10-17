@@ -38,6 +38,7 @@ public class DaysListActivity extends AppCompatActivity
     String lColor = "";
     int countDays = 0;
     int programNumber;
+    int pageCount = 5;
 
     View hView;
     ImageView menuImage;
@@ -83,6 +84,7 @@ public class DaysListActivity extends AppCompatActivity
         final String lColorDay = prInfo.lColorDay;
         lLightColor = prInfo.lLightColor;
         countDays = prInfo.countDays;
+        pageCount = prInfo.countMeal;
 
         listView = (ListView) findViewById(R.id.daylist2);
 
@@ -136,6 +138,9 @@ public class DaysListActivity extends AppCompatActivity
 
                 intent.putExtra("arg_day_number", (position + 1));
                 intent.putExtra("arg_program_number", programNumber);
+                intent.putExtra("arg_page_count", pageCount);
+                intent.putExtra("arg_color", lColor);
+                intent.putExtra("arg_light_color", lLightColor);
                 startActivity(intent);
             }
         });

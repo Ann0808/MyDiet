@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity
     boolean hintDays = false;
     String lLightColor = "";
     String lColor = "";
+    int pageCount = 5;
 
     boolean fromSettings = false;
 
@@ -115,7 +116,6 @@ public class MainActivity extends AppCompatActivity
 
         Intent intentTmp = getIntent();
         fromSettings = intentTmp.getBooleanExtra("from_settings",false);
-
 
     }
 
@@ -178,6 +178,7 @@ public class MainActivity extends AppCompatActivity
             final String lColorDay = prInfo.lColorDay;
             lLightColor = prInfo.lLightColor;
             countDays = prInfo.countDays;
+            pageCount = prInfo.countMeal;
 
             pBar.getProgressDrawable().setColorFilter(Color.parseColor(lColorDay), android.graphics.PorterDuff.Mode.SRC_IN);
             titleView.setText(lName);
@@ -307,6 +308,9 @@ public class MainActivity extends AppCompatActivity
 
                 intent3.putExtra("arg_day_number", (position + 1));
                 intent3.putExtra("arg_program_number", savedProg);
+                intent3.putExtra("arg_page_count", pageCount);
+                intent3.putExtra("arg_color", lColor);
+                intent3.putExtra("arg_light_color", lLightColor);
                 intent3.putExtra("arg_date", listView.getItemAtPosition(position).toString());
                 startActivity(intent3);
             }
