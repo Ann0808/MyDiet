@@ -26,9 +26,6 @@ import android.widget.Toast;
 public class AboutActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    TextView title;
-    final String USER_NAME = "user_name";
-
     final String SAVED_PROGRAM = "saved_program";
     int savedProg;
     SharedPreferences sPref;

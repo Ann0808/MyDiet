@@ -156,7 +156,6 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
         ingridients.setText(products);
         recipe.setText(recipeText);
         kcal.setText(kcal.getText() + kcalText);
-        //GradientDrawable draw = (GradientDrawable) view.getBackground(); //test
         view.setBackgroundColor(Color.parseColor(backColor));
         nameDish.setText(name);
 

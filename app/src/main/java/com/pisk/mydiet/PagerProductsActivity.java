@@ -2,6 +2,7 @@ package com.pisk.mydiet;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -27,6 +28,8 @@ public class PagerProductsActivity extends AppCompatActivity {
     PagerAdapter pagerAdapter;
     SharedPreferences sPref;
     final String SAVED_PROGRAM = "saved_program";
+    String color;
+    String lightColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +42,8 @@ public class PagerProductsActivity extends AppCompatActivity {
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
         programNumber = sPref.getInt(SAVED_PROGRAM, 0);
         week = intentTmp.getIntExtra("arg_week_number",1);
-
+        color = intentTmp.getStringExtra("arg_color");
+        lightColor = intentTmp.getStringExtra("arg_light_color");
 
         pager = (ViewPager) findViewById(R.id.pager);
         pagerTab = (PagerTabStrip) findViewById(R.id.pagerTabStrip);
@@ -49,18 +53,7 @@ public class PagerProductsActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("К списку недель");
 
-        if(programNumber ==1) {
-            pagerTab.setBackgroundResource(R.color.colorSuperFit);
-        } else if(programNumber ==2) {
-            pagerTab.setBackgroundResource(R.color.colorFit);
-        } else if(programNumber ==3) {
-            pagerTab.setBackgroundResource(R.color.colorBalance);
-        } else {
-            pagerTab.setBackgroundResource(R.color.colorStrong);
-        }
-
-        //for time
-        //pagerTab.setBackgroundResource(R.color.colorPrimaryDark);
+        pagerTab.setBackgroundColor(Color.parseColor(color));
 
         pagerTab.setTabIndicatorColor(getResources().getColor(R.color.colorWhite));
         pagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
@@ -70,7 +63,7 @@ public class PagerProductsActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                Log.d(TAG, "onPageSelected, position = " + position);
+
             }
 
             @Override
@@ -96,7 +89,7 @@ public class PagerProductsActivity extends AppCompatActivity {
             if (newPos !=0 ) {
                 newPos++;
             }
-            return PageProductsFragment.newInstance((position +1), programNumber,week);
+            return PageProductsFragment.newInstance((position +1), programNumber,week, lightColor);
         }
 
         @Override

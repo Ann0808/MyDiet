@@ -34,6 +34,7 @@ public class PageProductsFragment extends Fragment implements NavigationView.OnN
     static final String ARGUMENT_PAGE_NUMBER = "arg_page_number";
     static final String ARGUMENT_PROGRAM_NUMBER = "arg_program_number";
     static final String ARGUMENT_WEEK = "arg_date";
+    static final String ARGUMENT_LIGHT_COLOR = "arg_light_color";
 
     int pageNumber;
     int weekNumber;
@@ -42,19 +43,20 @@ public class PageProductsFragment extends Fragment implements NavigationView.OnN
 
     Map<String,String> productCount;
 
-    int backColor;
+    String backColor;
     DatabaseHelper dbHelper;
     SQLiteDatabase db;
     Cursor cursor;
 
     //TextView viewDate;
 
-    static PageProductsFragment newInstance(int page, int programNumber, int week) {
+    static PageProductsFragment newInstance(int page, int programNumber, int week, String backColor) {
         PageProductsFragment pageFragment = new PageProductsFragment();
         Bundle arguments = new Bundle();
         arguments.putInt(ARGUMENT_PAGE_NUMBER, page);
         arguments.putInt(ARGUMENT_PROGRAM_NUMBER, programNumber);
         arguments.putInt(ARGUMENT_WEEK, week);
+        arguments.putString(ARGUMENT_LIGHT_COLOR, backColor);
         pageFragment.setArguments(arguments);
         return pageFragment;
     }
@@ -65,18 +67,7 @@ public class PageProductsFragment extends Fragment implements NavigationView.OnN
         pageNumber = getArguments().getInt(ARGUMENT_PAGE_NUMBER);
         weekNumber = getArguments().getInt(ARGUMENT_WEEK);
         programNumber = getArguments().getInt(ARGUMENT_PROGRAM_NUMBER);
-
-
-        if(programNumber ==1) {
-            backColor = getResources().getColor(R.color.colorSuperFitLight);
-        } else if(programNumber ==2) {
-            backColor = getResources().getColor(R.color.colorFitLight);
-        } else if(programNumber ==3) {
-            backColor = getResources().getColor(R.color.colorBalanceLight);
-        } else {
-            backColor = getResources().getColor(R.color.colorStrongLight);
-        }
-
+        backColor = getArguments().getString(ARGUMENT_LIGHT_COLOR);
 
         productCount = new TreeMap<>();
 
@@ -85,16 +76,6 @@ public class PageProductsFragment extends Fragment implements NavigationView.OnN
         dbHelper.create_db();
         db = dbHelper.open();
 
-//        String[] columns = new String[]{dbHelper.RECIPE,dbHelper.INRIDIENTS,dbHelper.KKAL,
-//                dbHelper.IMAGE,dbHelper.NAME};
-//        String selection = dbHelper.PROGRAM_NUMBER + "= ?";
-//         String[] selectionArgs = new String[] { "1" };
-
-//        Log.d(TAG2, "programNumber is: " + programNumber);
-//        Log.d(TAG2, "pageNumber is: " + pageNumber);
-//        Log.d(TAG2, "dayNumber is: " + dayNumber);
-
-//        String table = "recipes as R inner join images as I on R.image_id = I.id";
 
         String[] columns = new String[]{dbHelper.PRODUCT,dbHelper.COUNT};
         String WHERE = dbHelper.PROGRAM_NUMBER_PR + "='" + programNumber + "' AND " +
@@ -150,9 +131,8 @@ public class PageProductsFragment extends Fragment implements NavigationView.OnN
             tvImage.setImageResource(R.drawable.other);
         }
 
-        Log.d(TAG2, "page : " + pageNumber);
 
-        view.setBackgroundColor(backColor);
+        view.setBackgroundColor(Color.parseColor(backColor));
 
         TableLayout tableLayout = (TableLayout) view.findViewById(R.id.tableLayout);
 
@@ -162,9 +142,6 @@ public class PageProductsFragment extends Fragment implements NavigationView.OnN
         for(Map.Entry<String,String> entry : productCount.entrySet()) {
             String product = entry.getKey();
             String count = entry.getValue();
-
-            Log.d("myLogs2", "prod is " + product);
-            Log.d("myLogs2", "count is " + count);
 
             TableRow tableRow = new TableRow(this.getContext());
             tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
@@ -181,7 +158,6 @@ public class PageProductsFragment extends Fragment implements NavigationView.OnN
             tv.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             tv.setTextSize(24);
             tv.setTypeface(typeface);
-            //tv.setShadowLayer(2.0f, 2, 2, Color.BLACK);
 
             ShapeDrawable border = new ShapeDrawable(new RectShape());
             border.getPaint().setStyle(Paint.Style.STROKE);
@@ -202,18 +178,12 @@ public class PageProductsFragment extends Fragment implements NavigationView.OnN
             tv2.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             tv2.setTextSize(24);
             tv2.setTypeface(typeface);
-            //tv2.setShadowLayer(2.0f, 2, 2, Color.BLACK);
-
 
             tableRow.addView(tv, 0);
             tableRow.addView(tv2, 1);
 
             tableLayout.addView(tableRow, i);
             i++;
-
-//            TableRow tableRow2 = new TableRow(this);
-//            TextView tv2 = new TextView(this);
-//            tv.setText(count);
 
         }
 

@@ -2,6 +2,8 @@ package com.pisk.mydiet;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -30,6 +32,10 @@ public class ProductsActivity extends AppCompatActivity
     final String SAVED_PROGRAM = "saved_program";
     SharedPreferences sPref;
     TextView title;
+    String lLightColor = "";
+    String lColor = "";
+    String lName = "";
+    int countDays = 0;
 
     View hView;
     ImageView menuImage;
@@ -69,11 +75,25 @@ public class ProductsActivity extends AppCompatActivity
         listView = (ListView) findViewById(R.id.listViewWeeks);
         title = findViewById(R.id.title1);
 
-        final String[] weeks = new String[4];
+        DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
+        ProgramInfo prInfo = CommonFunctions.getProgramInfoFromDatabase(dbHelper,programNumber);
+
+        lName = prInfo.lName;
+        String lImage = prInfo.lImage;
+        lColor = prInfo.lColor;
+        final String lColorDay = prInfo.lColorDay;
+        lLightColor = prInfo.lLightColor;
+        countDays = prInfo.countDays;
+
+        int countWeeks = (countDays%7 > 0) ? countDays/7 + 1 : countDays/7;
+
+        final String[] weeks = new String[countWeeks];
 
         for (int i = 0; i < weeks.length; i++) {
             weeks[i] = "Неделя " + (i+1);
         }
+
+        hView.getBackground().setColorFilter(Color.parseColor(lColor),android.graphics.PorterDuff.Mode.SRC_IN);
 
         final ArrayAdapter<String> adapter;
         adapter = new ArrayAdapter<String>(this, R.layout.day, weeks) {
@@ -83,29 +103,13 @@ public class ProductsActivity extends AppCompatActivity
 
                 TextView mytextview=(TextView)view;
 
-                if (programNumber == 1) {
-
-                    mytextview.setBackgroundResource(R.drawable.custom_shape1);
-                    hView.setBackgroundResource(R.color.colorSuperFit);
-
-                } else if (programNumber == 2) {
-
-                    mytextview.setBackgroundResource(R.drawable.custom_shape2);
-                    hView.setBackgroundResource(R.color.colorFit);
-
-                } else if (programNumber == 3) {
-
-                    mytextview.setBackgroundResource(R.drawable.custom_shape3);
-                    hView.setBackgroundResource(R.color.colorBalance);
-
-                } else {
-
-                    mytextview.setBackgroundResource(R.drawable.custom_shape4);
-                    hView.setBackgroundResource(R.color.colorStrong);
-
+                mytextview.setBackgroundResource(R.drawable.custom_shape);
+                if (lColor != "") {
+                    GradientDrawable drawable = (GradientDrawable) mytextview.getBackground();
+                    drawable.setColor(Color.parseColor(lColor));
                 }
 
-                title.setText("Список продуктов для программы " + getResources().getStringArray(R.array.programms)[programNumber - 1]);
+                title.setText("Список продуктов для программы " + lName);
 
                 return view;
             }
@@ -124,6 +128,8 @@ public class ProductsActivity extends AppCompatActivity
                                     long id) {
 
                 intent.putExtra("arg_week_number", (position + 1));
+                intent.putExtra("arg_color", lColor);
+                intent.putExtra("arg_light_color", lLightColor);
                 //intent.putExtra("arg_program_number", programNumber);
                 startActivity(intent);
             }

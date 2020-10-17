@@ -49,8 +49,6 @@ public class MyPageActivity extends AppCompatActivity
     String userName;
     EditText viewName;
     LinearLayout nameLayout, bigLayout, dateLay, radioL, programL, lay2;
-    Spinner spinner;
-    //ImageView edit;
     Button b1;
     RadioGroup radioGroup;
     CalendarView mCalendarView;
@@ -89,9 +87,6 @@ public class MyPageActivity extends AppCompatActivity
         hView =  navigationView.getHeaderView(0);
         menuImage = hView.findViewById(R.id.imageViewHead);
 
-//        navHead = findViewById(R.id.nav_head);
-//        navHead.setBackgroundResource(R.color.colorStrongLight);
-
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
         userName = sPref.getString(USER_NAME, "Пользователь");
         savedProg = sPref.getInt(SAVED_PROGRAM, 0);
@@ -121,10 +116,6 @@ public class MyPageActivity extends AppCompatActivity
         mCalendarView.setDate (millis, true, true);
         date.setText(savedDate);
 
-//        spinner = findViewById(R.id.spinner);
-//
-//
-//        spinner.setSelection(savedProg - 1);
 
         RadioButton b;
         int colorBack;
@@ -161,8 +152,6 @@ public class MyPageActivity extends AppCompatActivity
 
         b.setChecked(true);
 
-        //bigLayout.setBackgroundResource(colorBack);
-        //bigLayout.setBackgroundResource(R.drawable.back4);
         b1.setBackgroundResource(colorButton);
         edit.setBackgroundResource(colorButton);
         mCalendarView.setBackgroundResource(colorButton);
@@ -171,9 +160,6 @@ public class MyPageActivity extends AppCompatActivity
         viewName = findViewById(R.id.userName);
         viewName.setText(userName);
 
-        //editName = findViewById(R.id.editName);
-        //edit = findViewById(R.id.imageView3);
-        //edit = findViewById(R.id.ed);
         nameLayout = findViewById(R.id.nameLayout);
         dateLay = findViewById(R.id.datePickerL);
         dateLay.removeView(mCalendarView);
@@ -213,8 +199,6 @@ public class MyPageActivity extends AppCompatActivity
                     radioGroup.getChildAt(i).setClickable(true);
                 }
 
-//                InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-//                im.showSoftInput(viewName, 0);
                 int color = R.color.colorWhite;
                 if (savedProg == 1) {
                     color = R.color.colorSuperFit;
@@ -228,7 +212,6 @@ public class MyPageActivity extends AppCompatActivity
                 viewName.setBackgroundResource(color);
 
                 try {
-                    // https://github.com/android/platform_frameworks_base/blob/kitkat-release/core/java/android/widget/TextView.java#L562-564
                     Field f = TextView.class.getDeclaredField("mCursorDrawableRes");
                     f.setAccessible(true);
                     f.set(viewName, R.drawable.cursor);
@@ -261,9 +244,6 @@ public class MyPageActivity extends AppCompatActivity
                 int selectedId1 = radioGroup.getCheckedRadioButtonId();
                 int numbProg;
 
-//                for (int i = 0; i< radioGroup.getChildCount();i++) {
-//                    radioGroup.getChildAt(i).setClickable(false);
-//                }
                 int colorBack;
                 int colorButton;
 
@@ -291,24 +271,15 @@ public class MyPageActivity extends AppCompatActivity
                 edit.setBackgroundResource(colorButton);
                 mCalendarView.setBackgroundResource(colorButton);
 
-
-                //LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) v.getLayoutParams();
-                //params.width = 1;
-                //v.setLayoutParams(params);
                 v.setVisibility(View.INVISIBLE);
 
-                //LinearLayout.LayoutParams paramsV = (LinearLayout.LayoutParams) edit.getLayoutParams();
-                //paramsV.width = LinearLayout.LayoutParams.WRAP_CONTENT;
                 edit.setVisibility(View.VISIBLE);
-                //edit.setLayoutParams(paramsV);
 
                 viewName.setClickable(false);
                 viewName.setCursorVisible(false);
                 viewName.setFocusable(false);
                 viewName.setFocusableInTouchMode(false);
                 viewName.setBackgroundResource(0);
-
-               // viewName.requestFocus();
 
                 InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 im.hideSoftInputFromWindow(viewName.getWindowToken(), 0);
@@ -328,12 +299,7 @@ public class MyPageActivity extends AppCompatActivity
                     date = sdf.parse(currentDate + " 11:00:00");
 
                     millis = date.getTime();
-                    //
-//                    Date dateNotification = new Date(millis);
-//                    DateFormat df = new SimpleDateFormat("dd.MM.yy HH:mm:ss");
-//                    String firstDate = df.format(dateNotification);
-//                    Log.d("myLogs2", "date of today's notification is: " + firstDate);
-                    //
+
                     if (millis > System.currentTimeMillis()) {
 
                         startAlert(millis,true);
@@ -345,11 +311,6 @@ public class MyPageActivity extends AppCompatActivity
                 }
                 if (millis > System.currentTimeMillis()) {
                     startAlert(millis,false);
-
-//                    Date dateNotification = new Date(millis);
-//                    DateFormat df = new SimpleDateFormat("dd.MM.yy HH:mm:ss");
-//                    String firstDate = df.format(dateNotification);
-//                    Log.d("myLogs2", "date of notification is: " + firstDate);
                 }
 
                 Toast.makeText(getApplicationContext(),"Данные обновлены",Toast.LENGTH_SHORT).show();
@@ -367,7 +328,6 @@ public class MyPageActivity extends AppCompatActivity
                 String strMonth = month>9 ? String.valueOf(month) : "0" + month;
                 String day = dayOfMonth>9 ? String.valueOf(dayOfMonth) : "0" + dayOfMonth;
                 currentDate = day + "/" + strMonth + "/" + year;
-                //Log.d("myLogs2", "currentDate: " + currentDate);
             }
         });
 
@@ -388,7 +348,6 @@ public class MyPageActivity extends AppCompatActivity
                 this.getApplicationContext(), 234, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
-        //Toast.makeText(this, "Alarm set to after " + (timeInSec * 1000) + " seconds",Toast.LENGTH_LONG).show();
     }
 
 
