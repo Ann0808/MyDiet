@@ -45,16 +45,16 @@ import java.util.Date;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    Button b2, b4, finish;
+    Button buttonNextSex, buttonNextGoalActivity, buttonFinish;
 
-    EditText name;
-    LinearLayout lay1, lay2, lay3, lay4;
+    //EditText name;
+    LinearLayout laySex, layGoalAndActivity, layChooseProgram, layCalendar;
     RelativeLayout bLayout;
-    ScrollView scrollView2, scrollView3, scrollView4;
+    ScrollView scrollGoalAndActivity, scrollChooseProgram, scrollCalendar;
     Animation anim, anim2;
     SharedPreferences sPref;
-    TextView hello4, recommend;
-    private RadioGroup radioGroup1, radioGroup2;
+    TextView textViewChooseProgram, recomendation;
+    private RadioGroup radioGroupGoal, radioGroupActive;
     DatePickerDialog.OnDateSetListener d;
     CalendarView picker;
 
@@ -86,28 +86,28 @@ public class SettingsActivity extends AppCompatActivity {
 
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
 
-        b2 = findViewById(R.id.button2);
-        b4 = findViewById(R.id.button4);
-        finish = findViewById(R.id.buttonFinish);
-        name = findViewById(R.id.userName);
+        buttonNextSex = findViewById(R.id.buttonNextSex);
+        buttonNextGoalActivity = findViewById(R.id.buttonNextGoalActivity);
+        buttonFinish = findViewById(R.id.buttonFinish);
+        //name = findViewById(R.id.userName);
 
 
         bLayout = findViewById(R.id.biglayout);
 
-        lay1 = findViewById(R.id.lay1);
-        lay2 = findViewById(R.id.lay2);
-        lay3 = findViewById(R.id.lay3);
-        lay4 = findViewById(R.id.lay4);
+        laySex = findViewById(R.id.laySex);
+        layGoalAndActivity = findViewById(R.id.layGoalAndActivity);
+        layChooseProgram = findViewById(R.id.layChooseProgram);
+        layCalendar = findViewById(R.id.layCalendar);
 
-        hello4 = findViewById(R.id.hello4);
-        recommend = findViewById(R.id.rec1);
+        textViewChooseProgram = findViewById(R.id.textViewChooseProgram);
+        recomendation = findViewById(R.id.recomendation);
 
-        scrollView2 = findViewById(R.id.scroll2);
-        scrollView3 = findViewById(R.id.scroll3);
-        scrollView4 = findViewById(R.id.scroll4);
+        scrollGoalAndActivity = findViewById(R.id.scrollGoalAndActivity);
+        scrollChooseProgram = findViewById(R.id.scrollChooseProgram);
+        scrollCalendar = findViewById(R.id.scrollCalendar);
 
-        radioGroup1 = findViewById(R.id.radioGroup1);
-        radioGroup2 = findViewById(R.id.radioGroup2);
+        radioGroupGoal = findViewById(R.id.radioGroupGoal);
+        radioGroupActive = findViewById(R.id.radioGroupActive);
 
         picker = findViewById(R.id.datePicker);
         picker.setMinDate(System.currentTimeMillis() -1000);
@@ -158,7 +158,7 @@ public class SettingsActivity extends AppCompatActivity {
                     buttonProgram.setTextColor(getResources().getColor(R.color.colorWhite));
                     buttonProgram.setTextSize(TypedValue.COMPLEX_UNIT_SP,22);
 
-                    lay3.addView(buttonProgram);
+                    layChooseProgram.addView(buttonProgram);
 
                     buttonProgram.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -193,9 +193,9 @@ public class SettingsActivity extends AppCompatActivity {
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {
-                    bLayout.removeView(lay1);
-                    lay2.setVisibility(View.VISIBLE);
-                    scrollView2.setVisibility(View.VISIBLE);
+                    bLayout.removeView(laySex);
+                    layGoalAndActivity.setVisibility(View.VISIBLE);
+                    scrollGoalAndActivity.setVisibility(View.VISIBLE);
 
                 }
             }, 0);
@@ -205,18 +205,18 @@ public class SettingsActivity extends AppCompatActivity {
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {
-                    bLayout.removeView(lay1);
-                    bLayout.removeView(scrollView2);
-                    bLayout.removeView(scrollView3);
-                    scrollView4.setVisibility(View.VISIBLE);
-                    lay4.setVisibility(View.VISIBLE);
+                    bLayout.removeView(laySex);
+                    bLayout.removeView(scrollGoalAndActivity);
+                    bLayout.removeView(scrollChooseProgram);
+                    scrollCalendar.setVisibility(View.VISIBLE);
+                    layCalendar.setVisibility(View.VISIBLE);
 
                 }
             }, 0);
         }
         //go from main
 
-        radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        radioGroupGoal.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -230,7 +230,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        radioGroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        radioGroupActive.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -259,39 +259,39 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
 
-        b2.setOnClickListener(new View.OnClickListener() {
+        buttonNextSex.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
 
                 firstPage = false;
 
                 v.setBackgroundResource(R.drawable.dcustom_shape3);
-                String usernameLocal = name.getText().toString();
-                if (usernameLocal.length() == 0) usernameLocal = "Пользователь";
-                SharedPreferences.Editor ed = sPref.edit();
-                ed.putString(USER_NAME,usernameLocal);
-                ed.commit();
+//                String usernameLocal = name.getText().toString();
+//                if (usernameLocal.length() == 0) usernameLocal = "Пользователь";
+//                SharedPreferences.Editor ed = sPref.edit();
+//                ed.putString(USER_NAME,usernameLocal);
+//                ed.commit();
 
 
                 anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha);
                 anim2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha2);
-                lay1.startAnimation(anim);
+                laySex.startAnimation(anim);
 
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
-                        bLayout.removeView(lay1);
-                        lay2.startAnimation(anim2);
-                        lay2.setVisibility(View.VISIBLE);
-                        scrollView2.setVisibility(View.VISIBLE);
+                        bLayout.removeView(laySex);
+                        layGoalAndActivity.startAnimation(anim2);
+                        layGoalAndActivity.setVisibility(View.VISIBLE);
+                        scrollGoalAndActivity.setVisibility(View.VISIBLE);
                     }
                 }, 1000);
 
             }
         });
 
-        b4.setOnClickListener(new View.OnClickListener() {
+        buttonNextGoalActivity.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
 
@@ -299,15 +299,15 @@ public class SettingsActivity extends AppCompatActivity {
 
                 points = 0;
 
-                int selectedId1 = radioGroup1.getCheckedRadioButtonId();
-                int selectedId2 = radioGroup2.getCheckedRadioButtonId();
+                int selectedId1 = radioGroupGoal.getCheckedRadioButtonId();
+                int selectedId2 = radioGroupActive.getCheckedRadioButtonId();
 
 
                 switch(selectedId1){
-                    case R.id.radio_slim:
+                    case R.id.radio_GoalSlim:
                         points+=1;
                         break;
-                    case R.id.radio_balance:
+                    case R.id.radio_GoalBalance:
                         points+=2;
                         break;
                     default: points+=3;
@@ -315,10 +315,10 @@ public class SettingsActivity extends AppCompatActivity {
                 }
 
                 switch(selectedId2){
-                    case R.id.radio_1:
+                    case R.id.radio_lazyActive:
                         points+=1;
                         break;
-                    case R.id.radio_2:
+                    case R.id.radio_balanseActive:
                         points+=2;
                         break;
                     default: points+=3;
@@ -336,23 +336,23 @@ public class SettingsActivity extends AppCompatActivity {
                 }
 
                 String textRecomendation = "Мы рекомендуем Вам";
-                recommend.setText(textRecomendation);
+                recomendation.setText(textRecomendation);
 
 
                 sPref = getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
 
                 anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha);
                 anim2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha2);
-                lay2.startAnimation(anim);
+                layGoalAndActivity.startAnimation(anim);
 
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
-                        bLayout.removeView(scrollView2);
-                        lay3.startAnimation(anim2);
-                        lay3.setVisibility(View.VISIBLE);
-                        scrollView3.setVisibility(View.VISIBLE);
+                        bLayout.removeView(scrollGoalAndActivity);
+                        layChooseProgram.startAnimation(anim2);
+                        layChooseProgram.setVisibility(View.VISIBLE);
+                        scrollChooseProgram.setVisibility(View.VISIBLE);
                     }
                 }, 1000);
 
@@ -360,7 +360,7 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
 
-        finish.setOnClickListener(new View.OnClickListener() {
+        buttonFinish.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
                 v.setBackgroundResource(R.drawable.dcustom_shape3);
@@ -419,16 +419,16 @@ public class SettingsActivity extends AppCompatActivity {
     public void makeAnimationButton() {
         anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha);
         anim2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha2);
-        lay3.startAnimation(anim);
+        layChooseProgram.startAnimation(anim);
 
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                bLayout.removeView(scrollView3);
-                lay4.startAnimation(anim2);
-                scrollView4.setVisibility(View.VISIBLE);
-                lay4.setVisibility(View.VISIBLE);
+                bLayout.removeView(scrollChooseProgram);
+                layCalendar.startAnimation(anim2);
+                scrollCalendar.setVisibility(View.VISIBLE);
+                layCalendar.setVisibility(View.VISIBLE);
 
             }
         }, 1000);
