@@ -373,12 +373,14 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent2);
 
 
-        } else if (id == R.id.nav_slideshow) {
-
-            Intent intent2 = new Intent(this, ProgramsActivity.class);
-            startActivity(intent2);
-
-        } else if (id == R.id.nav_manage) {
+        }
+//        else if (id == R.id.nav_slideshow) {
+//
+//            Intent intent2 = new Intent(this, ProgramsActivity.class);
+//            startActivity(intent2);
+//
+//        }
+        else if (id == R.id.nav_manage) {
             Intent intent2 = new Intent(this, MyPageActivity.class);
             startActivity(intent2);
 

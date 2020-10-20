@@ -160,7 +160,7 @@ public class MyPageActivity extends AppCompatActivity
         viewName = findViewById(R.id.userName);
         viewName.setText(userName);
 
-        nameLayout = findViewById(R.id.nameLayout);
+        //nameLayout = findViewById(R.id.nameLayout);
         dateLay = findViewById(R.id.datePickerL);
         dateLay.removeView(mCalendarView);
         radioL.removeView(radioGroup);
@@ -399,21 +399,24 @@ public class MyPageActivity extends AppCompatActivity
             Intent intent2 = new Intent(this, ProductsActivity.class);
             startActivity(intent2);
 
-        } else if (id == R.id.nav_slideshow) {
+        }
+//        else if (id == R.id.nav_slideshow) {
+//
+//            Intent intent2 = new Intent(this, ProgramsActivity.class);
+//            startActivity(intent2);
+//
+//        }
+        else if (id == R.id.nav_manage) {
 
-            Intent intent2 = new Intent(this, ProgramsActivity.class);
-            startActivity(intent2);
 
-        } else if (id == R.id.nav_manage) {
-
-
-        } else if (id == R.id.nav_share) {
+        }
+        else if (id == R.id.nav_share) {
 
             Intent sendIntent = MenuClick.share();
             startActivity(Intent.createChooser(sendIntent,"Поделиться"));
 
-
-        } else if (id == R.id.nav_about) {
+        }
+        else if (id == R.id.nav_about) {
 
             Intent intent2 = new Intent(this, AboutActivity.class);
             startActivity(intent2);
