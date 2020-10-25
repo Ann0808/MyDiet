@@ -145,84 +145,165 @@
 
     </LinearLayout>
 
-    <ScrollView
-        android:id="@+id/scrollGoalAndActivity"
+    <RelativeLayout
+        android:id="@+id/scrollBodyParams"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible">
+        android:visibility="invisible"
+        android:paddingBottom="10dp">
 
-        <LinearLayout
-            android:id="@+id/layGoalAndActivity"
+    <LinearLayout
+        android:id="@+id/layBodyParams"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:visibility="invisible"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+        android:id="@+id/textViewheight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:shadowColor="@color/colorPrimaryDark"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="6"
+        android:text="Ваш рост(см):"
+        android:textColor="@color/colorWhite"
+        android:textColorLink="@color/colorWhite"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/growth"
+            android:maxLength="3"
+            android:digits="0123456789."
+            android:textColor="@color/colorPrimary"
+            android:textColorLink="@color/colorPrimary"
+            android:gravity="center"
+            android:textSize="50sp"
+            android:background="@color/colorWhite"
+            android:inputType="numberDecimal"
+            android:layout_marginBottom="10dp"
+            android:hint="165"
+            android:textColorHint="@color/colorDaysLight"/>
+
+        <TextView
+            android:id="@+id/textViewWeight"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:gravity="center"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:visibility="invisible"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:shadowColor="@color/colorPrimaryDark"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="6"
+            android:text="Ваш вес(кг):"
+            android:textColor="@color/colorWhite"
+            android:textColorLink="@color/colorWhite"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/weight"
+            android:maxLength="3"
+            android:digits="0123456789."
+            android:textColor="@color/colorPrimary"
+            android:textColorLink="@color/colorPrimary"
+            android:background="@color/colorWhite"
+            android:gravity="center"
+            android:textSize="50sp"
+            android:hint="70"
+            android:layout_marginBottom="10dp"
+            android:textColorHint="@color/colorDaysLight"
+            android:inputType="numberDecimal"/>
+
+        <TextView
+            android:id="@+id/textViewAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="6"
+            android:text="Ваш возраст:"
+            android:textColor="@color/colorWhite"
+            android:textColorLink="@color/colorWhite"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/Age"
+            android:maxLength="3"
+            android:digits="0123456789."
+            android:textColor="@color/colorPrimary"
+            android:textColorLink="@color/colorPrimary"
+            android:background="@color/colorWhite"
+            android:gravity="center"
+            android:textSize="50sp"
+            android:hint="30"
+            android:textColorHint="@color/colorDaysLight"
+            android:inputType="numberDecimal"/>
 
 
-                <!--<TextView-->
-                    <!--android:id="@+id/textView2"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:fontFamily="@font/kurale_regular"-->
-                    <!--android:gravity="center"-->
-                    <!--android:paddingLeft="10dp"-->
-                    <!--android:shadowColor="@color/colorPrimaryDark"-->
-                    <!--android:shadowDx="2"-->
-                    <!--android:shadowDy="2"-->
-                    <!--android:shadowRadius="6"-->
-                    <!--android:text="Ваш вес:"-->
-                    <!--android:textColor="@color/colorWhite"-->
-                    <!--android:textColorLink="@color/colorWhite"-->
-                    <!--android:textSize="30sp"-->
-                    <!--android:textStyle="bold" />-->
+    </LinearLayout>
+        <Button
+            android:id="@+id/buttonNextBodyParams"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/custom_shape3"
+            android:gravity="center"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:layout_alignParentBottom="true"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="5"
+            android:text="Далее"
+            android:layout_gravity="bottom"
+            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+            android:textColor="@color/colorWhite"
+            android:textColorLink="@color/colorWhite"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            android:fontFamily="@font/kurale_regular"/>
+    </RelativeLayout>
 
-                <!--<NumberPicker-->
-                    <!--android:id="@+id/weight"-->
-                    <!--android:layout_width="100dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="center"-->
+    <RelativeLayout
+        android:id="@+id/scrollGoal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="invisible"
+        android:paddingBottom="10dp">
 
-                    <!--android:gravity="center"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:paddingRight="10dp"-->
-                    <!--android:showDividers="middle"-->
-                    <!--android:theme="@style/DefaultNumberPickerTheme"-->
-                    <!--android:layout_marginBottom="40dp"/>-->
-
-
-            <!--<TextView-->
-                <!--android:id="@+id/textView3"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-
-                <!--android:gravity="center"-->
-                <!--android:paddingLeft="10dp"-->
-                <!--android:shadowColor="@color/colorPrimaryDark"-->
-                <!--android:shadowDx="2"-->
-                <!--android:shadowDy="2"-->
-                <!--android:shadowRadius="6"-->
-                <!--android:text="Ваш рост:"-->
-                <!--android:textColor="@color/colorWhite"-->
-                <!--android:textColorLink="@color/colorWhite"-->
-                <!--android:textSize="30sp"-->
-                <!--android:textStyle="bold" />-->
-
-            <!--<NumberPicker-->
-                <!--android:id="@+id/growth"-->
-                <!--android:layout_width="100dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center"-->
-
-                <!--android:gravity="center"-->
-                <!--android:orientation="vertical"-->
-                <!--android:paddingRight="10dp"-->
-                <!--android:showDividers="middle"-->
-                <!--android:theme="@style/DefaultNumberPickerTheme"-->
-                <!--android:layout_marginBottom="40dp"/>-->
+        <!--<LinearLayout-->
+            <!--android:id="@+id/layGoalAndActivity"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical"-->
+            <!--android:paddingLeft="10dp"-->
+            <!--android:paddingRight="10dp"-->
+            <!--android:visibility="invisible"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_gravity="top"-->
+            <!--android:paddingBottom="10dp">-->
 
             <TextView
                 android:id="@+id/textViewGoal"
@@ -248,10 +329,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginBottom="40dp"
                 android:background="@color/colorGrey"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
+                android:layout_below="@id/textViewGoal"
                 >
 
                 <RadioButton
@@ -317,6 +398,47 @@
 
             </RadioGroup>
 
+        <!--</LinearLayout>-->
+        <Button
+            android:id="@+id/buttonNextGoal"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/custom_shape3"
+            android:gravity="center"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="5"
+            android:text="Далее"
+            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+            android:textColor="@color/colorWhite"
+            android:textColorLink="@color/colorWhite"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            android:layout_alignParentBottom="true"
+            android:fontFamily="@font/kurale_regular"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/scrollActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="10dp"
+        android:visibility="invisible">
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/layActivity"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical"-->
+            <!--android:paddingLeft="10dp"-->
+            <!--android:paddingRight="10dp"-->
+            <!--android:visibility="invisible"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:paddingBottom="10dp">-->
+
             <TextView
                 android:id="@+id/textViewMyActive"
                 android:layout_width="match_parent"
@@ -344,6 +466,7 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:layout_marginBottom="40dp"
+                android:layout_below="@id/textViewMyActive"
                 android:background="@color/colorGrey"
                 >
 
@@ -411,30 +534,27 @@
 
             </RadioGroup>
 
-            <Button
-                android:id="@+id/buttonNextGoalActivity"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@drawable/custom_shape3"
-                android:gravity="center"
-                android:shadowColor="@color/colorPrimaryDark"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="5"
-                android:text="Далее"
-                android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                android:textColor="@color/colorWhite"
-                android:textColorLink="@color/colorWhite"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:visibility="visible"
-                android:fontFamily="@font/kurale_regular"/>
-
-        </LinearLayout>
-
-    </ScrollView>
-
-
+        <!--</LinearLayout>-->
+        <Button
+            android:id="@+id/buttonNextActivity"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/custom_shape3"
+            android:gravity="center"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="5"
+            android:text="Далее"
+            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+            android:textColor="@color/colorWhite"
+            android:textColorLink="@color/colorWhite"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            android:layout_alignParentBottom="true"
+            android:fontFamily="@font/kurale_regular"/>
+    </RelativeLayout>
     <ScrollView
         android:id="@+id/scrollChooseProgram"
         android:layout_width="match_parent"
@@ -487,78 +607,6 @@
                 android:fontFamily="@font/robotoreg"
                />
 
-            <!--<Button-->
-                <!--android:id="@+id/buttonSF"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:visibility="visible"-->
-                <!--android:layout_height="105dp"-->
-                <!--android:background="@drawable/custom_shape1"-->
-                <!--android:gravity="center"-->
-                <!--android:shadowColor="@color/colorPrimaryDark"-->
-                <!--android:shadowDx="1"-->
-                <!--android:shadowDy="1"-->
-                <!--android:shadowRadius="5"-->
-                <!--android:textAppearance="?android:attr/textAppearanceListItemSmall"-->
-                <!--android:textColor="@color/colorWhite"-->
-                <!--android:textColorLink="@color/colorWhite"-->
-                <!--android:textSize="22sp"-->
-                <!--android:textStyle="bold"-->
-                <!--android:drawableRight="@drawable/superfit"-->
-                <!--android:fontFamily="@font/kurale_regular"/>-->
-            <!--<Button-->
-                <!--android:id="@+id/buttonF"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:visibility="visible"-->
-                <!--android:layout_height="105dp"-->
-                <!--android:background="@drawable/custom_shape2"-->
-                <!--android:gravity="center"-->
-                <!--android:shadowColor="@color/colorPrimaryDark"-->
-                <!--android:shadowDx="1"-->
-                <!--android:shadowDy="1"-->
-                <!--android:shadowRadius="5"-->
-                <!--android:textAppearance="?android:attr/textAppearanceListItemSmall"-->
-                <!--android:textColor="@color/colorWhite"-->
-                <!--android:textColorLink="@color/colorWhite"-->
-                <!--android:textSize="22sp"-->
-                <!--android:textStyle="bold"-->
-                <!--android:drawableRight="@drawable/fit"-->
-                <!--android:fontFamily="@font/kurale_regular"/>-->
-            <!--<Button-->
-                <!--android:id="@+id/buttonB"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:visibility="visible"-->
-                <!--android:layout_height="105dp"-->
-                <!--android:background="@drawable/custom_shape3"-->
-                <!--android:gravity="center"-->
-                <!--android:shadowColor="@color/colorPrimaryDark"-->
-                <!--android:shadowDx="1"-->
-                <!--android:shadowDy="1"-->
-                <!--android:shadowRadius="5"-->
-                <!--android:textAppearance="?android:attr/textAppearanceListItemSmall"-->
-                <!--android:textColor="@color/colorWhite"-->
-                <!--android:textColorLink="@color/colorWhite"-->
-                <!--android:textSize="22sp"-->
-                <!--android:textStyle="bold"-->
-                <!--android:fontFamily="@font/kurale_regular"-->
-                <!--android:drawableRight="@drawable/balance"/>-->
-            <!--<Button-->
-                <!--android:id="@+id/buttonS"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:visibility="visible"-->
-                <!--android:layout_height="105dp"-->
-                <!--android:background="@drawable/custom_shape4"-->
-                <!--android:gravity="center"-->
-                <!--android:shadowColor="@color/colorPrimaryDark"-->
-                <!--android:shadowDx="1"-->
-                <!--android:shadowDy="1"-->
-                <!--android:shadowRadius="5"-->
-                <!--android:textAppearance="?android:attr/textAppearanceListItemSmall"-->
-                <!--android:textColor="@color/colorWhite"-->
-                <!--android:textColorLink="@color/colorWhite"-->
-                <!--android:textSize="22sp"-->
-                <!--android:textStyle="bold"-->
-                <!--android:fontFamily="@font/kurale_regular"-->
-                <!--android:drawableRight="@drawable/strong"/>-->
         </LinearLayout>
 
     </ScrollView>
@@ -613,7 +661,7 @@
             <Button
                 android:id="@+id/buttonFinish"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="100dp"
                 android:background="@drawable/custom_shape3"
                 android:gravity="center"
                 android:shadowColor="@color/colorPrimaryDark"
@@ -624,7 +672,7 @@
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:visibility="visible"
                 android:fontFamily="@font/kurale_regular"/>

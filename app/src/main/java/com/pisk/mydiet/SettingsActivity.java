@@ -1,9 +1,9 @@
 package com.pisk.mydiet;
 
 import android.app.AlarmManager;
-import android.app.DatePickerDialog;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -15,15 +15,12 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.core.view.GravityCompat;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Base64;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -36,45 +33,46 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class SettingsActivity extends AppCompatActivity implements
         RadioGroup.OnCheckedChangeListener {
 
-    Button buttonNextSex, buttonNextGoalActivity, buttonFinish;
+    Button buttonNextSex, buttonNextBodyParams, buttonNextGoal, buttonNextActivity, buttonFinish;
 
     //EditText name;
-    LinearLayout laySex, layGoalAndActivity, layChooseProgram, layCalendar;
-    RelativeLayout bLayout;
-    ScrollView scrollGoalAndActivity, scrollChooseProgram, scrollCalendar;
+    LinearLayout laySex, layBodyParams, layActivity, layChooseProgram, layCalendar;
+    RelativeLayout bLayout, scrollBodyParams, scrollGoal, scrollActivity;
+    ScrollView  scrollChooseProgram, scrollCalendar;
     Animation anim, anim2;
     SharedPreferences sPref;
     TextView textViewChooseProgram, recomendation;
     private RadioGroup radioGroupGoal, radioGroupActive, radioGroupSex;
-    DatePickerDialog.OnDateSetListener d;
     CalendarView picker;
-
+    EditText growth, weight, age;
 
     final String SAVED_PROGRAM = "saved_program";
-    final String USER_NAME = "user_name";
     final String DATE_START = "date_start";
 
     String[] programms;
 
     String currentDate = "";
-    int points = 2;
-    int programRecommended = 0;
+    boolean isWoman = true;
+    int heightValue = 0;
+    int weightValue = 0;
+    int ageValue = 0;
+    double goalCoef = 0;
+    double activityCoef = 0;
 
     private boolean firstPage = false;
 
     DatabaseHelper dbHelper;
     SQLiteDatabase db;
     Cursor cursor;
+    LayoutInflater inflaterForAlert;
+    AlertDialog.Builder builderAlert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +86,9 @@ public class SettingsActivity extends AppCompatActivity implements
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
 
         buttonNextSex = findViewById(R.id.buttonNextSex);
-        buttonNextGoalActivity = findViewById(R.id.buttonNextGoalActivity);
+        buttonNextBodyParams = findViewById(R.id.buttonNextBodyParams);
+        buttonNextGoal = findViewById(R.id.buttonNextGoal);
+        buttonNextActivity = findViewById(R.id.buttonNextActivity);
         buttonFinish = findViewById(R.id.buttonFinish);
         //name = findViewById(R.id.userName);
 
@@ -96,14 +96,18 @@ public class SettingsActivity extends AppCompatActivity implements
         bLayout = findViewById(R.id.biglayout);
 
         laySex = findViewById(R.id.laySex);
-        layGoalAndActivity = findViewById(R.id.layGoalAndActivity);
+        layBodyParams = findViewById(R.id.layBodyParams);
+        //layGoalAndActivity = findViewById(R.id.layGoalAndActivity);
+        //layActivity = findViewById(R.id.layActivity);
         layChooseProgram = findViewById(R.id.layChooseProgram);
         layCalendar = findViewById(R.id.layCalendar);
 
         textViewChooseProgram = findViewById(R.id.textViewChooseProgram);
         recomendation = findViewById(R.id.recomendation);
 
-        scrollGoalAndActivity = findViewById(R.id.scrollGoalAndActivity);
+        scrollBodyParams = findViewById(R.id.scrollBodyParams);
+        scrollGoal = findViewById(R.id.scrollGoal);
+        scrollActivity = findViewById(R.id.scrollActivity);
         scrollChooseProgram = findViewById(R.id.scrollChooseProgram);
         scrollCalendar = findViewById(R.id.scrollCalendar);
 
@@ -111,9 +115,17 @@ public class SettingsActivity extends AppCompatActivity implements
         radioGroupActive = findViewById(R.id.radioGroupActive);
         radioGroupSex = findViewById(R.id.radioGroupSex);
 
+        growth = findViewById(R.id.growth);
+        growth.requestFocus();
+        weight = findViewById(R.id.weight);
+        age = findViewById(R.id.Age);
+
         picker = findViewById(R.id.datePicker);
         picker.setMinDate(System.currentTimeMillis() -1000);
         picker.setDate(System.currentTimeMillis() -1000);
+
+        inflaterForAlert = this.getLayoutInflater();
+        builderAlert = new AlertDialog.Builder(this);
 
         // заменить это потом на получение по апи ++
         dbHelper = new DatabaseHelper(getApplicationContext());
@@ -196,8 +208,8 @@ public class SettingsActivity extends AppCompatActivity implements
             handler.postDelayed(new Runnable() {
                 public void run() {
                     bLayout.removeView(laySex);
-                    layGoalAndActivity.setVisibility(View.VISIBLE);
-                    scrollGoalAndActivity.setVisibility(View.VISIBLE);
+                    //layGoalAndActivity.setVisibility(View.VISIBLE);
+                    scrollGoal.setVisibility(View.VISIBLE);
 
                 }
             }, 0);
@@ -208,7 +220,7 @@ public class SettingsActivity extends AppCompatActivity implements
             handler.postDelayed(new Runnable() {
                 public void run() {
                     bLayout.removeView(laySex);
-                    bLayout.removeView(scrollGoalAndActivity);
+                    bLayout.removeView(scrollGoal);
                     bLayout.removeView(scrollChooseProgram);
                     scrollCalendar.setVisibility(View.VISIBLE);
                     layCalendar.setVisibility(View.VISIBLE);
@@ -243,12 +255,18 @@ public class SettingsActivity extends AppCompatActivity implements
                 firstPage = false;
 
                 v.setBackgroundResource(R.drawable.dcustom_shape3);
-//                String usernameLocal = name.getText().toString();
-//                if (usernameLocal.length() == 0) usernameLocal = "Пользователь";
-//                SharedPreferences.Editor ed = sPref.edit();
-//                ed.putString(USER_NAME,usernameLocal);
-//                ed.commit();
+                int selectedId = radioGroupGoal.getCheckedRadioButtonId();
 
+                switch(selectedId){
+                    case R.id.radio_female:
+                        isWoman = true;
+                        break;
+                    case R.id.radio_male:
+                        isWoman = false;
+                        break;
+                    default: isWoman = true;
+                        break;
+                }
 
                 anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha);
                 anim2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha2);
@@ -259,74 +277,150 @@ public class SettingsActivity extends AppCompatActivity implements
                 handler.postDelayed(new Runnable() {
                     public void run() {
                         bLayout.removeView(laySex);
-                        layGoalAndActivity.startAnimation(anim2);
-                        layGoalAndActivity.setVisibility(View.VISIBLE);
-                        scrollGoalAndActivity.setVisibility(View.VISIBLE);
+//                        layBodyParams.startAnimation(anim2);
+
+                        scrollBodyParams.startAnimation(anim2);
+                        scrollBodyParams.setVisibility(View.VISIBLE);
+                        layBodyParams.setVisibility(View.VISIBLE);
                     }
                 }, 1000);
 
             }
         });
 
-        buttonNextGoalActivity.setOnClickListener(new View.OnClickListener() {
+        buttonNextBodyParams.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+
+                if (growth.getText().length() == 0 || weight.getText().length() == 0 || age.getText().length() == 0)  {
+
+                    builderAlert.setView(inflaterForAlert.inflate(R.layout.dialog_enter_body_params, null));
+                    builderAlert.setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+
+                        }
+                    });
+                    final AlertDialog alert = builderAlert.create();
+
+                    alert.setOnShowListener( new DialogInterface.OnShowListener() {
+                        @Override
+                        public void onShow(DialogInterface arg0) {
+                            alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                        }
+                    });
+
+                    alert.show();
+
+                } else {
+
+                    weightValue = Integer.valueOf(weight.getText().toString());
+                    heightValue = Integer.valueOf(growth.getText().toString());
+                    ageValue = Integer.valueOf(age.getText().toString());
+                    v.setBackgroundResource(R.drawable.dcustom_shape3);
+
+
+                    anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha);
+                    anim2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha2);
+                    //layBodyParams.startAnimation(anim);
+                    scrollBodyParams.startAnimation(anim);
+
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            bLayout.removeView(scrollBodyParams);
+                            //layGoalAndActivity.startAnimation(anim2);
+                            scrollGoal.startAnimation(anim2);
+                            scrollGoal.setVisibility(View.VISIBLE);
+                            //layGoalAndActivity.setVisibility(View.VISIBLE);
+                            //scrollGoalAndActivity.setVisibility(View.VISIBLE);
+                        }
+                    }, 1000);
+                }
+
+            }
+        });
+
+        buttonNextGoal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
 
                 v.setBackgroundResource(R.drawable.dcustom_shape3);
 
-                points = 0;
-
-                int selectedId1 = radioGroupGoal.getCheckedRadioButtonId();
-                int selectedId2 = radioGroupActive.getCheckedRadioButtonId();
+                int selectedId = radioGroupGoal.getCheckedRadioButtonId();
 
 
-                switch(selectedId1){
+                switch(selectedId){
                     case R.id.radio_GoalSlim:
-                        points+=1;
+                        goalCoef = 0.7;
                         break;
                     case R.id.radio_GoalBalance:
-                        points+=2;
+                        goalCoef = 1;
                         break;
-                    default: points+=3;
-                        break;
-                }
-
-                switch(selectedId2){
-                    case R.id.radio_lazyActive:
-                        points+=1;
-                        break;
-                    case R.id.radio_balanseActive:
-                        points+=2;
-                        break;
-                    default: points+=3;
+                    default: goalCoef = 1.3;
                         break;
                 }
 
-                if (points == 2) {
-                    programRecommended = 0;
-                } else if (points == 3) {
-                    programRecommended = 1;
-                } else if (points == 4) {
-                    programRecommended = 2;
-                } else {
-                    programRecommended = 3;
-                }
-
-                String textRecomendation = "Мы рекомендуем Вам";
-                recomendation.setText(textRecomendation);
-
-
-                sPref = getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
 
                 anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha);
                 anim2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha2);
-                layGoalAndActivity.startAnimation(anim);
+                //layGoalAndActivity.startAnimation(anim);
+                scrollGoal.startAnimation(anim);
 
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
-                        bLayout.removeView(scrollGoalAndActivity);
+                        bLayout.removeView(scrollGoal);
+                        scrollActivity.startAnimation(anim2);
+                        scrollActivity.setVisibility(View.VISIBLE);
+//                        layChooseProgram.startAnimation(anim2);
+//                        layChooseProgram.setVisibility(View.VISIBLE);
+//                        scrollChooseProgram.setVisibility(View.VISIBLE);
+                    }
+                }, 1000);
+
+            }
+        });
+
+        buttonNextActivity.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+
+                v.setBackgroundResource(R.drawable.dcustom_shape3);
+
+                //points = 0;
+
+                int selectedId = radioGroupActive.getCheckedRadioButtonId();
+
+
+
+                switch(selectedId){
+                    case R.id.radio_lazyActive:
+                        activityCoef = 1.2;
+                        break;
+                    case R.id.radio_balanseActive:
+                        activityCoef = 1.4;
+                        break;
+                    default: activityCoef = 1.6;
+                        break;
+                }
+
+                int recommendedNorm = CommonFunctions.countDayNorm(isWoman,weightValue, heightValue,goalCoef, activityCoef, ageValue);
+
+                recomendation.setText("Ваша дневная норма каллорий " + recommendedNorm);
+
+                anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha);
+                anim2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha2);
+                //layGoalAndActivity.startAnimation(anim);
+
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        bLayout.removeView(scrollActivity);
                         layChooseProgram.startAnimation(anim2);
                         layChooseProgram.setVisibility(View.VISIBLE);
                         scrollChooseProgram.setVisibility(View.VISIBLE);

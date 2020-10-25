@@ -90,4 +90,15 @@ public class CommonFunctions {
 
         return hashMap;
     }
+
+    public static int countDayNorm(boolean isWoman, int weight, int height, double goalCoef, double activityCoef, int age)
+    {
+        int norm = 0;
+        if (isWoman) {
+            norm = (int) (activityCoef * goalCoef *(447.6 + (9.2 * (double) weight) + (3.1 * (double) height) - (4.3 *(double) age)));
+        } else {
+            norm = (int) (activityCoef * goalCoef *(88.36 + (13.4 * (double) weight) + (4.8 * (double) height) - (5.7 *(double) age)));
+        }
+        return norm;
+    }
 }
