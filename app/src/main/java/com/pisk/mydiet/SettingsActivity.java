@@ -410,7 +410,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
                 int recommendedNorm = CommonFunctions.countDayNorm(isWoman,weightValue, heightValue,goalCoef, activityCoef, ageValue);
 
-                recomendation.setText("Ваша дневная норма каллорий " + recommendedNorm);
+                recomendation.setText("(Ваша дневная норма каллорий " + recommendedNorm + ")");
 
                 anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha);
                 anim2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha2);

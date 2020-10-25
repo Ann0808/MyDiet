@@ -99,6 +99,7 @@ public class CommonFunctions {
         } else {
             norm = (int) (activityCoef * goalCoef *(88.36 + (13.4 * (double) weight) + (4.8 * (double) height) - (5.7 *(double) age)));
         }
-        return norm;
+
+        return (norm%100 < 50) ? norm/100*100 : norm/100*100 + 100;
     }
 }
