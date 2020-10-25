@@ -43,7 +43,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity implements
+        RadioGroup.OnCheckedChangeListener {
 
     Button buttonNextSex, buttonNextGoalActivity, buttonFinish;
 
@@ -54,7 +55,7 @@ public class SettingsActivity extends AppCompatActivity {
     Animation anim, anim2;
     SharedPreferences sPref;
     TextView textViewChooseProgram, recomendation;
-    private RadioGroup radioGroupGoal, radioGroupActive;
+    private RadioGroup radioGroupGoal, radioGroupActive, radioGroupSex;
     DatePickerDialog.OnDateSetListener d;
     CalendarView picker;
 
@@ -108,6 +109,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         radioGroupGoal = findViewById(R.id.radioGroupGoal);
         radioGroupActive = findViewById(R.id.radioGroupActive);
+        radioGroupSex = findViewById(R.id.radioGroupSex);
 
         picker = findViewById(R.id.datePicker);
         picker.setMinDate(System.currentTimeMillis() -1000);
@@ -215,34 +217,9 @@ public class SettingsActivity extends AppCompatActivity {
             }, 0);
         }
         //go from main
-
-        radioGroupGoal.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-               for(int i=0; i< group.getChildCount();i++) {
-                   RadioButton rb = (RadioButton) group.getChildAt(i);
-                   rb.setTextColor(getResources().getColor(R.color.colorWhite));
-               }
-               RadioButton rb = findViewById(checkedId);
-               rb.setTextColor(getResources().getColor(R.color.colorBalance));
-            }
-        });
-
-        radioGroupActive.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-                for(int i=0; i< group.getChildCount();i++) {
-                    RadioButton rb = (RadioButton) group.getChildAt(i);
-                    rb.setTextColor(getResources().getColor(R.color.colorWhite));
-                }
-                RadioButton rb = findViewById(checkedId);
-                rb.setTextColor(getResources().getColor(R.color.colorBalance));
-            }
-        });
+        radioGroupSex.setOnCheckedChangeListener(this);
+        radioGroupGoal.setOnCheckedChangeListener(this);
+        radioGroupActive.setOnCheckedChangeListener(this);
 
 
 
@@ -440,6 +417,17 @@ public class SettingsActivity extends AppCompatActivity {
         ed.putInt(SAVED_PROGRAM,prog);
 
         ed.commit();
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+        for(int i=0; i< group.getChildCount();i++) {
+            RadioButton rb = (RadioButton) group.getChildAt(i);
+            rb.setTextColor(getResources().getColor(R.color.colorWhite));
+        }
+        RadioButton rb = findViewById(checkedId);
+        rb.setTextColor(getResources().getColor(R.color.colorBalance));
     }
 
     @Override

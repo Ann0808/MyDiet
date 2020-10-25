@@ -344,7 +344,8 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:layout_marginBottom="40dp"
-                android:background="@color/colorGrey">
+                android:background="@color/colorGrey"
+                >
 
                 <RadioButton
                     android:id="@+id/radio_lazyActive"
