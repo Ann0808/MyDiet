@@ -52,14 +52,6 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     SharedPreferences sPref;
-    final String SAVED_PROGRAM = "saved_program";
-    final String DATE_START = "date_start";
-    final String HINT_DAYS = "hint_days";
-    final String MY_SEX = "my_sex";
-    final String MY_WEIGHT = "my_weight";
-    final String MY_HEIGHT = "my_height";
-    final String MY_AGE = "my_age";
-
 
     View hView;
     ImageView menuImage;
@@ -135,14 +127,14 @@ public class MainActivity extends AppCompatActivity
         final Intent intent = new Intent(this, SettingsActivity.class);
 
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
-        savedProg = sPref.getInt(SAVED_PROGRAM, 0);
-        savedDate = sPref.getString(DATE_START,"");
-        hintDays = sPref.getBoolean(HINT_DAYS,false);
+        savedProg = sPref.getInt(CommonFunctions.SAVED_PROGRAM, 0);
+        savedDate = sPref.getString(CommonFunctions.DATE_START,"");
+        hintDays = sPref.getBoolean(CommonFunctions.HINT_DAYS,false);
 
-        mySex = sPref.getBoolean(MY_SEX, true);
-        myWeight = sPref.getInt(MY_WEIGHT, 0);
-        myHeight = sPref.getInt(MY_HEIGHT, 0);
-        myAge = sPref.getInt(MY_AGE, 0);
+        mySex = sPref.getBoolean(CommonFunctions.MY_SEX, true);
+        myWeight = sPref.getInt(CommonFunctions.MY_WEIGHT, 0);
+        myHeight = sPref.getInt(CommonFunctions.MY_HEIGHT, 0);
+        myAge = sPref.getInt(CommonFunctions.MY_AGE, 0);
 
 
         if (savedProg == 0) {  //change to ==0
@@ -161,7 +153,7 @@ public class MainActivity extends AppCompatActivity
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                         SharedPreferences.Editor ed = sPref.edit();
-                        ed.putBoolean(HINT_DAYS,true);
+                        ed.putBoolean(CommonFunctions.HINT_DAYS,true);
                         ed.commit();
 
                     }
@@ -291,7 +283,7 @@ public class MainActivity extends AppCompatActivity
                 public void onClick(View v)
                 {
 
-                    intent4.putExtra("start_again", true);
+                    intent4.putExtra(CommonFunctions.START_AGAIN, true);
                     startActivity(intent4);
 
                 }
@@ -300,7 +292,7 @@ public class MainActivity extends AppCompatActivity
             b2.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v)
                 {
-                    intent4.putExtra("choose_new", true);
+                    intent4.putExtra(CommonFunctions.CHOOSE_NEW, true);
                     startActivity(intent4);
 
                 }
@@ -391,11 +383,11 @@ public class MainActivity extends AppCompatActivity
 //        }
         else if (id == R.id.nav_change) {
             Intent intent2 = new Intent(this, SettingsActivity.class);
-            intent2.putExtra(MY_SEX, mySex);
-            intent2.putExtra(MY_WEIGHT, myWeight);
-            intent2.putExtra(MY_HEIGHT, myHeight);
-            intent2.putExtra(MY_AGE, myAge);
-            intent2.putExtra("choose_new", true);
+            intent2.putExtra(CommonFunctions.MY_SEX, mySex);
+            intent2.putExtra(CommonFunctions.MY_WEIGHT, myWeight);
+            intent2.putExtra(CommonFunctions.MY_HEIGHT, myHeight);
+            intent2.putExtra(CommonFunctions.MY_AGE, myAge);
+            intent2.putExtra(CommonFunctions.CHOOSE_NEW, true);
             startActivity(intent2);
 
         }

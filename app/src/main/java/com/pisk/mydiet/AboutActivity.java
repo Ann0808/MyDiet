@@ -26,8 +26,8 @@ import android.widget.Toast;
 public class AboutActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    final String SAVED_PROGRAM = "saved_program";
-    int savedProg;
+    int savedProg, myWeight, myHeight, myAge;
+    boolean mySex = true;
     SharedPreferences sPref;
     View hView;
     ImageView menuImage;
@@ -65,7 +65,11 @@ public class AboutActivity extends AppCompatActivity
         hView =  navigationView.getHeaderView(0);
         menuImage = hView.findViewById(R.id.imageViewHead);
 
-        savedProg = sPref.getInt(SAVED_PROGRAM, 0);
+        savedProg = sPref.getInt(CommonFunctions.SAVED_PROGRAM, 0);
+        mySex = sPref.getBoolean(CommonFunctions.MY_SEX, true);
+        myWeight = sPref.getInt(CommonFunctions.MY_WEIGHT, 0);
+        myHeight = sPref.getInt(CommonFunctions.MY_HEIGHT, 0);
+        myAge = sPref.getInt(CommonFunctions.MY_AGE, 0);
 
         titleView = findViewById(R.id.title1);
 
@@ -130,13 +134,25 @@ public class AboutActivity extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
             Intent intent2 = new Intent(this, ProductsActivity.class);
             startActivity(intent2);
+        }
 
 //        } else if (id == R.id.nav_slideshow)
 //        {
 //
 //            Intent intent2 = new Intent(this, ProgramsActivity.class);
 //            startActivity(intent2);
+
 //
+            else if (id == R.id.nav_change) {
+                Intent intent2 = new Intent(this, SettingsActivity.class);
+                intent2.putExtra(CommonFunctions.MY_SEX, mySex);
+                intent2.putExtra(CommonFunctions.MY_WEIGHT, myWeight);
+                intent2.putExtra(CommonFunctions.MY_HEIGHT, myHeight);
+                intent2.putExtra(CommonFunctions.MY_AGE, myAge);
+                intent2.putExtra("choose_new", true);
+                startActivity(intent2);
+
+
         } else if (id == R.id.nav_manage) {
             Intent intent2 = new Intent(this, MyPageActivity.class);
             startActivity(intent2);

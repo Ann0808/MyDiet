@@ -14,6 +14,17 @@ import java.util.Map;
 
 public class CommonFunctions {
 
+    final static String SAVED_PROGRAM = "saved_program";
+    final static String DATE_START = "date_start";
+    final static String HINT_DAYS = "hint_days";
+    final static String MY_SEX = "my_sex";
+    final static String MY_WEIGHT = "my_weight";
+    final static String MY_HEIGHT = "my_height";
+    final static String MY_AGE = "my_age";
+    final static String CHOOSE_NEW = "choose_new";
+    final static String START_AGAIN = "start_again";
+    final static String FROM_SETTINGS = "from_settings";
+
     public static Drawable decodeDrawable(Context context, String base64) {
         Drawable ret = null;
         if (!base64.equals("")) {

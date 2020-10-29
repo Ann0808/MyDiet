@@ -38,9 +38,6 @@ import java.util.Date;
 public class MyPageActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    final String SAVED_PROGRAM = "saved_program";
-    final String DATE_START = "date_start";
-    final String USER_NAME = "user_name";
 
     SharedPreferences sPref;
 
@@ -88,9 +85,9 @@ public class MyPageActivity extends AppCompatActivity
         menuImage = hView.findViewById(R.id.imageViewHead);
 
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
-        userName = sPref.getString(USER_NAME, "Пользователь");
-        savedProg = sPref.getInt(SAVED_PROGRAM, 0);
-        currentDate = sPref.getString(DATE_START, "");
+        userName = "";
+        savedProg = sPref.getInt(CommonFunctions.SAVED_PROGRAM, 0);
+        currentDate = sPref.getString(CommonFunctions.DATE_START, "");
 
         bigLayout = findViewById(R.id.bigLayout);
         b1 = findViewById(R.id.b1);
@@ -103,7 +100,7 @@ public class MyPageActivity extends AppCompatActivity
         program = findViewById(R.id.program);
         lay2 = findViewById(R.id.lay2);
 
-        final String savedDate = sPref.getString(DATE_START, "");
+        final String savedDate = sPref.getString(CommonFunctions.DATE_START, "");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date dateD = null;
         try {
@@ -169,7 +166,7 @@ public class MyPageActivity extends AppCompatActivity
             public void onClick(View v)
             {
 
-                savedProg = sPref.getInt(SAVED_PROGRAM, 0);
+                savedProg = sPref.getInt(CommonFunctions.SAVED_PROGRAM, 0);
 
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) date.getLayoutParams();
                 params.height = 1;
@@ -285,9 +282,9 @@ public class MyPageActivity extends AppCompatActivity
                 im.hideSoftInputFromWindow(viewName.getWindowToken(), 0);
 
                 SharedPreferences.Editor ed = sPref.edit();
-                ed.putString(USER_NAME,viewName.getText().toString());
-                ed.putInt(SAVED_PROGRAM, numbProg);
-                ed.putString(DATE_START,currentDate);
+                //ed.putString(USER_NAME,viewName.getText().toString());
+                ed.putInt(CommonFunctions.SAVED_PROGRAM, numbProg);
+                ed.putString(CommonFunctions.DATE_START,currentDate);
                 ed.commit();
 
                 date.setText(currentDate);
@@ -406,6 +403,23 @@ public class MyPageActivity extends AppCompatActivity
 //            startActivity(intent2);
 //
 //        }
+        else if (id == R.id.nav_change) {
+
+            boolean mySex = sPref.getBoolean(CommonFunctions.MY_SEX, true);
+            int myWeight = sPref.getInt(CommonFunctions.MY_WEIGHT, 0);
+            int myHeight = sPref.getInt(CommonFunctions.MY_HEIGHT, 0);
+            int myAge = sPref.getInt(CommonFunctions.MY_AGE, 0);
+
+            Intent intent2 = new Intent(this, SettingsActivity.class);
+            intent2.putExtra(CommonFunctions.MY_SEX, mySex);
+            intent2.putExtra(CommonFunctions.MY_WEIGHT, myWeight);
+            intent2.putExtra(CommonFunctions.MY_HEIGHT, myHeight);
+            intent2.putExtra(CommonFunctions.MY_AGE, myAge);
+            intent2.putExtra(CommonFunctions.CHOOSE_NEW, true);
+            startActivity(intent2);
+
+
+        }
         else if (id == R.id.nav_manage) {
 
 

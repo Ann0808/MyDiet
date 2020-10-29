@@ -190,6 +190,22 @@ public class ProductsActivity extends AppCompatActivity
 //            startActivity(intent2);
 //
 //        }
+        else if (id == R.id.nav_change) {
+
+            boolean mySex = sPref.getBoolean(CommonFunctions.MY_SEX, true);
+            int myWeight = sPref.getInt(CommonFunctions.MY_WEIGHT, 0);
+            int myHeight = sPref.getInt(CommonFunctions.MY_HEIGHT, 0);
+            int myAge = sPref.getInt(CommonFunctions.MY_AGE, 0);
+
+            Intent intent2 = new Intent(this, SettingsActivity.class);
+            intent2.putExtra(CommonFunctions.MY_SEX, mySex);
+            intent2.putExtra(CommonFunctions.MY_WEIGHT, myWeight);
+            intent2.putExtra(CommonFunctions.MY_HEIGHT, myHeight);
+            intent2.putExtra(CommonFunctions.MY_AGE, myAge);
+            intent2.putExtra(CommonFunctions.CHOOSE_NEW, true);
+            startActivity(intent2);
+
+        }
         else if (id == R.id.nav_manage) {
             Intent intent2 = new Intent(this, MyPageActivity.class);
             startActivity(intent2);

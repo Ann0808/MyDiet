@@ -37,6 +37,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.pisk.mydiet.CommonFunctions.DATE_START;
+import static com.pisk.mydiet.CommonFunctions.MY_AGE;
+import static com.pisk.mydiet.CommonFunctions.MY_HEIGHT;
+import static com.pisk.mydiet.CommonFunctions.MY_SEX;
+import static com.pisk.mydiet.CommonFunctions.MY_WEIGHT;
+
 public class SettingsActivity extends AppCompatActivity implements
         RadioGroup.OnCheckedChangeListener {
 
@@ -53,13 +59,6 @@ public class SettingsActivity extends AppCompatActivity implements
     CalendarView picker;
     EditText growth, weight, age;
 
-    final String SAVED_PROGRAM = "saved_program";
-    final String DATE_START = "date_start";
-
-    final String MY_SEX = "my_sex";
-    final String MY_WEIGHT = "my_weight";
-    final String MY_HEIGHT = "my_height";
-    final String MY_AGE = "my_age";
     int myWeight, myHeight, myAge;
     boolean mySex, chooseNew = false, startAgain = false;
 
@@ -197,8 +196,8 @@ public class SettingsActivity extends AppCompatActivity implements
         //go from main
         Intent intentTmp = getIntent();
 
-        chooseNew = intentTmp.getBooleanExtra("choose_new", false);
-        startAgain = intentTmp.getBooleanExtra("start_again", false);
+        chooseNew = intentTmp.getBooleanExtra(CommonFunctions.CHOOSE_NEW, false);
+        startAgain = intentTmp.getBooleanExtra(CommonFunctions.START_AGAIN, false);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         currentDate = simpleDateFormat.format(System.currentTimeMillis() -1000);
@@ -493,7 +492,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
                 }
                 final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("from_settings", true);
+                intent.putExtra(CommonFunctions.FROM_SETTINGS, true);
                 startActivity(intent);
 
             }
@@ -539,7 +538,7 @@ public class SettingsActivity extends AppCompatActivity implements
     public void setSAVED_PROGRAM(int prog) {
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
         SharedPreferences.Editor ed = sPref.edit();
-        ed.putInt(SAVED_PROGRAM,prog);
+        ed.putInt(CommonFunctions.SAVED_PROGRAM,prog);
 
         ed.commit();
     }
@@ -566,7 +565,7 @@ public class SettingsActivity extends AppCompatActivity implements
         }
         else if (chooseNew || startAgain) {
             final Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("from_settings", true);
+            intent.putExtra(CommonFunctions.FROM_SETTINGS, true);
             startActivity(intent);
         }
         else {
