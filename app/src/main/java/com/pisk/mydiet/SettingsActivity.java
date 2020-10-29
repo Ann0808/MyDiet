@@ -61,7 +61,7 @@ public class SettingsActivity extends AppCompatActivity implements
     final String MY_HEIGHT = "my_height";
     final String MY_AGE = "my_age";
     int myWeight, myHeight, myAge;
-    boolean mySex;
+    boolean mySex, chooseNew = false, startAgain = false;
 
 
     String currentDate = "";
@@ -197,8 +197,8 @@ public class SettingsActivity extends AppCompatActivity implements
         //go from main
         Intent intentTmp = getIntent();
 
-        boolean chooseNew = intentTmp.getBooleanExtra("choose_new", false);
-        boolean startAgain = intentTmp.getBooleanExtra("start_again", false);
+        chooseNew = intentTmp.getBooleanExtra("choose_new", false);
+        startAgain = intentTmp.getBooleanExtra("start_again", false);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         currentDate = simpleDateFormat.format(System.currentTimeMillis() -1000);
@@ -563,7 +563,13 @@ public class SettingsActivity extends AppCompatActivity implements
             final Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
 
-        } else {
+        }
+        else if (chooseNew || startAgain) {
+            final Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("from_settings", true);
+            startActivity(intent);
+        }
+        else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 finishAffinity();
             }

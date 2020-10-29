@@ -335,8 +335,6 @@ public class MainActivity extends AppCompatActivity
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        Log.d("FP", "from settings " + fromSettings);
-
         if ((drawer.isDrawerOpen(GravityCompat.START))||(fromSettings)) {
             drawer.closeDrawer(GravityCompat.START);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -397,6 +395,7 @@ public class MainActivity extends AppCompatActivity
             intent2.putExtra(MY_WEIGHT, myWeight);
             intent2.putExtra(MY_HEIGHT, myHeight);
             intent2.putExtra(MY_AGE, myAge);
+            intent2.putExtra("choose_new", true);
             startActivity(intent2);
 
         }
@@ -430,5 +429,7 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
 }
