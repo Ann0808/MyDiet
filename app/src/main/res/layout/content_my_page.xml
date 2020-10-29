@@ -66,207 +66,17 @@
                         android:textColorLink="@color/colorWhite"
                         android:textSize="30sp"
                         android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/nameLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="30dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/titleName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="10dp"
-                        android:fontFamily="@font/robotoreg"
-                        android:paddingRight="5dp"
-                        android:shadowColor="@color/colorPrimaryDark"
-                        android:shadowDx="2"
-                        android:shadowDy="2"
-                        android:shadowRadius="6"
-                        android:text="Имя:"
-                        android:textColor="@color/colorWhite"
-                        android:textColorLink="@color/colorWhite"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/userName"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:background="@null"
-                        android:clickable="false"
-                        android:cursorVisible="false"
-                        android:ems="10"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:fontFamily="@font/robotoreg"
-                        android:hint="Ваше имя"
-                        android:inputType="textCapSentences"
-                        android:maxLength="15"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:shadowColor="@color/colorPrimaryDark"
-                        android:shadowDx="2"
-                        android:shadowDy="2"
-                        android:shadowRadius="3"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="20sp" />
+                    <Button
+                        android:id="@+id/imageButton"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/ic_mode_edit_black_24dp"/>
 
                 </LinearLayout>
 
 
                 <TextView
-                    android:id="@+id/titleSpin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/robotoreg"
-                    android:paddingRight="5dp"
-                    android:shadowColor="@color/colorPrimaryDark"
-                    android:shadowDx="2"
-                    android:shadowDy="2"
-                    android:shadowRadius="6"
-                    android:text="Программа:"
-                    android:textColor="@color/colorWhite"
-                    android:textColorLink="@color/colorWhite"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:id="@+id/programL"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/program"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginBottom="30dp"
-                        android:fontFamily="@font/robotoreg"
-                        android:paddingRight="5dp"
-                        android:shadowColor="@color/colorPrimaryDark"
-                        android:shadowDx="2"
-                        android:shadowDy="2"
-                        android:shadowRadius="3"
-                        android:textColor="@color/colorWhite"
-                        android:textColorLink="@color/colorWhite"
-                        android:textSize="20sp" />
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/radioL"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <RadioGroup
-                        android:id="@+id/radioGroup1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:orientation="vertical"
-                        android:visibility="invisible">
-
-                        <RadioButton
-                            android:id="@+id/radio_superfit"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_weight="1"
-                            android:checked="true"
-                            android:clickable="false"
-                            android:fontFamily="@font/robotoreg"
-                            android:scaleX="1.2"
-                            android:scaleY="1.2"
-                            android:shadowColor="@color/colorPrimaryDark"
-                            android:shadowDx="1"
-                            android:shadowDy="1"
-                            android:shadowRadius="3"
-                            android:text="Slim 1000 kcal"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="20sp"
-                            android:theme="@style/MyRadioButtonProgram1"
-                            android:translationX="30dp" />
-
-                        <RadioButton
-                            android:id="@+id/radio_fit"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_weight="1"
-                            android:clickable="false"
-                            android:fontFamily="@font/robotoreg"
-                            android:scaleX="1.2"
-                            android:scaleY="1.2"
-                            android:shadowColor="@color/colorPrimaryDark"
-                            android:shadowDx="1"
-                            android:shadowDy="1"
-                            android:shadowRadius="3"
-                            android:text="Fit 1300 kcal"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="20sp"
-                            android:theme="@style/MyRadioButtonProgram2"
-                            android:translationX="30dp" />
-
-                        <RadioButton
-                            android:id="@+id/radio_balance"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:clickable="false"
-                            android:fontFamily="@font/robotoreg"
-                            android:scaleX="1.2"
-                            android:scaleY="1.2"
-                            android:shadowColor="@color/colorPrimaryDark"
-                            android:shadowDx="1"
-                            android:shadowDy="1"
-                            android:shadowRadius="3"
-                            android:text="Balance 1800 kcal"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="20sp"
-                            android:theme="@style/MyRadioButtonProgram3"
-                            android:translationX="30dp" />
-
-                        <RadioButton
-                            android:id="@+id/radio_strong"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_weight="1"
-                            android:checked="true"
-                            android:clickable="false"
-                            android:fontFamily="@font/robotoreg"
-                            android:scaleX="1.2"
-                            android:scaleY="1.2"
-                            android:shadowColor="@color/colorPrimaryDark"
-                            android:shadowDx="1"
-                            android:shadowDy="1"
-                            android:shadowRadius="3"
-                            android:text="Sport 2500 kcal"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="20sp"
-                            android:theme="@style/MyRadioButtonProgram4"
-                            android:translationX="30dp" />
-
-                    </RadioGroup>
-
-                </LinearLayout>
-
-
-                <TextView
-                    android:id="@+id/title4"
+                    android:id="@+id/titleDateStart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -325,7 +135,7 @@
 
 
                 <Button
-                    android:id="@+id/b1"
+                    android:id="@+id/bSave"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_gravity="center"

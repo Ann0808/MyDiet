@@ -5,6 +5,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -43,13 +45,12 @@ public class MyPageActivity extends AppCompatActivity
 
     int savedProg;
     String currentDate = "";
-    String userName;
-    EditText viewName;
-    LinearLayout nameLayout, bigLayout, dateLay, radioL, programL, lay2;
-    Button b1;
-    RadioGroup radioGroup;
+    String lColor = "";
+    //EditText viewName;
+    LinearLayout nameLayout, bigLayout, dateLay, lay2;
+    Button bSave;
     CalendarView mCalendarView;
-    TextView date, program;
+    TextView date;
     Button edit;
 
     View hView;
@@ -85,20 +86,24 @@ public class MyPageActivity extends AppCompatActivity
         menuImage = hView.findViewById(R.id.imageViewHead);
 
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
-        userName = "";
+        //userName = "";
         savedProg = sPref.getInt(CommonFunctions.SAVED_PROGRAM, 0);
         currentDate = sPref.getString(CommonFunctions.DATE_START, "");
 
+        DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
+        ProgramInfo prInfo = CommonFunctions.getProgramInfoFromDatabase(dbHelper,savedProg);
+        lColor = prInfo.lColor;
+
+
         bigLayout = findViewById(R.id.bigLayout);
-        b1 = findViewById(R.id.b1);
-        radioL = findViewById(R.id.radioL);
-        programL = findViewById(R.id.programL);
+        bSave = findViewById(R.id.bSave);
         edit = findViewById(R.id.edit);
-        radioGroup = findViewById(R.id.radioGroup1);
         mCalendarView = findViewById(R.id.datePicker);
         date = findViewById(R.id.date);
-        program = findViewById(R.id.program);
         lay2 = findViewById(R.id.lay2);
+
+        //GradientDrawable draw = (GradientDrawable) mCalendarView.getBackground();
+        mCalendarView.setBackgroundColor(Color.parseColor(lColor));
 
         final String savedDate = sPref.getString(CommonFunctions.DATE_START, "");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -117,50 +122,20 @@ public class MyPageActivity extends AppCompatActivity
         RadioButton b;
         int colorBack;
         int colorButton;
-        if (savedProg == 1) {
-            colorBack = R.color.colorSuperFitLight;
-            colorButton = R.drawable.custom_shape1;
-            b = (RadioButton) findViewById(R.id.radio_superfit);
-            hView.setBackgroundResource(R.color.colorSuperFit);
-
-        } else if (savedProg == 2) {
-
-            colorBack = R.color.colorFitLight;
-            colorButton = R.drawable.custom_shape2;
-            b = (RadioButton) findViewById(R.id.radio_fit);
-            hView.setBackgroundResource(R.color.colorFit);
-
-        } else if (savedProg == 3) {
-
-            colorBack = R.color.colorBalanceLight;
-            colorButton = R.drawable.custom_shape3;
-            b = (RadioButton) findViewById(R.id.radio_balance);
-            hView.setBackgroundResource(R.color.colorBalance);
-
-        } else {
-            colorBack = R.color.colorStrongLight;
-            colorButton = R.drawable.custom_shape4;
-            b = (RadioButton) findViewById(R.id.radio_strong);
-            hView.setBackgroundResource(R.color.colorStrong);
-
-        }
-
-        program.setText(getResources().getStringArray(R.array.programms)[savedProg - 1]);
-
-        b.setChecked(true);
-
-        b1.setBackgroundResource(colorButton);
-        edit.setBackgroundResource(colorButton);
-        mCalendarView.setBackgroundResource(colorButton);
 
 
-        viewName = findViewById(R.id.userName);
-        viewName.setText(userName);
+        //program.setText(getResources().getStringArray(R.array.programms)[savedProg - 1]);
+
+        //edit.setBackgroundResource(colorButton);
+       // mCalendarView.setBackgroundResource(colorButton);
+
+
+        //viewName.setText(userName);
 
         //nameLayout = findViewById(R.id.nameLayout);
         dateLay = findViewById(R.id.datePickerL);
         dateLay.removeView(mCalendarView);
-        radioL.removeView(radioGroup);
+        //radioL.removeView(radioGroup);
 
         edit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
@@ -172,46 +147,46 @@ public class MyPageActivity extends AppCompatActivity
                 params.height = 1;
                 date.setLayoutParams(params);
 
-                programL.removeView(program);
+                //programL.removeView(program);
 
                 LinearLayout.LayoutParams paramsB = (LinearLayout.LayoutParams) v.getLayoutParams();
                 paramsB.height = 1;
                 v.setLayoutParams(paramsB);
                 dateLay.setVisibility(View.VISIBLE);
                 dateLay.addView(mCalendarView);
-                radioL.addView(radioGroup);
+                //radioL.addView(radioGroup);
 
-                b1.setVisibility(View.VISIBLE);
+                bSave.setVisibility(View.VISIBLE);
                 v.setVisibility(View.INVISIBLE);
-                radioGroup.setVisibility(View.VISIBLE);
-                program.setVisibility(View.INVISIBLE);
+                //radioGroup.setVisibility(View.VISIBLE);
+                //program.setVisibility(View.INVISIBLE);
 
-                viewName.setClickable(true);
-                viewName.setCursorVisible(true);
-                viewName.setFocusable(true);
-                viewName.setFocusableInTouchMode(true);
-                viewName.requestFocus();
-                viewName.setSelection(viewName.getText().length());
-                for (int i = 0; i< radioGroup.getChildCount();i++) {
-                    radioGroup.getChildAt(i).setClickable(true);
-                }
+//                viewName.setClickable(true);
+//                viewName.setCursorVisible(true);
+//                viewName.setFocusable(true);
+//                viewName.setFocusableInTouchMode(true);
+//                viewName.requestFocus();
+//                viewName.setSelection(viewName.getText().length());
+//                for (int i = 0; i< radioGroup.getChildCount();i++) {
+//                    radioGroup.getChildAt(i).setClickable(true);
+//                }
 
-                int color = R.color.colorWhite;
-                if (savedProg == 1) {
-                    color = R.color.colorSuperFit;
-                } else if (savedProg == 2) {
-                    color = R.color.colorFit;
-                } else if (savedProg == 3) {
-                    color = R.color.colorBalance;
-                } else {
-                    color = R.color.colorStrong;
-                }
-                viewName.setBackgroundResource(color);
+//                int color = R.color.colorWhite;
+//                if (savedProg == 1) {
+//                    color = R.color.colorSuperFit;
+//                } else if (savedProg == 2) {
+//                    color = R.color.colorFit;
+//                } else if (savedProg == 3) {
+//                    color = R.color.colorBalance;
+//                } else {
+//                    color = R.color.colorStrong;
+//                }
+                //viewName.setBackgroundResource(color);
 
                 try {
                     Field f = TextView.class.getDeclaredField("mCursorDrawableRes");
                     f.setAccessible(true);
-                    f.set(viewName, R.drawable.cursor);
+                    //f.set(viewName, R.drawable.cursor);
                 } catch (Exception ignored) {
                 }
 
@@ -220,7 +195,7 @@ public class MyPageActivity extends AppCompatActivity
             }
         });
 
-        b1.setOnClickListener(new View.OnClickListener() {
+        bSave.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
 
@@ -234,58 +209,41 @@ public class MyPageActivity extends AppCompatActivity
                 edit.setLayoutParams(paramsB);
 
                 dateLay.removeView(mCalendarView);
-                programL.addView(program);
-                program.setVisibility(View.VISIBLE);
-                radioL.removeView(radioGroup);
+//                programL.addView(program);
+//                program.setVisibility(View.VISIBLE);
+//                radioL.removeView(radioGroup);
 
-                int selectedId1 = radioGroup.getCheckedRadioButtonId();
+                //int selectedId1 = radioGroup.getCheckedRadioButtonId();
                 int numbProg;
 
                 int colorBack;
                 int colorButton;
 
-                if (selectedId1 == R.id.radio_superfit) {
-                    numbProg = 1;
-                    colorBack = R.color.colorSuperFitLight;
-                    colorButton = R.drawable.custom_shape1;
-                } else if (selectedId1 == R.id.radio_fit) {
-                    numbProg = 2;
-                    colorBack = R.color.colorFitLight;
-                    colorButton = R.drawable.custom_shape2;
-                } else if (selectedId1 == R.id.radio_balance) {
-                    numbProg = 3;
-                    colorBack = R.color.colorBalanceLight;
-                    colorButton = R.drawable.custom_shape3;
-                }else {
-                    numbProg = 4;
-                    colorBack = R.color.colorStrongLight;
-                    colorButton = R.drawable.custom_shape4;
-                }
-                program.setText(getResources().getStringArray(R.array.programms)[numbProg - 1]);
+               // program.setText(getResources().getStringArray(R.array.programms)[numbProg - 1]);
 
                 //bigLayout.setBackgroundResource(colorBack);
-                b1.setBackgroundResource(colorButton);
-                edit.setBackgroundResource(colorButton);
-                mCalendarView.setBackgroundResource(colorButton);
+                //b1.setBackgroundResource(colorButton);
+                //edit.setBackgroundResource(colorButton);
+                //mCalendarView.setBackgroundResource(colorButton);
 
                 v.setVisibility(View.INVISIBLE);
 
                 edit.setVisibility(View.VISIBLE);
 
-                viewName.setClickable(false);
-                viewName.setCursorVisible(false);
-                viewName.setFocusable(false);
-                viewName.setFocusableInTouchMode(false);
-                viewName.setBackgroundResource(0);
+//                viewName.setClickable(false);
+//                viewName.setCursorVisible(false);
+//                viewName.setFocusable(false);
+//                viewName.setFocusableInTouchMode(false);
+//                viewName.setBackgroundResource(0);
 
                 InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                im.hideSoftInputFromWindow(viewName.getWindowToken(), 0);
+               // im.hideSoftInputFromWindow(viewName.getWindowToken(), 0);
 
                 SharedPreferences.Editor ed = sPref.edit();
                 //ed.putString(USER_NAME,viewName.getText().toString());
-                ed.putInt(CommonFunctions.SAVED_PROGRAM, numbProg);
-                ed.putString(CommonFunctions.DATE_START,currentDate);
-                ed.commit();
+//                ed.putInt(CommonFunctions.SAVED_PROGRAM, numbProg);
+//                ed.putString(CommonFunctions.DATE_START,currentDate);
+//                ed.commit();
 
                 date.setText(currentDate);
 
