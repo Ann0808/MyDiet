@@ -19,6 +19,10 @@
             <!--android:icon="@drawable/ic_menu_main"-->
             <!--android:title="Обзор программ" />-->
         <item
+            android:id="@+id/nav_change"
+            android:icon="@drawable/ic_menu_main"
+            android:title="Поменять программу" />
+        <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
             android:title="Мои данные" />

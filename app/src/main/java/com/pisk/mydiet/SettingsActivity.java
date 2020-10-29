@@ -56,7 +56,13 @@ public class SettingsActivity extends AppCompatActivity implements
     final String SAVED_PROGRAM = "saved_program";
     final String DATE_START = "date_start";
 
-    String[] programms;
+    final String MY_SEX = "my_sex";
+    final String MY_WEIGHT = "my_weight";
+    final String MY_HEIGHT = "my_height";
+    final String MY_AGE = "my_age";
+    int myWeight, myHeight, myAge;
+    boolean mySex;
+
 
     String currentDate = "";
     boolean isWoman = true;
@@ -80,8 +86,6 @@ public class SettingsActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_settings);
 
         firstPage = true;
-
-        programms = getResources().getStringArray(R.array.programms);
 
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
 
@@ -119,6 +123,7 @@ public class SettingsActivity extends AppCompatActivity implements
         growth.requestFocus();
         weight = findViewById(R.id.weight);
         age = findViewById(R.id.Age);
+
 
         picker = findViewById(R.id.datePicker);
         picker.setMinDate(System.currentTimeMillis() -1000);
@@ -187,7 +192,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 }while (cursor.moveToNext());
             }
         }
-    // заменить это потом на получение по апи --
+        // заменить это потом на получение по апи --
 
         //go from main
         Intent intentTmp = getIntent();
@@ -204,15 +209,30 @@ public class SettingsActivity extends AppCompatActivity implements
         ed.commit();
 
         if (chooseNew) {
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    bLayout.removeView(laySex);
-                    //layGoalAndActivity.setVisibility(View.VISIBLE);
-                    scrollGoal.setVisibility(View.VISIBLE);
 
-                }
-            }, 0);
+            mySex = sPref.getBoolean(MY_SEX, true);
+            myWeight = sPref.getInt(MY_WEIGHT, 0);
+            myHeight = sPref.getInt(MY_HEIGHT, 0);
+            myAge = sPref.getInt(MY_AGE, 0);
+            if (mySex == false) {
+                RadioButton b = (RadioButton) findViewById(R.id.radio_male);
+                RadioGroup radioGroupSex =  findViewById(R.id.radioGroupSex);
+                b.setChecked(true);
+                onCheckedChanged(radioGroupSex, R.id.radio_male);
+            }
+
+            if (myWeight > 0) {
+                weight.setText(Integer.toString(myWeight));
+            }
+
+            if (myHeight > 0) {
+                growth.setText(Integer.toString(myHeight));
+            }
+
+            if (myAge > 0) {
+                age.setText(Integer.toString(myAge));
+            }
+
         }
 
         if (startAgain) {
@@ -255,7 +275,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 firstPage = false;
 
                 v.setBackgroundResource(R.drawable.dcustom_shape3);
-                int selectedId = radioGroupGoal.getCheckedRadioButtonId();
+                int selectedId = radioGroupSex.getCheckedRadioButtonId();
 
                 switch(selectedId){
                     case R.id.radio_female:
@@ -267,6 +287,10 @@ public class SettingsActivity extends AppCompatActivity implements
                     default: isWoman = true;
                         break;
                 }
+
+                SharedPreferences.Editor ed = sPref.edit();
+                ed.putBoolean(MY_SEX,isWoman);
+                ed.commit();
 
                 anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha);
                 anim2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha2);
@@ -318,6 +342,13 @@ public class SettingsActivity extends AppCompatActivity implements
                     weightValue = Integer.valueOf(weight.getText().toString());
                     heightValue = Integer.valueOf(growth.getText().toString());
                     ageValue = Integer.valueOf(age.getText().toString());
+
+                    SharedPreferences.Editor ed = sPref.edit();
+                    ed.putInt(MY_WEIGHT,weightValue);
+                    ed.putInt(MY_HEIGHT,heightValue);
+                    ed.putInt(MY_AGE,ageValue);
+                    ed.commit();
+
                     v.setBackgroundResource(R.drawable.dcustom_shape3);
 
 

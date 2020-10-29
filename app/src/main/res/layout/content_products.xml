@@ -38,7 +38,6 @@
             android:textColorLink="@color/colorWhite"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:fontFamily="@font/kurale_regular"
             />
 
         <ListView

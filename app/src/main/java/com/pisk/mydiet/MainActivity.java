@@ -55,6 +55,11 @@ public class MainActivity extends AppCompatActivity
     final String SAVED_PROGRAM = "saved_program";
     final String DATE_START = "date_start";
     final String HINT_DAYS = "hint_days";
+    final String MY_SEX = "my_sex";
+    final String MY_WEIGHT = "my_weight";
+    final String MY_HEIGHT = "my_height";
+    final String MY_AGE = "my_age";
+
 
     View hView;
     ImageView menuImage;
@@ -62,11 +67,12 @@ public class MainActivity extends AppCompatActivity
     private ListView listView;
     Button b1, b2;
     ProgressBar pBar;
-    int savedProg;
+    int savedProg, myWeight, myHeight, myAge;
+
     String savedDate;
     int daysGone =0;
     int countDays = 0;
-    boolean hintDays = false;
+    boolean hintDays = false, mySex = true;
     String lLightColor = "";
     String lColor = "";
     int pageCount = 5;
@@ -132,6 +138,11 @@ public class MainActivity extends AppCompatActivity
         savedProg = sPref.getInt(SAVED_PROGRAM, 0);
         savedDate = sPref.getString(DATE_START,"");
         hintDays = sPref.getBoolean(HINT_DAYS,false);
+
+        mySex = sPref.getBoolean(MY_SEX, true);
+        myWeight = sPref.getInt(MY_WEIGHT, 0);
+        myHeight = sPref.getInt(MY_HEIGHT, 0);
+        myAge = sPref.getInt(MY_AGE, 0);
 
 
         if (savedProg == 0) {  //change to ==0
@@ -380,6 +391,15 @@ public class MainActivity extends AppCompatActivity
 //            startActivity(intent2);
 //
 //        }
+        else if (id == R.id.nav_change) {
+            Intent intent2 = new Intent(this, SettingsActivity.class);
+            intent2.putExtra(MY_SEX, mySex);
+            intent2.putExtra(MY_WEIGHT, myWeight);
+            intent2.putExtra(MY_HEIGHT, myHeight);
+            intent2.putExtra(MY_AGE, myAge);
+            startActivity(intent2);
+
+        }
         else if (id == R.id.nav_manage) {
             Intent intent2 = new Intent(this, MyPageActivity.class);
             startActivity(intent2);
