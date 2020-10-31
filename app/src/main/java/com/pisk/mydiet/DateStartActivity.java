@@ -8,36 +8,37 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import android.util.Log;
-import android.view.View;
-import com.google.android.material.navigation.NavigationView;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MyPageActivity extends AppCompatActivity
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import static com.pisk.mydiet.CommonFunctions.DATE_START;
+
+public class DateStartActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
@@ -47,11 +48,11 @@ public class MyPageActivity extends AppCompatActivity
     String currentDate = "";
     String lColor = "";
     //EditText viewName;
-    LinearLayout  bigLayout, lay2;
+    LinearLayout nameLayout, bigLayout, dateLay, lay2;
     Button bSave;
+    CalendarView mCalendarView;
     TextView date;
-    Button editWeightButton, saveWeightButton;
-    EditText myWeight;
+    Button edit;
 
     View hView;
     ImageView menuImage;
@@ -59,7 +60,7 @@ public class MyPageActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_page);
+        setContentView(R.layout.activity_date_start);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -80,43 +81,161 @@ public class MyPageActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().getItem(3).setChecked(true);
+        navigationView.getMenu().getItem(4).setChecked(true);
 
         hView =  navigationView.getHeaderView(0);
         menuImage = hView.findViewById(R.id.imageViewHead);
 
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
+        //userName = "";
         savedProg = sPref.getInt(CommonFunctions.SAVED_PROGRAM, 0);
+        currentDate = sPref.getString(CommonFunctions.DATE_START, "");
 
         DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
         ProgramInfo prInfo = CommonFunctions.getProgramInfoFromDatabase(dbHelper,savedProg);
         lColor = prInfo.lColor;
-        hView.setBackgroundColor(Color.parseColor(prInfo.lColor));
 
         bigLayout = findViewById(R.id.bigLayout);
+        bSave = findViewById(R.id.bSave);
+        edit = findViewById(R.id.edit);
+        mCalendarView = findViewById(R.id.datePicker);
+        date = findViewById(R.id.date);
         lay2 = findViewById(R.id.lay2);
 
-        editWeightButton = findViewById(R.id.editWeightButton);
-        saveWeightButton = findViewById(R.id.saveWeightButton);
-        myWeight = findViewById(R.id.myWeight);
+        mCalendarView.setBackgroundColor(Color.parseColor(lColor));
+        GradientDrawable draw = (GradientDrawable) bSave.getBackground();
+        draw.setColor(Color.parseColor(lColor));
+        draw = (GradientDrawable) edit.getBackground();
+        draw.setColor(Color.parseColor(lColor));
+        hView.setBackgroundColor(Color.parseColor(prInfo.lColor));
 
-        editWeightButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                myWeight.setClickable(true);
-                myWeight.setCursorVisible(true);
-                myWeight.setFocusable(true);
-                myWeight.setFocusableInTouchMode(true);
-                myWeight.requestFocus();
-                myWeight.setSelection(myWeight.getText().length());
-                myWeight.setBackgroundColor(Color.parseColor(lColor));
-                editWeightButton.setVisibility(View.INVISIBLE);
-                editWeightButton.setWidth(0);
-                saveWeightButton.setVisibility(View.VISIBLE);
+        final String savedDate = sPref.getString(CommonFunctions.DATE_START, "");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateD = null;
+        try {
+            dateD = sdf.parse(savedDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long millis = dateD.getTime();
+
+        mCalendarView.setDate (millis, true, true);
+        date.setText(savedDate);
+
+        dateLay = findViewById(R.id.datePickerL);
+        dateLay.removeView(mCalendarView);
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) date.getLayoutParams();
+                params.height = 1;
+                date.setLayoutParams(params);
+
+                LinearLayout.LayoutParams paramsB = (LinearLayout.LayoutParams) v.getLayoutParams();
+                paramsB.height = 1;
+                v.setLayoutParams(paramsB);
+                dateLay.setVisibility(View.VISIBLE);
+                dateLay.addView(mCalendarView);
+
+                bSave.setVisibility(View.VISIBLE);
+                v.setVisibility(View.INVISIBLE);
+
+                try {
+                    Field f = TextView.class.getDeclaredField("mCursorDrawableRes");
+                    f.setAccessible(true);
+                } catch (Exception ignored) {
+                }
+
+
+
+            }
+        });
+
+        bSave.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) date.getLayoutParams();
+                params.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                date.setLayoutParams(params);
+
+                LinearLayout.LayoutParams paramsB = (LinearLayout.LayoutParams) edit.getLayoutParams();
+                final float scale = getApplicationContext().getResources().getDisplayMetrics().density;
+                paramsB.height = (int) (80 * scale + 0.5f);
+                edit.setLayoutParams(paramsB);
+
+                dateLay.removeView(mCalendarView);
+
+                v.setVisibility(View.INVISIBLE);
+
+                edit.setVisibility(View.VISIBLE);
+
+
+                SharedPreferences.Editor ed = sPref.edit();
+                ed.putString(DATE_START,currentDate);
+                ed.commit();
+                date.setText(currentDate);
+
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                Date date;
+                long millis = System.currentTimeMillis();
+                try {
+                    date = sdf.parse(currentDate + " 11:00:00");
+
+                    millis = date.getTime();
+
+                    if (millis > System.currentTimeMillis()) {
+
+                        startAlert(millis,true);
+                    }
+                    millis = millis - 24*60*60*1000;
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    Log.d("myLogs2", "not ok");
+                }
+                if (millis > System.currentTimeMillis()) {
+                    startAlert(millis,false);
+                }
+
+                Toast.makeText(getApplicationContext(),"Данные обновлены",Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+        mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month,
+                                            int dayOfMonth) {
+                month++;
+                String strMonth = month>9 ? String.valueOf(month) : "0" + month;
+                String day = dayOfMonth>9 ? String.valueOf(dayOfMonth) : "0" + dayOfMonth;
+                currentDate = day + "/" + strMonth + "/" + year;
             }
         });
 
 
     }
+
+    public void startAlert(long time, boolean today) {
+
+        Intent intent;
+
+        if (today) {
+            intent = new Intent(this, MyBroadcastReceiverToday.class);
+        } else {
+            intent = new Intent(this, MyBroadcastReceiver.class);
+        }
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this.getApplicationContext(), 234, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+    }
+
 
 
     @Override
@@ -167,12 +286,7 @@ public class MyPageActivity extends AppCompatActivity
             startActivity(intent2);
 
         }
-//        else if (id == R.id.nav_slideshow) {
-//
-//            Intent intent2 = new Intent(this, ProgramsActivity.class);
-//            startActivity(intent2);
-//
-//        }
+
         else if (id == R.id.nav_change) {
 
             boolean mySex = sPref.getBoolean(CommonFunctions.MY_SEX, true);

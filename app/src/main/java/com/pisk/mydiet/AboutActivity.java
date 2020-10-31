@@ -58,7 +58,7 @@ public class AboutActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().getItem(4).setChecked(true);
+        navigationView.getMenu().getItem(5).setChecked(true);
 
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
 

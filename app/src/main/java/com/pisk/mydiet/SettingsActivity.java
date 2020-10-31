@@ -49,7 +49,7 @@ public class SettingsActivity extends AppCompatActivity implements
     Button buttonNextSex, buttonNextBodyParams, buttonNextGoal, buttonNextActivity, buttonFinish;
 
     //EditText name;
-    LinearLayout laySex, layBodyParams, layActivity, layChooseProgram, layCalendar;
+    LinearLayout laySex, layBodyParams, layChooseProgram, layCalendar;
     RelativeLayout bLayout, scrollBodyParams, scrollGoal, scrollActivity;
     ScrollView  scrollChooseProgram, scrollCalendar;
     Animation anim, anim2;
@@ -273,7 +273,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
                 firstPage = false;
 
-                v.setBackgroundResource(R.drawable.dcustom_shape3);
+                v.setBackgroundResource(R.drawable.custom_shape_light);
                 int selectedId = radioGroupSex.getCheckedRadioButtonId();
 
                 switch(selectedId){
@@ -348,7 +348,7 @@ public class SettingsActivity extends AppCompatActivity implements
                     ed.putInt(MY_AGE,ageValue);
                     ed.commit();
 
-                    v.setBackgroundResource(R.drawable.dcustom_shape3);
+                    v.setBackgroundResource(R.drawable.custom_shape_light);
 
 
                     anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.myalpha);
@@ -377,7 +377,7 @@ public class SettingsActivity extends AppCompatActivity implements
             public void onClick(View v)
             {
 
-                v.setBackgroundResource(R.drawable.dcustom_shape3);
+                v.setBackgroundResource(R.drawable.custom_shape_light);
 
                 int selectedId = radioGroupGoal.getCheckedRadioButtonId();
 
@@ -419,7 +419,7 @@ public class SettingsActivity extends AppCompatActivity implements
             public void onClick(View v)
             {
 
-                v.setBackgroundResource(R.drawable.dcustom_shape3);
+                v.setBackgroundResource(R.drawable.custom_shape_light);
 
                 //points = 0;
 
@@ -464,7 +464,7 @@ public class SettingsActivity extends AppCompatActivity implements
         buttonFinish.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                v.setBackgroundResource(R.drawable.dcustom_shape3);
+                v.setBackgroundResource(R.drawable.custom_shape_light);
                 sPref = getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
                 SharedPreferences.Editor ed = sPref.edit();
                 ed.putString(DATE_START,currentDate);

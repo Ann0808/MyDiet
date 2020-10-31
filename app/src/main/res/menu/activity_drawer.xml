@@ -8,7 +8,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_main"
-            android:icon="@drawable/ic_calendar"
+            android:icon="@drawable/ic_home_black"
             android:title="Главная" />
         <item
             android:id="@+id/nav_gallery"
@@ -24,12 +24,16 @@
             android:title="Поменять программу" />
         <item
             android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Мои данные" />
+            android:icon="@drawable/ic_my_parameters"
+            android:title="Мои параметры" />
+        <item
+            android:id="@+id/nav_date_start"
+            android:icon="@drawable/ic_calendar"
+            android:title="Дата начала" />
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_info_black_24dp"
-            android:title="О приложении" />
+            android:title="О программе" />
 
         <item
             android:id="@+id/nav_share"

@@ -32,6 +32,7 @@
     <string name="title_activity_programs">Программы</string>
     <string name="title_activity_settings">Анкета</string>
     <string name="title_activity_days_list">Просмотр программы</string>
+    <string name="title_activity_date_start">Установить новую дату диеты</string>
 
     <string name="sharedPref">IDvalue</string>
 

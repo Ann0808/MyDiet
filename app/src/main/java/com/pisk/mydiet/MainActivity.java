@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity
         b2 = findViewById(R.id.button2);
 
         Intent intentTmp = getIntent();
-        fromSettings = intentTmp.getBooleanExtra("from_settings",false);
+        fromSettings = intentTmp.getBooleanExtra(CommonFunctions.FROM_SETTINGS,false);
 
     }
 
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity
             int progress = 0;
 
             if (dayLefttoStart < 0) {
-                progress = -(int)(((double)dayLefttoStart*100)/(double)28) ;
+                progress = -(int)(((double)dayLefttoStart*100)/(double)countDays) ;
                 if (progress > 100) {
                     progress = 100;
                 }
@@ -220,7 +220,6 @@ public class MainActivity extends AppCompatActivity
             final String[] days = new String[countDays];
 
             daysGone = -dayLefttoStart;
-            Log.d("myLogs2", "days gone: " + daysGone);
 
             long localDate = millis;
             for (int i = 0; i < days.length; i++) {
@@ -399,6 +398,11 @@ public class MainActivity extends AppCompatActivity
 
             Intent sendIntent = MenuClick.share();
             startActivity(Intent.createChooser(sendIntent,"Поделиться"));
+
+        }
+        else if (id == R.id.nav_date_start) {
+            Intent intent2 = new Intent(this, DateStartActivity.class);
+            startActivity(intent2);
 
         } else if (id == R.id.nav_about) {
 
