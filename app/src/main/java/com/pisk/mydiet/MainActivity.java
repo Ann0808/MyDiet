@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity
 
         if(!oldDBDeleted) {
             try{
-                this.deleteDatabase(this.getFilesDir().getPath() + "MyDiet.db");
+                this.deleteDatabase("MyDiet.db");
             }catch (Exception e) {
 
             }
