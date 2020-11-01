@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity
     String lLightColor = "";
     String lColor = "";
     int pageCount = 5;
+    boolean oldDBDeleted = false;
 
     boolean fromSettings = false;
 
@@ -130,6 +131,18 @@ public class MainActivity extends AppCompatActivity
         savedProg = sPref.getInt(CommonFunctions.SAVED_PROGRAM, 0);
         savedDate = sPref.getString(CommonFunctions.DATE_START,"");
         hintDays = sPref.getBoolean(CommonFunctions.HINT_DAYS,false);
+        oldDBDeleted = sPref.getBoolean(CommonFunctions.OLDDBDELETED,false);
+
+        if(!oldDBDeleted) {
+            try{
+                this.deleteDatabase(this.getFilesDir().getPath() + "MyDiet.db");
+            }catch (Exception e) {
+
+            }
+            SharedPreferences.Editor ed = sPref.edit();
+            ed.putBoolean(CommonFunctions.OLDDBDELETED,true);
+            ed.commit();
+        }
 
         mySex = sPref.getBoolean(CommonFunctions.MY_SEX, true);
         myWeight = sPref.getInt(CommonFunctions.MY_WEIGHT, 0);

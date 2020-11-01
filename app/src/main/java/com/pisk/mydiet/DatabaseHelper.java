@@ -45,6 +45,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
     static final String PrCountDays = "countDays";
     static final String PrCountMeal = "countMeal";
     static final String Prid = "id";
+    static final String PrDescription = "description";
 
 
     private Context myContext;

@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -131,12 +132,14 @@ public class SettingsActivity extends AppCompatActivity implements
         inflaterForAlert = this.getLayoutInflater();
         builderAlert = new AlertDialog.Builder(this);
 
+        final AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
+
         // заменить это потом на получение по апи ++
         dbHelper = new DatabaseHelper(getApplicationContext());
         dbHelper.create_db();
         db = dbHelper.open();
         String table = "programs as R ";
-        String columns[] = { "R.id as id, R.name as name", "R.image as image", "R.color as color", "R.lightColor as lightColor"};
+        String columns[] = { "R.id as id, R.name as name", "R.image as image", "R.color as color", "R.lightColor as lightColor", "R.description as description"};
         cursor = db.query(table, columns, null, null, null, null, null);
 
         if (cursor != null) {
@@ -146,11 +149,13 @@ public class SettingsActivity extends AppCompatActivity implements
                 int colorColIndex = cursor.getColumnIndex(dbHelper.PrCOLOR);
                 int idColIndex = cursor.getColumnIndex(dbHelper.Prid);
                 int idLightColor = cursor.getColumnIndex(dbHelper.PrlightColor);
+                int idDescription = cursor.getColumnIndex(dbHelper.PrDescription);
 
                 do {
                     String lName = cursor.getString(nameColIndex);
+                    final String lShortDescr = cursor.getString(idDescription);
                     String lImage = cursor.getString(imageColIndex);
-                    String lColor = cursor.getString(colorColIndex);
+                    final String lColor = cursor.getString(colorColIndex);
                     final int lProgramNumber = cursor.getInt(idColIndex);
                     final String  lLightColor = cursor.getString(idLightColor);
 
@@ -182,10 +187,45 @@ public class SettingsActivity extends AppCompatActivity implements
                         @Override
                         public void onClick(View v) {
                             v.setBackgroundResource(R.drawable.custom_shape);
-                            GradientDrawable drawable = (GradientDrawable) v.getBackground();
-                            drawable.setColor(Color.parseColor(lLightColor));
-                            makeAnimationButton();
-                            setSAVED_PROGRAM(lProgramNumber);
+                            v.startAnimation(buttonClick);
+                            //final GradientDrawable drawable = (GradientDrawable) v.getBackground();
+                            //drawable.setColor(Color.parseColor(lLightColor));
+                            //test comm
+                            View contentAlert =  inflaterForAlert.inflate(R.layout.dialog_program_info, null);
+                            builderAlert.setView(contentAlert);
+                            TextView tvProgramInfo = (TextView) contentAlert.findViewById(R.id.programInfoView);
+                            tvProgramInfo.setText(lShortDescr);
+                            builderAlert.setNegativeButton("Посмотреть другие", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //drawable.setColor(Color.parseColor(lColor));
+                                    dialog.cancel();
+
+                                }
+                            });
+                            builderAlert.setPositiveButton("Выбрать эту программу", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                    setSAVED_PROGRAM(lProgramNumber);
+                                    makeAnimationButton();
+                                    //dialog.cancel();
+
+                                }
+                            });
+
+
+                            final AlertDialog alert = builderAlert.create();
+
+                            alert.setOnShowListener( new DialogInterface.OnShowListener() {
+                                @Override
+                                public void onShow(DialogInterface arg0) {
+                                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                                }
+                            });
+
+                            alert.show();
+
+                            //testcomm
                         }});
 
                 }while (cursor.moveToNext());

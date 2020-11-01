@@ -24,6 +24,7 @@ public class CommonFunctions {
     final static String CHOOSE_NEW = "choose_new";
     final static String START_AGAIN = "start_again";
     final static String FROM_SETTINGS = "from_settings";
+    final static String OLDDBDELETED = "oldDBdeleted";
 
     public static Drawable decodeDrawable(Context context, String base64) {
         Drawable ret = null;
