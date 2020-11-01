@@ -42,20 +42,12 @@
                 android:orientation="vertical">
 
 
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/settingsLayout"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginBottom="30dp"-->
-                    <!--android:orientation="horizontal">-->
-
                     <TextView
                         android:id="@+id/title1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="@font/kurale_regular"
+                        android:layout_marginBottom="30dp"
                         android:shadowColor="@color/colorPrimaryDark"
                         android:shadowDx="2"
                         android:shadowDy="2"
@@ -67,7 +59,70 @@
                         android:textSize="30sp"
                         android:textStyle="bold" />
 
-                <!--</LinearLayout>-->
+                <LinearLayout
+                    android:id="@+id/myHeightLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/titleMyHeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/robotoreg"
+                        android:paddingRight="5dp"
+                        android:shadowColor="@color/colorPrimaryDark"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="6"
+                        android:text="Рост (см):"
+                        android:textColor="@color/colorWhite"
+                        android:textColorLink="@color/colorWhite"
+                        android:textSize="30sp" />
+
+                    <EditText
+                        android:id="@+id/myHeight"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:gravity="center"
+                        android:digits="0123456789"
+                        android:ems="10"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@font/robotoreg"
+                        android:inputType="numberDecimal"
+                        android:maxLength="3"
+                        android:shadowColor="@color/colorPrimaryDark"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="3"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="30sp" />
+
+                    <Button
+                        android:id="@+id/editHeightButton"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/ic_mode_edit_black_24dp"/>
+
+                    <Button
+                        android:id="@+id/saveHeightButton"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:visibility="invisible"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/ic_save"/>
+
+                </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/myWeightLayout"
@@ -88,21 +143,21 @@
                     android:shadowDx="2"
                     android:shadowDy="2"
                     android:shadowRadius="6"
-                    android:text="Мой вес (кг):"
+                    android:text="Вес (кг):"
                     android:textColor="@color/colorWhite"
                     android:textColorLink="@color/colorWhite"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="30sp" />
 
                 <EditText
                     android:id="@+id/myWeight"
-                    android:layout_width="44dp"
+                    android:layout_width="55dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@null"
                     android:clickable="false"
                     android:cursorVisible="false"
                     android:digits="0123456789"
+                    android:gravity="center"
                     android:ems="10"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
@@ -114,9 +169,8 @@
                     android:shadowDy="2"
                     android:shadowRadius="3"
                     android:layout_marginRight="10dp"
-                    android:text="123"
                     android:textColor="@color/colorWhite"
-                    android:textSize="20sp" />
+                    android:textSize="30sp" />
 
                 <Button
                     android:id="@+id/editWeightButton"
@@ -134,7 +188,145 @@
                     android:background="@drawable/ic_save"/>
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/myAgeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/titleMyAge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/robotoreg"
+                        android:paddingRight="5dp"
+                        android:shadowColor="@color/colorPrimaryDark"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="6"
+                        android:text="Возраст:"
+                        android:textColor="@color/colorWhite"
+                        android:textColorLink="@color/colorWhite"
+                        android:textSize="30sp" />
+
+                    <EditText
+                        android:id="@+id/myAge"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:digits="0123456789"
+                        android:ems="10"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@font/robotoreg"
+                        android:inputType="numberDecimal"
+                        android:maxLength="3"
+                        android:shadowColor="@color/colorPrimaryDark"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="3"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="30sp" />
+
+                    <Button
+                        android:id="@+id/editAgeButton"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/ic_mode_edit_black_24dp"/>
+
+                    <Button
+                        android:id="@+id/saveAgeButton"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:visibility="invisible"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/ic_save"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mySexLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/titleMySex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/robotoreg"
+                        android:paddingRight="5dp"
+                        android:shadowColor="@color/colorPrimaryDark"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="6"
+                        android:text="Пол:"
+                        android:textColor="@color/colorWhite"
+                        android:textColorLink="@color/colorWhite"
+                        android:textSize="30sp" />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupSex"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@color/colorGrey"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        >
+
+                        <RadioButton
+                            android:id="@+id/radio_female"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Ж"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="20sp"
+                            android:shadowColor="@color/colorPrimaryDark"
+                            android:shadowDx="2"
+                            android:shadowDy="2"
+                            android:shadowRadius="6"
+                            android:theme="@style/MyRadioButtonWite"
+                            android:scaleX="1.2"
+                            android:scaleY="1.2"
+                            android:translationX="30dp" />
+
+                        <RadioButton
+                            android:id="@+id/radio_male"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="М"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="20sp"
+                            android:shadowColor="@color/colorPrimaryDark"
+                            android:shadowDx="2"
+                            android:shadowDy="2"
+                            android:shadowRadius="6"
+                            android:theme="@style/MyRadioButtonWite"
+                            android:scaleX="1.2"
+                            android:scaleY="1.2"
+                            android:translationX="30dp" />
+                    </RadioGroup>
+
+                </LinearLayout>
+
             </LinearLayout>
+
         </ScrollView>
 
 

@@ -30,6 +30,11 @@
         <item name="colorControlActivated">@color/colorBalance</item>
     </style>
 
+    <style name="MyRadioButtonWite" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlActivated">@android:color/white</item>
+    </style>
+
     <style name="MyRadioButtonProgram1" parent="Theme.AppCompat.Light">
         <item name="colorControlNormal">@color/colorSuperFit</item>
         <item name="colorControlActivated">@color/colorSuperFit</item>

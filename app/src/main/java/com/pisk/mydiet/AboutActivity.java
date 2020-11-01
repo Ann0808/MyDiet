@@ -163,6 +163,11 @@ public class AboutActivity extends AppCompatActivity
             startActivity(Intent.createChooser(sendIntent,"Поделиться"));
 
 
+        }
+        else if (id == R.id.nav_date_start) {
+            Intent intent2 = new Intent(this, DateStartActivity.class);
+            startActivity(intent2);
+
         } else if (id == R.id.nav_about) {
 
 

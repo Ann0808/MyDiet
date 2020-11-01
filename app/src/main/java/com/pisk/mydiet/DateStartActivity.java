@@ -305,6 +305,11 @@ public class DateStartActivity extends AppCompatActivity
 
         }
         else if (id == R.id.nav_manage) {
+            Intent intent2 = new Intent(this, MyPageActivity.class);
+            startActivity(intent2);
+        }
+
+        else if (id == R.id.nav_date_start) {
 
 
         }

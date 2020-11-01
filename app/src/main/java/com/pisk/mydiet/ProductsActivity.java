@@ -211,12 +211,18 @@ public class ProductsActivity extends AppCompatActivity
             startActivity(intent2);
 
         }
+        else if (id == R.id.nav_date_start) {
+            Intent intent2 = new Intent(this, DateStartActivity.class);
+            startActivity(intent2);
+
+        }
         else if (id == R.id.nav_share) {
 
             Intent sendIntent = MenuClick.share();
             startActivity(Intent.createChooser(sendIntent,"Поделиться"));
 
         }
+
         else if (id == R.id.nav_about) {
 
             Intent intent2 = new Intent(this, AboutActivity.class);
