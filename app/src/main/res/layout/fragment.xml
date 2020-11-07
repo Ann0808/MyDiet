@@ -141,6 +141,33 @@
                 <!--android:visibility="invisible"-->
                 <!--&gt;</TextView>-->
 
+            <TextView
+                android:id="@+id/tvAddition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:padding="0dp"
+                android:text="Дополнительно:"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:fontFamily="@font/kurale_regular"
+                android:textSize="20sp"
+                android:visibility="gone"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/addition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_margin="10dp"
+                android:textSize="17sp"
+                android:visibility="gone"
+                android:fontFamily="@font/robotoreg"/>
+
         </LinearLayout>
     </ScrollView>
 

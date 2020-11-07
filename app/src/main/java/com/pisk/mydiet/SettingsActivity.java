@@ -136,7 +136,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
         // заменить это потом на получение по апи ++
         dbHelper = new DatabaseHelper(getApplicationContext());
-        dbHelper.create_db();
+        //dbHelper.create_db();
         db = dbHelper.open();
         String table = "programs as R ";
         String columns[] = { "R.id as id, R.name as name", "R.image as image", "R.color as color", "R.lightColor as lightColor", "R.description as description"};

@@ -42,6 +42,7 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
     String image;
     String name;
     Bitmap bm;
+    String additionInfo = "";
     //for time
 
     String backColor;
@@ -83,7 +84,7 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
 
         String columns[] = { "R.recipe as recipe", "R.ingridients as ingridients",
                 "R.kkal as kkal",
-                "I.image as image",  "R.name as name",};
+                "I.image as image",  "R.name as name", "R.additionInfo as additionInfo"};
 
         String WHERE = dbHelper.PROGRAM_NUMBER + "='" + programNumber + "' AND " +
                 dbHelper.FOOD_TIME + "='" + pageNumber + "' AND " +
@@ -99,6 +100,7 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
                 int kkalColIndex = cursor.getColumnIndex(dbHelper.KKAL);
                 int imageColIndex = cursor.getColumnIndex(dbHelper.IMAGE);
                 int nameColIndex = cursor.getColumnIndex(dbHelper.NAME);
+                int additionColIndex = cursor.getColumnIndex(dbHelper.ADIITION);
 
                 do {
                     products = cursor.getString(ingridientsColIndex);
@@ -106,6 +108,7 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
                     kcalText = cursor.getString(kkalColIndex);
                     image = cursor.getString(imageColIndex);
                     name = cursor.getString(nameColIndex);
+                    additionInfo = cursor.getString(additionColIndex);
                     String b64 = image;
 
                     byte[] decodedString = Base64.decode(b64, Base64.DEFAULT);
@@ -133,6 +136,14 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
         TextView recipe = (TextView) view.findViewById(R.id.recipe);
         TextView kcal = (TextView) view.findViewById(R.id.tvPage3);
         TextView nameDish = view.findViewById(R.id.nameDish);
+        TextView addition = view.findViewById(R.id.addition);
+        TextView additionTitle = view.findViewById(R.id.tvAddition);
+
+        if (additionInfo != null && additionInfo.length() > 0) {
+            additionTitle.setVisibility(View.VISIBLE);
+            addition.setText(additionInfo);
+            addition.setVisibility(View.VISIBLE);
+        }
 
         TextView viewDate = (TextView) view.findViewById(R.id.date);
         ViewGroup.LayoutParams params = viewDate.getLayoutParams();
