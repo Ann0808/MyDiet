@@ -42,6 +42,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -139,6 +140,13 @@ public class MainActivity extends AppCompatActivity
             }catch (Exception e) {
 
             }
+            try {
+                File file = new File(this.getFilesDir().getPath() + "MyDiet.db");
+                file.delete();
+            } catch (Exception ex) {
+
+            }
+
             SharedPreferences.Editor ed = sPref.edit();
             ed.putBoolean(CommonFunctions.OLDDBDELETED,true);
             ed.commit();

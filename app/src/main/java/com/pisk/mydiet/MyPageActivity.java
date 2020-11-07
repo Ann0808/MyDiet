@@ -2,9 +2,11 @@ package com.pisk.mydiet;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -190,6 +192,22 @@ public class MyPageActivity extends AppCompatActivity
 
                 Toast.makeText(getApplicationContext(),"Данные обновлены",Toast.LENGTH_SHORT).show();
 
+                //test databaes
+//                DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
+//                dbHelper.create_db();
+//                SQLiteDatabase db = dbHelper.open();
+//                ContentValues cv = new ContentValues();
+//                cv.put("color", "#e31919");
+//                try {
+//                    db.update("programs", cv, "id = ?",
+//                            new String[] { "2" });
+//                    dbHelper.close();
+//                } catch (Exception e) {
+//                    Log.d("dblogs",e.getMessage());
+//                }
+
+
+
             }
         });
 
@@ -203,10 +221,6 @@ public class MyPageActivity extends AppCompatActivity
                 myHeight.setSelection(myHeight.getText().length());
                 myHeight.setBackgroundColor(Color.parseColor(lColor));
                 editHeightButton.setVisibility(View.INVISIBLE);
-                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) editHeightButton.getLayoutParams();
-                params.width = 0;
-                editHeightButton.setLayoutParams(params);
-                saveHeightButton.setVisibility(View.VISIBLE);
                 buttonSave.setVisibility(View.VISIBLE);
             }
         });

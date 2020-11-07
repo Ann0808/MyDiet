@@ -61,15 +61,18 @@ class DatabaseHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion,  int newVersion) {
+//        db.execSQL("DROP TABLE IF EXISTS "+CONTACTS_TABLE_NAME);
+//        onCreate(db);
     }
 
     void create_db(){
         InputStream myInput = null;
         OutputStream myOutput = null;
+
         try {
             File file = new File(DB_PATH);
+
             if (!file.exists()) {
-                Log.d("dblogs", "jj");
                 this.getReadableDatabase();
                 //получаем локальную бд как поток
                 myInput = myContext.getAssets().open(DB_NAME);
@@ -97,6 +100,6 @@ class DatabaseHelper extends SQLiteOpenHelper {
     }
     public SQLiteDatabase open()throws SQLException {
 
-        return SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READONLY);
+        return SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READWRITE);
     }
 }
