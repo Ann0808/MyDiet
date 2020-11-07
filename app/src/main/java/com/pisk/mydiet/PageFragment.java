@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.AnimatedVectorDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -12,14 +14,18 @@ import androidx.annotation.RequiresApi;
 import com.google.android.material.navigation.NavigationView;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
+
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PageFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -49,6 +55,10 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
     DatabaseHelper dbHelper;
     SQLiteDatabase db;
     Cursor cursor;
+    Button likeButton, unLikeButton;
+    ImageView heartImage;
+    AnimatedVectorDrawableCompat avd;
+    AnimatedVectorDrawable avd2;
 
     //TextView viewDate;
 
@@ -138,6 +148,43 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
         TextView nameDish = view.findViewById(R.id.nameDish);
         TextView addition = view.findViewById(R.id.addition);
         TextView additionTitle = view.findViewById(R.id.tvAddition);
+        likeButton = view.findViewById(R.id.likeButton);
+        unLikeButton = view.findViewById(R.id.unLikeButton);
+        heartImage = view.findViewById(R.id.heartImage);
+
+        final Drawable drawable = heartImage.getDrawable();
+
+        likeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+
+                likeButton.setVisibility(View.GONE);
+                unLikeButton.setVisibility(View.VISIBLE);
+                heartImage.setAlpha(0.70f);
+
+                if (drawable instanceof AnimatedVectorDrawableCompat) {
+                    avd = (AnimatedVectorDrawableCompat) drawable;
+                    avd.start();
+                } else if (drawable instanceof AnimatedVectorDrawable) {
+                    avd2 = (AnimatedVectorDrawable) drawable;
+                    avd2.start();
+                }
+
+                Toast.makeText(getContext(),"Рецепт добавлен в избранное",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        unLikeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+
+                unLikeButton.setVisibility(View.GONE);
+                likeButton.setVisibility(View.VISIBLE);
+                Toast.makeText(getContext(),"Рецепт удален из избранного",Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
         if (additionInfo != null && additionInfo.length() > 0) {
             additionTitle.setVisibility(View.VISIBLE);
@@ -172,6 +219,8 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
 
 
         tvImage.setImageBitmap(bm);
+
+
 
         return view;
     }
