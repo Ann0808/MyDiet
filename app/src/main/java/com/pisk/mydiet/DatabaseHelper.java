@@ -57,6 +57,13 @@ class DatabaseHelper extends SQLiteOpenHelper {
         OutputStream myOutput = null;
         try {
             File file = new File(DB_PATH);
+            if (file.exists()) {
+                try {
+                    file.delete();
+                } catch (Exception ex) {
+
+                }
+            }
             if (!file.exists()) {
                 Log.d("dblogs", "jj");
                 this.getReadableDatabase();
