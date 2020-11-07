@@ -50,7 +50,7 @@ public class MyPageActivity extends AppCompatActivity
     String lColor = "";
     //EditText viewName;
     LinearLayout  bigLayout, lay2;
-    Button editWeightButton, saveWeightButton, editHeightButton, saveHeightButton, editAgeButton, saveAgeButton;
+    Button editWeightButton, saveWeightButton, editHeightButton, saveHeightButton, editAgeButton, saveAgeButton, buttonSave;
     EditText myWeight, myHeight, myAge;
     RadioGroup radioSex;
 
@@ -119,6 +119,10 @@ public class MyPageActivity extends AppCompatActivity
         myHeight = findViewById(R.id.myHeight);
         myAge = findViewById(R.id.myAge);
         radioSex = findViewById(R.id.radioGroupSex);
+        buttonSave = findViewById(R.id.buttonSave);
+
+        GradientDrawable drawable = (GradientDrawable) buttonSave.getBackground();
+        drawable.setColor(Color.parseColor(lColor));
 
         radioSex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
@@ -150,6 +154,45 @@ public class MyPageActivity extends AppCompatActivity
         myHeight.setText(Integer.toString(userHeight));
         myAge.setText(Integer.toString(userAge));
 
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                myWeight.setClickable(false);
+                myWeight.setCursorVisible(false);
+                myWeight.setFocusable(false);
+                myWeight.setFocusableInTouchMode(false);
+                myWeight.setSelection(myWeight.getText().length());
+                myWeight.setBackgroundResource(0);
+                editWeightButton.setVisibility(View.VISIBLE);
+
+                myHeight.setClickable(false);
+                myHeight.setCursorVisible(false);
+                myHeight.setFocusable(false);
+                myHeight.setFocusableInTouchMode(false);
+                myHeight.setSelection(myHeight.getText().length());
+                myHeight.setBackgroundResource(0);
+                editHeightButton.setVisibility(View.VISIBLE);
+
+                myAge.setClickable(false);
+                myAge.setCursorVisible(false);
+                myAge.setFocusable(false);
+                myAge.setFocusableInTouchMode(false);
+                myAge.setSelection(myAge.getText().length());
+                myAge.setBackgroundResource(0);
+                editAgeButton.setVisibility(View.VISIBLE);
+
+                SharedPreferences.Editor ed = sPref.edit();
+                ed.putInt(CommonFunctions.MY_HEIGHT, Integer.parseInt(myHeight.getText().toString()));
+                ed.putInt(CommonFunctions.MY_WEIGHT, Integer.parseInt(myWeight.getText().toString()));
+                ed.putInt(CommonFunctions.MY_AGE, Integer.parseInt(myAge.getText().toString()));
+                ed.commit();
+
+                buttonSave.setVisibility(View.INVISIBLE);
+
+                Toast.makeText(getApplicationContext(),"Данные обновлены",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
         editHeightButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 myHeight.setClickable(true);
@@ -164,6 +207,7 @@ public class MyPageActivity extends AppCompatActivity
                 params.width = 0;
                 editHeightButton.setLayoutParams(params);
                 saveHeightButton.setVisibility(View.VISIBLE);
+                buttonSave.setVisibility(View.VISIBLE);
             }
         });
 
@@ -201,10 +245,11 @@ public class MyPageActivity extends AppCompatActivity
                 myWeight.setSelection(myWeight.getText().length());
                 myWeight.setBackgroundColor(Color.parseColor(lColor));
                 editWeightButton.setVisibility(View.INVISIBLE);
-                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) editWeightButton.getLayoutParams();
-                params.width = 0;
-                editWeightButton.setLayoutParams(params);
-                saveWeightButton.setVisibility(View.VISIBLE);
+//                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) editWeightButton.getLayoutParams();
+//                params.width = 0;
+//                editWeightButton.setLayoutParams(params);
+//                saveWeightButton.setVisibility(View.VISIBLE);
+                buttonSave.setVisibility(View.VISIBLE);
             }
         });
 
@@ -242,10 +287,11 @@ public class MyPageActivity extends AppCompatActivity
                 myAge.setSelection(myAge.getText().length());
                 myAge.setBackgroundColor(Color.parseColor(lColor));
                 editAgeButton.setVisibility(View.INVISIBLE);
-                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) editAgeButton.getLayoutParams();
-                params.width = 0;
-                editAgeButton.setLayoutParams(params);
-                saveAgeButton.setVisibility(View.VISIBLE);
+//                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) editAgeButton.getLayoutParams();
+//                params.width = 0;
+//                editAgeButton.setLayoutParams(params);
+//                saveAgeButton.setVisibility(View.VISIBLE);
+                buttonSave.setVisibility(View.VISIBLE);
             }
         });
 

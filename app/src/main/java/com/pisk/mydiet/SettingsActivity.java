@@ -247,7 +247,7 @@ public class SettingsActivity extends AppCompatActivity implements
         ed.putString(DATE_START,currentDate);
         ed.commit();
 
-        if (chooseNew) {
+       // if (chooseNew) {
 
             mySex = sPref.getBoolean(MY_SEX, true);
             myWeight = sPref.getInt(MY_WEIGHT, 0);
@@ -272,7 +272,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 age.setText(Integer.toString(myAge));
             }
 
-        }
+       // }
 
         if (startAgain) {
             Handler handler = new Handler();
@@ -355,7 +355,8 @@ public class SettingsActivity extends AppCompatActivity implements
             public void onClick(View v)
             {
 
-                if (growth.getText().length() == 0 || weight.getText().length() == 0 || age.getText().length() == 0)  {
+                if ((growth.getText().length() == 0 || weight.getText().length() == 0 || age.getText().length() == 0) ||
+                        (Integer.valueOf(weight.getText().toString()) == 0 || Integer.valueOf(growth.getText().toString()) == 0 || Integer.valueOf(age.getText().toString()) == 0)){
 
                     builderAlert.setView(inflaterForAlert.inflate(R.layout.dialog_enter_body_params, null));
                     builderAlert.setPositiveButton("ОК", new DialogInterface.OnClickListener() {

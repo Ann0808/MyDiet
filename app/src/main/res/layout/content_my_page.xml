@@ -333,5 +333,35 @@
     </LinearLayout>
 
 
+    <LinearLayout
+        android:id="@+id/buttonLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_shape"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="5"
+            android:text="Сохранить"
+            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+            android:textColor="@color/colorWhite"
+            android:textColorLink="@color/colorWhite"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            />
+
+    </LinearLayout>
 
 </RelativeLayout>
