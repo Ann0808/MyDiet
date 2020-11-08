@@ -24,21 +24,21 @@
             <set>
                 <objectAnimator
                     android:propertyName="scaleX"
-                    android:duration="400"
+                    android:duration="600"
                     android:valueFrom="0"
                     android:valueTo="0.85"
                     android:valueType="floatType"
                     android:interpolator="@android:anim/overshoot_interpolator"/>
                 <objectAnimator
                     android:propertyName="scaleY"
-                    android:duration="400"
+                    android:duration="600"
                     android:valueFrom="0"
                     android:valueTo="0.85"
                     android:valueType="floatType"
                     android:interpolator="@android:anim/overshoot_interpolator"/>
                 <objectAnimator
                     android:propertyName="scaleX"
-                    android:startOffset="600"
+                    android:startOffset="800"
                     android:duration="200"
                     android:valueFrom="0.85"
                     android:valueTo="0"
@@ -46,7 +46,7 @@
                     android:interpolator="@android:anim/accelerate_interpolator"/>
                 <objectAnimator
                     android:propertyName="scaleY"
-                    android:startOffset="600"
+                    android:startOffset="800"
                     android:duration="200"
                     android:valueFrom="0.85"
                     android:valueTo="0"
@@ -60,15 +60,15 @@
             <set>
                 <objectAnimator
                     android:propertyName="fillAlpha"
-                    android:duration="50"
+                    android:duration="300"
                     android:valueFrom="0"
                     android:valueTo="1"
                     android:valueType="floatType"
                     android:interpolator="@android:anim/accelerate_interpolator"/>
                 <objectAnimator
                     android:propertyName="fillAlpha"
-                    android:startOffset="750"
-                    android:duration="50"
+                    android:startOffset="700"
+                    android:duration="300"
                     android:valueFrom="1"
                     android:valueTo="0"
                     android:valueType="floatType"

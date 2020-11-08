@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
+import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,6 +50,8 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
     String name;
     Bitmap bm;
     String additionInfo = "";
+    int category;
+    int kcalCount;
     //for time
 
     String backColor;
@@ -93,7 +96,7 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
         String table = "recipes as R inner join images as I on R.image_id = I.id";
 
         String columns[] = { "R.recipe as recipe", "R.ingridients as ingridients",
-                "R.kkal as kkal",
+                "R.kkal as kkal", "R.kkalCount as kkalCount", "R.category as category",
                 "I.image as image",  "R.name as name", "R.additionInfo as additionInfo"};
 
         String WHERE = dbHelper.PROGRAM_NUMBER + "='" + programNumber + "' AND " +
@@ -108,16 +111,20 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
                 int recipeColIndex = cursor.getColumnIndex(dbHelper.RECIPE);
                 int ingridientsColIndex = cursor.getColumnIndex(dbHelper.INRIDIENTS);
                 int kkalColIndex = cursor.getColumnIndex(dbHelper.KKAL);
+                int kkalCountColIndex = cursor.getColumnIndex(dbHelper.KKAL_COUNT);
                 int imageColIndex = cursor.getColumnIndex(dbHelper.IMAGE);
                 int nameColIndex = cursor.getColumnIndex(dbHelper.NAME);
                 int additionColIndex = cursor.getColumnIndex(dbHelper.ADIITION);
+                int categoryColIndex = cursor.getColumnIndex(dbHelper.CATEGORY_RECIPE);
 
                 do {
                     products = cursor.getString(ingridientsColIndex);
                     recipeText = cursor.getString(recipeColIndex);
                     kcalText = cursor.getString(kkalColIndex);
+                    kcalCount = cursor.getInt(kkalCountColIndex);
                     image = cursor.getString(imageColIndex);
                     name = cursor.getString(nameColIndex);
+                    category = cursor.getInt(categoryColIndex);
                     additionInfo = cursor.getString(additionColIndex);
                     String b64 = image;
 
@@ -143,7 +150,7 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
         View view = inflater.inflate(R.layout.fragment, null);
 
         TextView ingridients = (TextView) view.findViewById(R.id.ingridients);
-        TextView recipe = (TextView) view.findViewById(R.id.recipe);
+        final TextView recipe = (TextView) view.findViewById(R.id.recipe);
         TextView kcal = (TextView) view.findViewById(R.id.tvPage3);
         TextView nameDish = view.findViewById(R.id.nameDish);
         TextView addition = view.findViewById(R.id.addition);
@@ -152,12 +159,48 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
         unLikeButton = view.findViewById(R.id.unLikeButton);
         heartImage = view.findViewById(R.id.heartImage);
 
+        dbHelper = new DatabaseHelper(this.getContext());
+        db = dbHelper.open();
+
+
+        String table = "loving_recipes as R";
+
+        String columns[] = { "R.name as name"};
+
+        String WHERE = dbHelper.NAME + "='" + name + " " + Integer.toString(kcalCount) + " ккал" + "'";
+        try {
+            cursor = db.query(table, columns, WHERE, null, null, null, null);
+
+            if (cursor != null) {
+                if (cursor.moveToFirst()) {
+                    likeButton.setVisibility(View.GONE);
+                    unLikeButton.setVisibility(View.VISIBLE);
+                }
+            }
+        } catch (Exception ex) {
+            Log.d("dblogs",ex.getMessage());
+        }
+
+        dbHelper.close();
+
+
         final Drawable drawable = heartImage.getDrawable();
 
         likeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
 
+                likeButton.setClickable(false);
+                unLikeButton.setClickable(false);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        likeButton.setClickable(true);
+                        unLikeButton.setClickable(true);
+                    }
+                }, 1500);
+                String lovingName = name + " " + Integer.toString(kcalCount) + " ккал";
+                CommonFunctions.AddRecipeToLoving(dbHelper, lovingName, category, recipeText, products, kcalText, image, additionInfo);
                 likeButton.setVisibility(View.GONE);
                 unLikeButton.setVisibility(View.VISIBLE);
                 heartImage.setAlpha(0.70f);
@@ -179,6 +222,17 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
             public void onClick(View v)
             {
 
+                likeButton.setClickable(false);
+                unLikeButton.setClickable(false);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        likeButton.setClickable(true);
+                        unLikeButton.setClickable(true);
+                    }
+                }, 1500);
+                String lovingName = name + " " + Integer.toString(kcalCount) + " ккал";
+                CommonFunctions.removeRecipeToLoving(dbHelper, lovingName);
                 unLikeButton.setVisibility(View.GONE);
                 likeButton.setVisibility(View.VISIBLE);
                 Toast.makeText(getContext(),"Рецепт удален из избранного",Toast.LENGTH_SHORT).show();

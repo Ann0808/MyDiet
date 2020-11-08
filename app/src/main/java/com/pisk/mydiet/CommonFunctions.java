@@ -1,10 +1,12 @@
 package com.pisk.mydiet;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.util.Base64;
+import android.util.Log;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -25,6 +27,7 @@ public class CommonFunctions {
     final static String START_AGAIN = "start_again";
     final static String FROM_SETTINGS = "from_settings";
     final static String OLDDBDELETED = "oldDBdeleted";
+    
 
     public static Drawable decodeDrawable(Context context, String base64) {
         Drawable ret = null;
@@ -69,7 +72,7 @@ public class CommonFunctions {
 
             }
         }
-
+        dbHelper.close();
         return prInro;
 
     }
@@ -113,5 +116,42 @@ public class CommonFunctions {
         }
 
         return (norm%100 < 50) ? norm/100*100 : norm/100*100 + 100;
+    }
+
+    public static void AddRecipeToLoving(DatabaseHelper dbHelper, String name, int category, String recipe, String ingridients, String kkal, String image, String additionInfo){
+
+        dbHelper.create_db();
+        SQLiteDatabase db = dbHelper.open();
+        ContentValues cv = new ContentValues();
+        cv.put("name", name);
+        cv.put("category", category);
+        cv.put("recipe", recipe);
+        cv.put("ingridients", ingridients);
+        cv.put("kkal", kkal);
+        cv.put("image", image);
+        cv.put("additionInfo", additionInfo);
+        try {
+            db.insert("loving_recipes", null, cv);
+        } catch (Exception ex) {
+            Log.d("dblogs", ex.getMessage());
+        }
+        dbHelper.close();
+
+    }
+
+    public static void removeRecipeToLoving(DatabaseHelper dbHelper, String name){
+
+        dbHelper.create_db();
+        SQLiteDatabase db = dbHelper.open();
+        try {
+            db.delete("loving_recipes",
+                    "NAME = ?",
+                    new String[] {name});
+        } catch (Exception ex) {
+            Log.d("dblogs", ex.getMessage());
+        }
+
+        dbHelper.close();
+
     }
 }

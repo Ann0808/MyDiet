@@ -14,6 +14,10 @@
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_shopping"
             android:title="Список продуктов" />
+        <item
+            android:id="@+id/nav_loving"
+            android:icon="@drawable/ic_favorite_black"
+            android:title="Избранные рецепты" />
         <!--<item-->
             <!--android:id="@+id/nav_slideshow"-->
             <!--android:icon="@drawable/ic_menu_main"-->

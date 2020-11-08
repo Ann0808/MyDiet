@@ -26,9 +26,11 @@ class DatabaseHelper extends SQLiteOpenHelper {
     static final String RECIPE = "recipe";
     static final String INRIDIENTS = "ingridients";
     static final String KKAL = "kkal";
+    static final String KKAL_COUNT = "kkalCount";
     static final String IMAGE = "image";
     static final String NAME = "name";
     static final String ADIITION = "additionInfo";
+    static final String CATEGORY_RECIPE = "category";
 
     // названия столбцов TABLE_PRODUCTS
     static final String WEEK = "week";
