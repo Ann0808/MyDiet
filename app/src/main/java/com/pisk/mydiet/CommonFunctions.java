@@ -154,4 +154,10 @@ public class CommonFunctions {
         dbHelper.close();
 
     }
+
+    public static String getTheKeyLovingRecipes(String name, int kkal){
+
+      return name + "\n" + Integer.toString(kkal) + " ккал";
+
+    }
 }

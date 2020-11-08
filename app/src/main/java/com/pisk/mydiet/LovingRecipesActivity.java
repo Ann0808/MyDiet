@@ -1,6 +1,8 @@
 package com.pisk.mydiet;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
@@ -31,25 +33,18 @@ import androidx.drawerlayout.widget.DrawerLayout;
 public class LovingRecipesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ListView listView;
     LinearLayout layCategories;
-    private TextView titleView;
-    String lLightColor = "";
     String lColor = "";
-    int countDays = 0;
-    int programNumber;
-    int pageCount = 5;
 
     View hView;
-    ImageView menuImage;
+    DatabaseHelper dbHelper;
+    SharedPreferences sPref;
+    int savedProg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loving_recipes);
-
-        Intent intentTmp = getIntent();
-        programNumber = intentTmp.getIntExtra("arg_program_number",0);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -72,7 +67,14 @@ public class LovingRecipesActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
+        savedProg = sPref.getInt(CommonFunctions.SAVED_PROGRAM, 0);
+
+        dbHelper = new DatabaseHelper(getApplicationContext());
+        ProgramInfo prInfo = CommonFunctions.getProgramInfoFromDatabase(dbHelper,savedProg);
+        lColor = prInfo.lColor;
         hView =  navigationView.getHeaderView(0);
+        hView.getBackground().setColorFilter(Color.parseColor(lColor),android.graphics.PorterDuff.Mode.SRC_IN);
         layCategories = findViewById(R.id.layCategories);
 
 
@@ -86,13 +88,16 @@ public class LovingRecipesActivity extends AppCompatActivity
                     getResources().getDimension(R.dimen.button_height),
                     getResources().getDisplayMetrics()
             );
+
             buttonCategory.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, buttonProgramHeight));
             buttonCategory.setText(cat.categoryName());
             buttonCategory.setGravity(Gravity.CENTER);
             buttonCategory.setShadowLayer(5,1,1, R.color.colorPrimaryDark);
             buttonCategory.setTextColor(getResources().getColor(R.color.colorWhite));
-            buttonCategory.setTextSize(TypedValue.COMPLEX_UNIT_SP,22);
+            buttonCategory.setTextSize(TypedValue.COMPLEX_UNIT_SP,23);
             buttonCategory.setBackgroundResource(R.drawable.custom_shape);
+            GradientDrawable drawable = (GradientDrawable) buttonCategory.getBackground();
+            drawable.setColor(Color.parseColor(lColor));
             buttonCategory.setCompoundDrawablePadding(-100);
             buttonCategory.setPadding(20,0,100,0);
             Drawable myDrawable = getResources().getDrawable(cat.categoryImage());
@@ -103,6 +108,24 @@ public class LovingRecipesActivity extends AppCompatActivity
             } catch (Exception ex) {
                 Log.d("dblogs", ex.getMessage());
             }
+
+            final String categoryName = cat.categoryName();
+            final int categoryNumber = cat.number();
+            final int categoryImage = cat.categoryImage();
+            final Intent intent = new Intent(this, LovingRecipesListActivity.class);
+            buttonCategory.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v)
+                {
+
+
+                    intent.putExtra("category_name",categoryName);
+                    intent.putExtra("category_number",categoryNumber);
+                    intent.putExtra("category_image",categoryImage);
+                    intent.putExtra("color",lColor);
+                    startActivity(intent);
+
+                }
+            });
 
         }
 

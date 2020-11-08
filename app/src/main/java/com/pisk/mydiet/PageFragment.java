@@ -167,7 +167,7 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
 
         String columns[] = { "R.name as name"};
 
-        String WHERE = dbHelper.NAME + "='" + name + " " + Integer.toString(kcalCount) + " ккал" + "'";
+        String WHERE = dbHelper.NAME + "='" + CommonFunctions.getTheKeyLovingRecipes(name, kcalCount) + "'";
         try {
             cursor = db.query(table, columns, WHERE, null, null, null, null);
 
@@ -199,7 +199,7 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
                         unLikeButton.setClickable(true);
                     }
                 }, 1500);
-                String lovingName = name + " " + Integer.toString(kcalCount) + " ккал";
+                String lovingName = CommonFunctions.getTheKeyLovingRecipes(name, kcalCount);
                 CommonFunctions.AddRecipeToLoving(dbHelper, lovingName, category, recipeText, products, kcalText, image, additionInfo);
                 likeButton.setVisibility(View.GONE);
                 unLikeButton.setVisibility(View.VISIBLE);
@@ -231,7 +231,7 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
                         unLikeButton.setClickable(true);
                     }
                 }, 1500);
-                String lovingName = name + " " + Integer.toString(kcalCount) + " ккал";
+                String lovingName = CommonFunctions.getTheKeyLovingRecipes(name, kcalCount);
                 CommonFunctions.removeRecipeToLoving(dbHelper, lovingName);
                 unLikeButton.setVisibility(View.GONE);
                 likeButton.setVisibility(View.VISIBLE);

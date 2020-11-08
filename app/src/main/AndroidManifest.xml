@@ -30,6 +30,9 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".LovingRecipesListActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".DateStartActivity"
             android:label="@string/title_activity_date_start"
             android:theme="@style/AppTheme.NoActionBar"
