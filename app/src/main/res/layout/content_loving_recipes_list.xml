@@ -23,4 +23,22 @@
         android:textSize="23sp"
         android:layout_marginBottom="10dp" />
 
+    <ScrollView
+        android:id="@+id/scrollRecipes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/layRecipes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+        </LinearLayout>
+
+    </ScrollView>
+
 </LinearLayout>

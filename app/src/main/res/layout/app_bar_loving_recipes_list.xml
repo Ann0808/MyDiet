@@ -7,13 +7,6 @@
     android:orientation="vertical"
     tools:context=".LovingRecipesListActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-
-    </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_loving_recipes_list" />
 
