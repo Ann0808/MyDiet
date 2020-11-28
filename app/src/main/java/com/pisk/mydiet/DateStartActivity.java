@@ -81,7 +81,7 @@ public class DateStartActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().getItem(4).setChecked(true);
+        navigationView.getMenu().getItem(5).setChecked(true);
 
         hView =  navigationView.getHeaderView(0);
         menuImage = hView.findViewById(R.id.imageViewHead);
@@ -310,6 +310,12 @@ public class DateStartActivity extends AppCompatActivity
         }
 
         else if (id == R.id.nav_date_start) {
+
+
+        }
+        else if (id == R.id.nav_loving) {
+            Intent intent2 = new Intent(this, LovingRecipesActivity.class);
+            startActivity(intent2);
 
 
         }

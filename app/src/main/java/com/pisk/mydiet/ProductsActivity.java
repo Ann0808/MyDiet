@@ -184,6 +184,12 @@ public class ProductsActivity extends AppCompatActivity
 
 
         }
+        else if (id == R.id.nav_loving) {
+            Intent intent2 = new Intent(this, LovingRecipesActivity.class);
+            startActivity(intent2);
+
+
+        }
 //        else if (id == R.id.nav_slideshow) {
 //
 //            Intent intent2 = new Intent(this, ProgramsActivity.class);

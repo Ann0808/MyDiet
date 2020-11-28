@@ -40,6 +40,8 @@ public class LovingRecipesActivity extends AppCompatActivity
     DatabaseHelper dbHelper;
     SharedPreferences sPref;
     int savedProg;
+    boolean mySex = true;
+    int myWeight, myHeight, myAge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +68,14 @@ public class LovingRecipesActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().getItem(2).setChecked(true);
 
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
         savedProg = sPref.getInt(CommonFunctions.SAVED_PROGRAM, 0);
-
+        mySex = sPref.getBoolean(CommonFunctions.MY_SEX, true);
+        myWeight = sPref.getInt(CommonFunctions.MY_WEIGHT, 0);
+        myHeight = sPref.getInt(CommonFunctions.MY_HEIGHT, 0);
+        myAge = sPref.getInt(CommonFunctions.MY_AGE, 0);
         dbHelper = new DatabaseHelper(getApplicationContext());
         ProgramInfo prInfo = CommonFunctions.getProgramInfoFromDatabase(dbHelper,savedProg);
         lColor = prInfo.lColor;
@@ -179,6 +185,16 @@ public class LovingRecipesActivity extends AppCompatActivity
             startActivity(intent2);
 
         }
+        else if (id == R.id.nav_change) {
+            Intent intent2 = new Intent(this, SettingsActivity.class);
+            intent2.putExtra(CommonFunctions.MY_SEX, mySex);
+            intent2.putExtra(CommonFunctions.MY_WEIGHT, myWeight);
+            intent2.putExtra(CommonFunctions.MY_HEIGHT, myHeight);
+            intent2.putExtra(CommonFunctions.MY_AGE, myAge);
+            intent2.putExtra(CommonFunctions.CHOOSE_NEW, true);
+            startActivity(intent2);
+
+        }
 //        else if (id == R.id.nav_slideshow) {
 //
 //            Intent intent2 = new Intent(this, ProgramsActivity.class);
@@ -197,6 +213,11 @@ public class LovingRecipesActivity extends AppCompatActivity
         } else if (id == R.id.nav_about) {
 
             Intent intent2 = new Intent(this, AboutActivity.class);
+            startActivity(intent2);
+
+        }
+        else if (id == R.id.nav_date_start) {
+            Intent intent2 = new Intent(this, DateStartActivity.class);
             startActivity(intent2);
 
         } else if (id == R.id.nav_send) {

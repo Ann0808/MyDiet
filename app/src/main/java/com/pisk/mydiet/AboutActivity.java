@@ -58,7 +58,7 @@ public class AboutActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().getItem(5).setChecked(true);
+        navigationView.getMenu().getItem(6).setChecked(true);
 
         sPref = getSharedPreferences(getResources().getString(R.string.sharedPref),0);
 
@@ -161,6 +161,12 @@ public class AboutActivity extends AppCompatActivity
 
             Intent sendIntent = MenuClick.share();
             startActivity(Intent.createChooser(sendIntent,"Поделиться"));
+
+
+        }
+        else if (id == R.id.nav_loving) {
+            Intent intent2 = new Intent(this, LovingRecipesActivity.class);
+            startActivity(intent2);
 
 
         }

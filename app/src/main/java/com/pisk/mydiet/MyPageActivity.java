@@ -83,7 +83,7 @@ public class MyPageActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().getItem(3).setChecked(true);
+        navigationView.getMenu().getItem(4).setChecked(true);
 
         hView =  navigationView.getHeaderView(0);
         menuImage = hView.findViewById(R.id.imageViewHead);
@@ -383,6 +383,12 @@ public class MyPageActivity extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
             Intent intent2 = new Intent(this, ProductsActivity.class);
             startActivity(intent2);
+
+        }
+        else if (id == R.id.nav_loving) {
+            Intent intent2 = new Intent(this, LovingRecipesActivity.class);
+            startActivity(intent2);
+
 
         }
 //        else if (id == R.id.nav_slideshow) {
