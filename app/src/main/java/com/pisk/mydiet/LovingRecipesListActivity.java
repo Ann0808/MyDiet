@@ -44,6 +44,7 @@ public class LovingRecipesListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     String lColor = "";
+    int categoryNumber;
     DatabaseHelper dbHelper;
     SQLiteDatabase db;
     Cursor cursor;
@@ -63,7 +64,7 @@ public class LovingRecipesListActivity extends AppCompatActivity
 
         String nameCategory = intentTmp.getStringExtra("category_name");
         int categoryImage = intentTmp.getIntExtra("category_image",0);
-        lColor = intentTmp.getStringExtra("color");
+        categoryNumber = intentTmp.getIntExtra("category_number",0);
         TextView titleView = (TextView) findViewById(R.id.titleCategory);
         titleView.setText(nameCategory);
         layRecipes = findViewById(R.id.layRecipes);
@@ -86,9 +87,10 @@ public class LovingRecipesListActivity extends AppCompatActivity
         String table = "loving_recipes as R";
 
         String columns[] = { "R.name as name", "R.id as id"};
+        String WHERE = dbHelper.CATEGORY_RECIPE + "='" + categoryNumber + "'";
 
         try {
-            cursor = db.query(table, columns, null, null, null, null, null);
+            cursor = db.query(table, columns, WHERE, null, null, null, null);
 
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
