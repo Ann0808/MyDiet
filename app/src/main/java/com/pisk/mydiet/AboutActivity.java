@@ -31,7 +31,7 @@ public class AboutActivity extends AppCompatActivity
     SharedPreferences sPref;
     View hView;
     ImageView menuImage;
-    TextView titleView;
+    TextView titleView, myDescription;
 
 
     @Override
@@ -72,6 +72,7 @@ public class AboutActivity extends AppCompatActivity
         myAge = sPref.getInt(CommonFunctions.MY_AGE, 0);
 
         titleView = findViewById(R.id.title1);
+        myDescription = findViewById(R.id.myDescription);
 
         DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
         ProgramInfo prInfo = CommonFunctions.getProgramInfoFromDatabase(dbHelper,savedProg);
@@ -85,7 +86,8 @@ public class AboutActivity extends AppCompatActivity
         titleView.setCompoundDrawablesWithIntrinsicBounds(null, null, d, null);
 
 
-        titleView.setText( getResources().getString(R.string.app_name) );
+        titleView.setText(prInfo.lName);
+        myDescription.setText(prInfo.lDescription);
     }
 
     @Override

@@ -10,6 +10,7 @@ public class ProgramInfo {
     String lColorDay;
     String lLightColor;
 
+    String lDescription;
     int countDays;
     int countMeal;
 
@@ -17,6 +18,7 @@ public class ProgramInfo {
             String lColor,
             String lColorDay,
             String lLightColor,
+            String lDescription,
             int countDays,
             int countMeal) {
 
@@ -25,6 +27,7 @@ public class ProgramInfo {
         this.lImage = lImage;
         this.lColorDay = lColorDay;
         this.lLightColor = lLightColor;
+        this.lDescription = lDescription;
         this.countDays = countDays;
         this.countMeal = countMeal;
 

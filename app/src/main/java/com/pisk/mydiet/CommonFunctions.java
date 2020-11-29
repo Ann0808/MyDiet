@@ -53,7 +53,7 @@ public class CommonFunctions {
         SQLiteDatabase db = dbHelper.open();
         String table = "programs as R ";
         String columns[] = { "R.id as id", "R.name as name", "R.image as image", "R.color as color", "R.countMeal as countMeal",
-                "R.dayColor as dayColor", "R.lightColor as lightColor", "R.countDays as countDays"};
+                "R.dayColor as dayColor", "R.lightColor as lightColor", "R.countDays as countDays", "R.description as description"};
 
         String WHERE = dbHelper.Prid + "='" + savedProg + "'";
         Cursor cursor = db.query(table, columns, WHERE, null, null, null, null);
@@ -67,6 +67,7 @@ public class CommonFunctions {
                 prInro.lColor = cursor.getString(cursor.getColumnIndex(dbHelper.PrCOLOR));
                 prInro.lColorDay = cursor.getString(cursor.getColumnIndex(dbHelper.PrdayColor));
                 prInro.lLightColor = cursor.getString(cursor.getColumnIndex(dbHelper.PrlightColor));
+                prInro.lDescription = cursor.getString(cursor.getColumnIndex(dbHelper.PrDescription));
 
                 prInro.countDays = cursor.getInt(cursor.getColumnIndex(dbHelper.PrCountDays));
                 prInro.countMeal = cursor.getInt(cursor.getColumnIndex(dbHelper.PrCountMeal));

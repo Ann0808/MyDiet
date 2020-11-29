@@ -114,13 +114,13 @@ public class PagerLovingActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "♡"+nameCategory+"♡";
-//            if (position + 1 == pageCount) {
-//                return "←    ";
-//            }
-//            else  {
-//                return "     →";
-//            }
+            //return "♡"+nameCategory+"♡";
+            if (position + 1 == pageCount) {
+                return "⟵" + nameCategory;
+            }
+            else  {
+                return nameCategory +"⟶";
+            }
 ////            else {
 ////                return "←     →";
 ////            }

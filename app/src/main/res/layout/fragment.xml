@@ -44,6 +44,7 @@
         android:alpha="0"
         app:srcCompat="@drawable/avd_insta_anim" />
 
+
     <ScrollView
         android:id="@+id/scrollingrec"
         android:layout_width="match_parent"

@@ -40,7 +40,7 @@
                 android:layout_marginBottom="10dp" />
 
             <TextView
-                android:id="@+id/myImageViewText"
+                android:id="@+id/myDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
@@ -49,68 +49,10 @@
                 android:shadowDx="1"
                 android:shadowDy="1"
                 android:shadowRadius="2"
-                android:text="✓ Помогает корректировать вес."
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/myImageViewText2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:gravity="left"
-                android:shadowColor="@color/colorPrimaryDark"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="2"
-                android:text="✓ Разнообразная вкусная еда."
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-            <TextView
-                android:id="@+id/myImageViewText3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:gravity="left"
-                android:text="✓ Список продуктов на каждую неделю."
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:shadowColor="@color/colorPrimaryDark"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="2"
-                android:textStyle="bold"/>
-            <TextView
-                android:id="@+id/myImageViewText4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="✓ Обратная связь с автором приложения."
-                android:layout_gravity="left"
-                android:gravity="left"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:shadowColor="@color/colorPrimaryDark"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="2"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/myImageViewText5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:layout_gravity="left"
-                android:text="✓ Программу испытывали реальные люди разных возрастов."
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:shadowColor="@color/colorPrimaryDark"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="2"
-                android:textStyle="bold"/>
 
         </LinearLayout>
 

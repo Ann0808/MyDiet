@@ -1,5 +1,6 @@
 package com.pisk.mydiet;
 
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -43,6 +44,7 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
     int dayNumber;
     int programNumber;
     String date = null;
+    SharedPreferences sPref;
 
 
     // for time
@@ -63,7 +65,7 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
     SQLiteDatabase db;
     Cursor cursor;
     Button likeButton, unLikeButton;
-    ImageView heartImage;
+    ImageView heartImage, swipe;
     AnimatedVectorDrawableCompat avd;
     AnimatedVectorDrawable avd2;
 
@@ -95,7 +97,6 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         isLovingPage = getArguments().getBoolean(ARGUMENT_TRIGGER);
         backColor = getArguments().getString(ARGUMENT_LIGHT_COLOR);
@@ -242,6 +243,7 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
 
 
         final Drawable drawable = heartImage.getDrawable();
+
 
         likeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
