@@ -35,8 +35,11 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
     static final String ARGUMENT_PROGRAM_NUMBER = "arg_program_number";
     static final String ARGUMENT_DATE = "arg_date";
     static final String ARGUMENT_LIGHT_COLOR = "arg_light_color";
+    static final String ARGUMENT_TRIGGER = "arg_trirrer"; //true - loving recipe page, false - recipe page
+    static final String ARGUMENT_ID = "arg_id"; //id of loving recipe
 
     int pageNumber;
+    int id;
     int dayNumber;
     int programNumber;
     String date = null;
@@ -52,6 +55,7 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
     String additionInfo = "";
     int category;
     int kcalCount;
+    boolean isLovingPage = false;
     //for time
 
     String backColor;
@@ -73,6 +77,17 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
         arguments.putInt(ARGUMENT_PROGRAM_NUMBER, programNumber);
         arguments.putString(ARGUMENT_DATE, date);
         arguments.putString(ARGUMENT_LIGHT_COLOR, backColor);
+        arguments.putBoolean(ARGUMENT_TRIGGER, false);
+        pageFragment.setArguments(arguments);
+        return pageFragment;
+    }
+
+    static PageFragment newInstance(int id, String backColor) {
+        PageFragment pageFragment = new PageFragment();
+        Bundle arguments = new Bundle();
+        arguments.putInt(ARGUMENT_ID, id);
+        arguments.putString(ARGUMENT_LIGHT_COLOR, backColor);
+        arguments.putBoolean(ARGUMENT_TRIGGER, true);
         pageFragment.setArguments(arguments);
         return pageFragment;
     }
@@ -80,11 +95,21 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pageNumber = getArguments().getInt(ARGUMENT_PAGE_NUMBER);
-        dayNumber = getArguments().getInt(ARGUMENT_DAY_NUMBER);
-        programNumber = getArguments().getInt(ARGUMENT_PROGRAM_NUMBER);
-        date = getArguments().getString(ARGUMENT_DATE);
+
+
+        isLovingPage = getArguments().getBoolean(ARGUMENT_TRIGGER);
         backColor = getArguments().getString(ARGUMENT_LIGHT_COLOR);
+        if (isLovingPage) {
+            id = getArguments().getInt(ARGUMENT_ID);
+        } else {
+            pageNumber = getArguments().getInt(ARGUMENT_PAGE_NUMBER);
+            dayNumber = getArguments().getInt(ARGUMENT_DAY_NUMBER);
+            programNumber = getArguments().getInt(ARGUMENT_PROGRAM_NUMBER);
+            date = getArguments().getString(ARGUMENT_DATE);
+        }
+
+
+
 
 
         dbHelper = new DatabaseHelper(this.getContext());
@@ -92,18 +117,36 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
         dbHelper.create_db();
         db = dbHelper.open();
 
+        String table = "";
+        String columns[] = { };
+        String WHERE = "";
+        if (isLovingPage) {
+            table = "loving_recipes as R";
 
-        String table = "recipes as R inner join images as I on R.image_id = I.id";
+            columns = new String[]{"R.recipe as recipe", "R.ingridients as ingridients",
+                    "R.kkal as kkal", "R.category as category",
+                    "R.image as image", "R.name as name", "R.additionInfo as additionInfo"};
 
-        String columns[] = { "R.recipe as recipe", "R.ingridients as ingridients",
-                "R.kkal as kkal", "R.kkalCount as kkalCount", "R.category as category",
-                "I.image as image",  "R.name as name", "R.additionInfo as additionInfo"};
+            WHERE = "id='" + id + "'";
+        } else {
+            table = "recipes as R inner join images as I on R.image_id = I.id";
 
-        String WHERE = dbHelper.PROGRAM_NUMBER + "='" + programNumber + "' AND " +
-                dbHelper.FOOD_TIME + "='" + pageNumber + "' AND " +
-                dbHelper.DAY + "='" + dayNumber + "'";
-        cursor = db.query(table, columns, WHERE, null, null, null, null);
+            columns = new String[] {"R.recipe as recipe", "R.ingridients as ingridients",
+                    "R.kkal as kkal", "R.kkalCount as kkalCount", "R.category as category",
+                    "I.image as image", "R.name as name", "R.additionInfo as additionInfo"};
 
+            WHERE = dbHelper.PROGRAM_NUMBER + "='" + programNumber + "' AND " +
+                    dbHelper.FOOD_TIME + "='" + pageNumber + "' AND " +
+                    dbHelper.DAY + "='" + dayNumber + "'";
+        }
+
+        try {
+            cursor = db.query(table, columns, WHERE, null, null, null, null);
+        } catch (Exception ex) {
+            Log.d("dblogs",ex.getMessage());
+        }
+        int kkalCountColIndex = 0;
+        try {
         if (cursor != null) {
             if (cursor.moveToFirst()) {
 
@@ -111,17 +154,21 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
                 int recipeColIndex = cursor.getColumnIndex(dbHelper.RECIPE);
                 int ingridientsColIndex = cursor.getColumnIndex(dbHelper.INRIDIENTS);
                 int kkalColIndex = cursor.getColumnIndex(dbHelper.KKAL);
-                int kkalCountColIndex = cursor.getColumnIndex(dbHelper.KKAL_COUNT);
+                if (!isLovingPage) {
+                    kkalCountColIndex = cursor.getColumnIndex(dbHelper.KKAL_COUNT);
+                }
                 int imageColIndex = cursor.getColumnIndex(dbHelper.IMAGE);
                 int nameColIndex = cursor.getColumnIndex(dbHelper.NAME);
                 int additionColIndex = cursor.getColumnIndex(dbHelper.ADIITION);
                 int categoryColIndex = cursor.getColumnIndex(dbHelper.CATEGORY_RECIPE);
 
-                do {
+                //do {
                     products = cursor.getString(ingridientsColIndex);
                     recipeText = cursor.getString(recipeColIndex);
                     kcalText = cursor.getString(kkalColIndex);
-                    kcalCount = cursor.getInt(kkalCountColIndex);
+                    if (!isLovingPage) {
+                        kcalCount = cursor.getInt(kkalCountColIndex);
+                    }
                     image = cursor.getString(imageColIndex);
                     name = cursor.getString(nameColIndex);
                     category = cursor.getInt(categoryColIndex);
@@ -131,11 +178,14 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
                     byte[] decodedString = Base64.decode(b64, Base64.DEFAULT);
                     bm = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-                } while (cursor.moveToNext());
+                //}
             }
             cursor.close();
         } else {
 
+        } }
+        catch (Exception ex) {
+            Log.d("dblogs",ex.getMessage());
         }
 
 
@@ -163,11 +213,17 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
         db = dbHelper.open();
 
 
+
         String table = "loving_recipes as R";
 
         String columns[] = { "R.name as name"};
 
-        String WHERE = dbHelper.NAME + "='" + CommonFunctions.getTheKeyLovingRecipes(name, kcalCount) + "'";
+        String WHERE = null;
+        if (!isLovingPage) {
+            WHERE = dbHelper.NAME + "='" + CommonFunctions.getTheKeyLovingRecipes(name, kcalCount) + "'";
+        } else {
+            WHERE = dbHelper.NAME + "='" + name + "'";
+        }
         try {
             cursor = db.query(table, columns, WHERE, null, null, null, null);
 
@@ -182,6 +238,7 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
         }
 
         dbHelper.close();
+
 
 
         final Drawable drawable = heartImage.getDrawable();
@@ -199,7 +256,11 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
                         unLikeButton.setClickable(true);
                     }
                 }, 1500);
-                String lovingName = CommonFunctions.getTheKeyLovingRecipes(name, kcalCount);
+
+                String lovingName = name;
+                if (!isLovingPage) {
+                    lovingName = CommonFunctions.getTheKeyLovingRecipes(name, kcalCount);
+                }
                 CommonFunctions.AddRecipeToLoving(dbHelper, lovingName, category, recipeText, products, kcalText, image, additionInfo);
                 likeButton.setVisibility(View.GONE);
                 unLikeButton.setVisibility(View.VISIBLE);
@@ -231,8 +292,13 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
                         unLikeButton.setClickable(true);
                     }
                 }, 1500);
-                String lovingName = CommonFunctions.getTheKeyLovingRecipes(name, kcalCount);
-                CommonFunctions.removeRecipeToLoving(dbHelper, lovingName);
+                if (!isLovingPage) {
+                    String lovingName = CommonFunctions.getTheKeyLovingRecipes(name, kcalCount);
+                    CommonFunctions.removeRecipeToLoving(dbHelper, lovingName);
+                } else {
+                    CommonFunctions.removeRecipeToLoving(dbHelper, name);
+                }
+
                 unLikeButton.setVisibility(View.GONE);
                 likeButton.setVisibility(View.VISIBLE);
                 Toast.makeText(getContext(),"Рецепт удален из избранного",Toast.LENGTH_SHORT).show();
@@ -240,40 +306,50 @@ public class PageFragment extends Fragment implements NavigationView.OnNavigatio
             }
         });
 
-        if (additionInfo != null && additionInfo.length() > 0) {
-            additionTitle.setVisibility(View.VISIBLE);
-            addition.setText(additionInfo);
-            addition.setVisibility(View.VISIBLE);
+
+            if (additionInfo != null && additionInfo.length() > 0) {
+                additionTitle.setVisibility(View.VISIBLE);
+                addition.setText(additionInfo);
+                addition.setVisibility(View.VISIBLE);
+            }
+
+            TextView viewDate = (TextView) view.findViewById(R.id.date);
+            ViewGroup.LayoutParams params = viewDate.getLayoutParams();
+
+            if (date == null) {
+
+                container.removeView(viewDate);
+
+            } else {
+
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                viewDate.setLayoutParams(params);
+                viewDate.setText(date);
+                viewDate.setVisibility(View.VISIBLE);
+
+            }
+
+
+            ImageView tvImage = (ImageView) view.findViewById(R.id.photoRecept);
+
+            ingridients.setText(products);
+            recipe.setText(recipeText);
+            kcal.setText(kcal.getText() + kcalText);
+            view.setBackgroundColor(Color.parseColor(backColor));
+            try {
+                nameDish.setText(name);
+            }catch (Exception ex) {
+                //nameDish.setText("55");
+                Log.d("dblogs",ex.getMessage());
+            }
+
+
+        try {
+            tvImage.setImageBitmap(bm);
+        }catch (Exception ex) {
+            //nameDish.setText("55");
+            Log.d("dblogs",ex.getMessage());
         }
-
-        TextView viewDate = (TextView) view.findViewById(R.id.date);
-        ViewGroup.LayoutParams params = viewDate.getLayoutParams();
-
-        if (date == null) {
-
-            container.removeView(viewDate);
-
-        } else {
-
-            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-            viewDate.setLayoutParams(params);
-            viewDate.setText(date);
-            viewDate.setVisibility(View.VISIBLE);
-
-        }
-
-
-        ImageView tvImage = (ImageView) view.findViewById(R.id.photoRecept);
-
-        ingridients.setText(products);
-        recipe.setText(recipeText);
-        kcal.setText(kcal.getText() + kcalText);
-        view.setBackgroundColor(Color.parseColor(backColor));
-        nameDish.setText(name);
-
-
-        tvImage.setImageBitmap(bm);
-
 
 
         return view;

@@ -28,7 +28,7 @@
             android:name=".LovingRecipesActivity"
             android:label="@string/title_activity_loving_recipes"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".LovingRecipesListActivity"
             android:screenOrientation="portrait"/>
@@ -58,6 +58,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".PagerActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".PagerLovingActivity"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".PagerProductsActivity"

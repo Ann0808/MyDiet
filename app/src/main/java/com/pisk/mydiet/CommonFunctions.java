@@ -12,6 +12,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class CommonFunctions {
@@ -145,8 +146,9 @@ public class CommonFunctions {
         SQLiteDatabase db = dbHelper.open();
         try {
             db.delete("loving_recipes",
-                    "NAME = ?",
+                    "name = ?",
                     new String[] {name});
+            Log.d("dblogs", name);
         } catch (Exception ex) {
             Log.d("dblogs", ex.getMessage());
         }
@@ -155,9 +157,19 @@ public class CommonFunctions {
 
     }
 
+
     public static String getTheKeyLovingRecipes(String name, int kkal){
 
       return name + "\n" + Integer.toString(kkal) + " ккал";
 
+    }
+
+    public static <T, E> T getKeyByValue(Map<T, E> map, E value) {
+        for (Map.Entry<T, E> entry : map.entrySet()) {
+            if (Objects.equals(value, entry.getValue())) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 }
