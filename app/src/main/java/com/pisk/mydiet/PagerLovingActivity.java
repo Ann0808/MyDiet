@@ -38,6 +38,7 @@ public class PagerLovingActivity extends AppCompatActivity {
     String lightColor = "#FFFFFF";
     HashMap<Integer, Integer> idWithNumber;
     int positionNumber = 0;
+    String nameCategory = "";
     //Intent intent;
 
     @Override
@@ -53,7 +54,7 @@ public class PagerLovingActivity extends AppCompatActivity {
         color = intent.getStringExtra("arg_color");
         positionNumber = CommonFunctions.getKeyByValue(idWithNumber, intent.getIntExtra("arg_id",0));
         pageCount = intent.getIntExtra("pageCount",1);
-
+        nameCategory = intent.getStringExtra("category_name");
 
         pager = (ViewPager) findViewById(R.id.pager);
         pagerTab = (PagerTabStrip) findViewById(R.id.pagerTabStrip);
@@ -113,7 +114,17 @@ public class PagerLovingActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "";
+            return "♡"+nameCategory+"♡";
+//            if (position + 1 == pageCount) {
+//                return "←    ";
+//            }
+//            else  {
+//                return "     →";
+//            }
+////            else {
+////                return "←     →";
+////            }
+
         }
 
     }

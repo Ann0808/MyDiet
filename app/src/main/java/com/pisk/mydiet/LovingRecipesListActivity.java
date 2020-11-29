@@ -77,7 +77,7 @@ public class LovingRecipesListActivity extends AppCompatActivity
 
         Intent intentTmp = getIntent();
 
-        String nameCategory = intentTmp.getStringExtra("category_name");
+        nameCategory = intentTmp.getStringExtra("category_name");
         categoryImage = intentTmp.getIntExtra("category_image",0);
         categoryNumber = intentTmp.getIntExtra("category_number",0);
         TextView titleView = (TextView) findViewById(R.id.titleCategory);
@@ -188,7 +188,7 @@ public class LovingRecipesListActivity extends AppCompatActivity
                                 intent.putExtra("arg_light_color", lLightColor);
                                 intent.putExtra("arg_color", lColor);
 
-//                                intent.putExtra("category_name",nameCategory);
+                                intent.putExtra("category_name",nameCategory);
 //                                intent.putExtra("category_number",categoryNumber);
 //                                intent.putExtra("category_image",categoryImage);
 //                                intent.putExtra("color",lColor);
@@ -310,7 +310,7 @@ public class LovingRecipesListActivity extends AppCompatActivity
                                 intent.putExtra("arg_light_color", lLightColor);
                                 intent.putExtra("arg_color", lColor);
 
-//                                intent.putExtra("category_name",nameCategory);
+                                intent.putExtra("category_name",nameCategory);
 //                                intent.putExtra("category_number",categoryNumber);
 //                                intent.putExtra("category_image",categoryImage);
 //                                intent.putExtra("color",lColor);
