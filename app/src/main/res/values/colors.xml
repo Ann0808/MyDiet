@@ -20,7 +20,7 @@
     <color name="colorSuperFit">#BF98C543</color>
     <color name="colorFit">#BF84CEEC</color>
     <color name="colorBalance">#BF009688</color>
-    <color name="colorStrong">#B3FF9140</color>
+    <color name="colorStrong">#BFE4A4BA</color>
 
 
     <color name="colorMask">#99000000</color>
@@ -28,14 +28,14 @@
     <color name="colorSuperFitDay">#6698C543</color>
     <color name="colorFitDay">#6684CEEC</color>
     <color name="colorBalanceDay">#66009688</color>
-    <color name="colorStrongDay">#66FF9140</color>
+    <color name="colorStrongDay">#66E4A4BA</color>
     <color name="colorDaysDay">#66000000</color>
 
     <color name="colorSuperFitLight">#3398C543</color>
     <color name="colorFitLight">#3384CEEC</color>
     <color name="colorBalanceLight">#33009688</color>
     <color name="colorStrongLight">#33FF9140</color>
-    <color name="colorDaysLight">#33000000</color>
+    <color name="colorDaysLight">#33E4A4BA</color>
 
     <color name="colorGrey">#4D000000</color>
 
