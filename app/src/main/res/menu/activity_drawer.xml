@@ -37,6 +37,13 @@
             android:id="@+id/nav_send"
             android:icon="@drawable/ic_menu_send"
             android:title="Связаться с нами" />
+
+        <item
+            android:id="@+id/nav_test"
+            android:icon="@drawable/ic_menu_test"
+            android:title="Пройти опрос"
+            />
+
     </group>
 
     <!--<item android:title="Communicate">-->

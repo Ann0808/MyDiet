@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     defaultConfig {
         applicationId "com.pisk.mydiet"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 7
-        versionName "3.4"
+        versionCode 9
+        versionName "3.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

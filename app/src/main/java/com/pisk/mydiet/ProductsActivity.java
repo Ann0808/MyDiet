@@ -2,6 +2,7 @@ package com.pisk.mydiet;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -203,6 +204,15 @@ public class ProductsActivity extends AppCompatActivity
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), "Ошибка. Установите приложение Telegram.", Toast.LENGTH_LONG).show();
             }
+        } else if (id == R.id.nav_test) {
+
+            try {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/hF9NMTY7ZvBNMAhP9"));
+                startActivity(browserIntent);
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Произошла ошибка.", Toast.LENGTH_LONG).show();
+            }
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
